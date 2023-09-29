@@ -1,0 +1,516 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Descargar_630101_IVA_Ventas" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_FechaInicio" Type="InArgument(x:String)" />
+    <x:Property Name="in_FechaFinal" Type="InArgument(x:String)" />
+    <x:Property Name="in_DownloadsPath" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1032,6965</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Descargar_630101_IVA_Ventas_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="60">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices.RuntimeInformation</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.MachineLearningExtractor.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Descargar_630101_IVA_Ventas" sap:VirtualizedContainerService.HintSize="680,6900" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="FolderExists" />
+      <Variable x:TypeArguments="x:Boolean" Name="chromeExist" />
+      <Variable x:TypeArguments="x:Boolean" Name="ReporteComprasExist" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Elminar aquellos archivos anteriormente descargados. En C:\Users\grantthornton\Downloads" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="638,661" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Directory.getFiles(in_DownloadsPath)]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="file" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,486" sap2010:WorkflowViewState.IdRef="Sequence_7">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="fileName" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="484,70" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[fileName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[file.ToString().Replace(in_DownloadsPath, "")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[fileName.Contains(&quot;CrystalReportViewer&quot;)]" sap:VirtualizedContainerService.HintSize="484,286" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="284,89" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[file.ToString()]" />
+              </If.Then>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEach>
+    <ui:PathExists DisplayName="Path Exists" Exists="[FolderExists]" sap:VirtualizedContainerService.HintSize="638,99" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="ReportesDescargados" PathType="Folder" />
+    <If Condition="[NOT FolderExists]" sap:VirtualizedContainerService.HintSize="638,286" sap2010:WorkflowViewState.IdRef="If_5">
+      <If.Then>
+        <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,89" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="ReportesDescargados" />
+      </If.Then>
+    </If>
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Anexar navegador 'chrome.exe Éxito'" sap:VirtualizedContainerService.HintSize="638,4005" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="bdf7e090a9d2bbb2661a697814c96172" Selector="&lt;html app='chrome.exe' title='Éxito ERP - la vía directa al Éxito' /&gt;">
+      <ui:BrowserScope.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Secuencia" sap:VirtualizedContainerService.HintSize="604,3849" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Boolean" Name="ExportacionesWindow" />
+              <Variable x:TypeArguments="x:Boolean" Name="NotificacionExist" />
+              <Variable x:TypeArguments="x:Boolean" Name="NoData" />
+              <Variable x:TypeArguments="x:Int32" Name="Cont" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Delay DisplayName="Delay 3s" Duration="[TimeSpan.FromMilliseconds(3000)]" sap:VirtualizedContainerService.HintSize="562,32" sap2010:WorkflowViewState.IdRef="Delay_9" />
+            <ui:NavigateTo Browser="{x:Null}" sap2010:Annotation.AnnotationText="Navegar al modulo de Facturacion para descargar los documentos." DisplayName="Navegar a &quot;Documentos de Facturacion&quot;" sap:VirtualizedContainerService.HintSize="562,111" sap2010:WorkflowViewState.IdRef="NavigateTo_1" Url="https://clientes.exitodesarrollos.co.cr/Aimi/CuentasxPagar/Recepciondocumentos">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:NavigateTo>
+            <Delay DisplayName="Delay 4s" Duration="[TimeSpan.FromMilliseconds(4000)]" sap:VirtualizedContainerService.HintSize="562,32" sap2010:WorkflowViewState.IdRef="Delay_10" />
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT  Fecha Inicio'" EmptyField="True" sap:VirtualizedContainerService.HintSize="562,144" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[in_FechaInicio + &quot;[k(tab)]&quot;]">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ead092aa-0347-445c-a953-03f8803962de" InformativeScreenshot="41e484d79ec7d0aeaaeb35d12e51efe9" Selector="&lt;html app='chrome.exe' omit:title='Exito Desarrollos - Registro de Documentos' /&gt;&lt;webctrl id='fechainicio' tag='INPUT' type='text' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <Delay DisplayName="Delay 10s" Duration="[TimeSpan.FromMilliseconds(10000)]" sap:VirtualizedContainerService.HintSize="562,32" sap2010:WorkflowViewState.IdRef="Delay_1" />
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT  Fecha Final'" EmptyField="True" sap:VirtualizedContainerService.HintSize="562,144" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="[in_FechaFinal + &quot;[k(tab)]&quot;]">
+              <ui:TypeInto.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c26b9b0c-ea7e-4dd1-88e7-463f5d2b5465" InformativeScreenshot="79a3ba5ef1069b9ca33eba422073fcbc" Selector="&lt;html app='chrome.exe' omit:title='Exito Desarrollos - Registro de Documentos' /&gt;&lt;webctrl id='fechafinal' tag='INPUT' type='text' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:TypeInto.Target>
+            </ui:TypeInto>
+            <Delay DisplayName="Delay 8s" Duration="[TimeSpan.FromMilliseconds(8000)]" sap:VirtualizedContainerService.HintSize="562,32" sap2010:WorkflowViewState.IdRef="Delay_2" />
+            <ui:UiElementExists DisplayName="Element Exists 'No Data'" Exists="[NoData]" sap:VirtualizedContainerService.HintSize="562,116" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
+              <ui:UiElementExists.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5cc03e69-743f-49ea-90ec-11c95b4d4d5d" InformativeScreenshot="9b8eb07b0e41dbc5a81491f60c345ae2" Selector="&lt;html app='chrome.exe' title='Exito Desarrollos - Registro de Documentos' /&gt;&lt;webctrl id='tabla_informe1' tag='TABLE' /&gt;&lt;webctrl tag='TD' innertext='No data available in table' /&gt;" TimeoutMS="12000">
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:UiElementExists.Target>
+            </ui:UiElementExists>
+            <If Condition="[NOT NoData]" sap:VirtualizedContainerService.HintSize="562,2796" sap2010:WorkflowViewState.IdRef="If_4">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="526,2600" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InterruptibleWhile Condition="[NOT ExportacionesWindow]" DisplayName="While" sap:VirtualizedContainerService.HintSize="484,640" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_3">
+                    <ui:InterruptibleWhile.Body>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,465" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT'" sap:VirtualizedContainerService.HintSize="358,116" sap2010:WorkflowViewState.IdRef="Click_9" KeyModifiers="None" MouseButton="BTN_LEFT">
+                          <ui:Click.CursorPosition>
+                            <ui:CursorPosition Position="Center">
+                              <ui:CursorPosition.OffsetX>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:CursorPosition.OffsetX>
+                              <ui:CursorPosition.OffsetY>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:CursorPosition.OffsetY>
+                            </ui:CursorPosition>
+                          </ui:Click.CursorPosition>
+                          <ui:Click.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="10585bad-e922-49d6-8158-e5d1152abdf7" InformativeScreenshot="20cd11b9da85f4b321052ed546fa3aa0" Selector="&lt;html app='chrome.exe' omit:title='Exito Desarrollos - Registro de Documentos' /&gt;&lt;webctrl aaname='Imprimir' tag='INPUT' type='button' /&gt;">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                              <ui:Target.WaitForReady>
+                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                              </ui:Target.WaitForReady>
+                            </ui:Target>
+                          </ui:Click.Target>
+                        </ui:Click>
+                        <Delay DisplayName="Delay 2s" Duration="[TimeSpan.FromMilliseconds(2000)]" sap:VirtualizedContainerService.HintSize="358,32" sap2010:WorkflowViewState.IdRef="Delay_11" />
+                        <ui:UiElementExists sap2010:Annotation.AnnotationText="Revisar si la ventana de exportacion del reporte existe" DisplayName="Element Exists 'Exportaciones.aspx'" Exists="[ExportacionesWindow]" sap:VirtualizedContainerService.HintSize="358,147" sap2010:WorkflowViewState.IdRef="UiElementExists_4">
+                          <ui:UiElementExists.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="af2ac6cc-cf99-4290-aab1-f94440991573" InformativeScreenshot="ca7dbdab990566834c1fbd8e0983c3f2" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='*Exportaciones.aspx*' /&gt;" TimeoutMS="2000">
+                              <ui:Target.WaitForReady>
+                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                              </ui:Target.WaitForReady>
+                            </ui:Target>
+                          </ui:UiElementExists.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:UiElementExists>
+                      </Sequence>
+                    </ui:InterruptibleWhile.Body>
+                  </ui:InterruptibleWhile>
+                  <Delay DisplayName="Delay 5s" Duration="[TimeSpan.FromMilliseconds(5000)]" sap:VirtualizedContainerService.HintSize="484,32" sap2010:WorkflowViewState.IdRef="Delay_12" />
+                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Exportar'" sap:VirtualizedContainerService.HintSize="484,116" sap2010:WorkflowViewState.IdRef="Click_10" KeyModifiers="None" MouseButton="BTN_LEFT">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fdee7699-545a-4b14-a861-38cb4142df06" InformativeScreenshot="2b090040d5f18c613b21a581900b5a81" Selector="&lt;html app='chrome.exe' htmlwindowname='mywindow' title='*Exportaciones.aspx*' /&gt;&#xA;&lt;webctrl parentid='_btnGrp_palette' tag='TABLE' idx='1' /&gt;&#xA;&lt;webctrl parentid='_btnGrp_palette' tableCol='6' tag='TD' /&gt;&#xA;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Click.Target>
+                  </ui:Click>
+                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Drop down opcions'" sap:VirtualizedContainerService.HintSize="484,116" sap2010:WorkflowViewState.IdRef="Click_11" KeyModifiers="None" MouseButton="BTN_LEFT">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="99f4178c-51ef-42cf-b2f9-026f03fda4c6" InformativeScreenshot="b9f1cf33851ec623b740fede2eca7623" Selector="&lt;html app='chrome.exe' htmlwindowname='mywindow' title='*Exportaciones.aspx*' /&gt;&lt;webctrl aria-role='button' id='iconMenu_icon_bobjid_*_dialog_combo' tag='TABLE' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Click.Target>
+                  </ui:Click>
+                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Microsoft Excel 97-2003'" sap:VirtualizedContainerService.HintSize="484,116" sap2010:WorkflowViewState.IdRef="Click_12" KeyModifiers="None" MouseButton="BTN_LEFT">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7c538ca4-c7e4-4445-b02d-be213a60cb6f" InformativeScreenshot="de8fe19032447a122810eb3f5c1fbbec" Selector="&lt;html app='chrome.exe' htmlwindowname='mywindow' title='*Exportaciones.aspx*' /&gt;&lt;webctrl parentid='iconMenu_menu_bobjid_*_dialog_combo' tag='TABLE' /&gt;&lt;webctrl id='iconMenu_menu_bobjid_*_dialog_combo_text_bobjid_*' tableRow='4' tag='TD' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Click.Target>
+                  </ui:Click>
+                  <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: clientes.exitodesarrollos.co.cr/Aimi/AspNetForms/Exportaciones.aspx" sap:VirtualizedContainerService.HintSize="484,494" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Never" Version="V1">
+                    <uix:NApplicationCard.Body>
+                      <ActivityAction x:TypeArguments="x:Object">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="400,268" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <uix:NClick ClickType="Single" DisplayName="Click 'Hasta:'" sap:VirtualizedContainerService.HintSize="358,176" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left">
+                            <uix:NClick.Target>
+                              <uix:TargetAnchorable BrowserURL="https://clientes.exitodesarrollos.co.cr/Aimi/AspNetForms/Exportaciones.aspx" DesignTimeRectangle="803, 613, 48, 21" FriendlyName="'Exportar'" FullSelectorArgument="&lt;webctrl id='bobjid_1686262102477_dialog_submitBtn' tag='TABLE' /&gt;&lt;webctrl id='theBttnCenterImgbobjid_1686262102477_dialog_submitBtn' tag='TD' /&gt;" FuzzySelectorArgument="&lt;webctrl id='bobjid_1686262102477_dialog_submitBtn' tag='TABLE' /&gt;&lt;webctrl id='theBttnCenterImgbobjid_1686262102477_dialog_submitBtn' tag='TD' type='' aaname='' check:text='Exportar' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADQAAAAZCAYAAAB+Sg0DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMGSURBVFhH7ZjrS9phFMfPP9fUStn/EWHhXM4uezsKodpqthuMgSArahOKFg0WNObWzZiRLg1t5ciRDUexyn13npv6E18Ea2PKgg/nOd/ney6PvjLaPyyimWi+Bw0MPEYzQXt7R2gmCE32R6WLnyiVmIuSRuclkzeKxpF1Oj+7wNnZeZlKXtEbQTM6nZ78wOlpFbV5o2gaKhZPoTjRqHyxj0BUy20s1vgqdb+viZmuJ7sW7bK1BioUiigUvleh8ld+foB/0aJZvVet7eDhdYLz0U6VdtladT7mSPn8N9Rjrocf5FuwaF8PjzkmEXQR2ieSUtsKOvmb68dsfgF+ciE40a+/TT7HTG0SE1xj1ZXm9wm/C4N3XPreqe7nTB+Ff07UqBl+n/D28UzTXyB2Owblckc4OKhg8oi30qyM8wE2pG8ePupFhGOPjEZjj3de1m+M80PZH+N+spfWDyK93EvUbGPMWdFzOZW3jm/LPBKZL+8ie0mfmmE8BuHLichQNpNHNpvHXvZQYvJpDw/zzFo0Ecu+d0E4uLl3xmiz8FI7RqPaF73P97cwnYljtK2eT+mOux9VP+1zjMa1j7UZf+XDlLuIWtXLsos4ZzjyjpROfUE6nUM6ZVD5ZDc36Y5YNItv0icH2UZiWovAQ20Yfqt9y2OwkQ+TqU0MtxI8U7qu7ItJ3TZs6pVP9VN31DqOKPeKjrTqXUSt7lW9i9hPkgMlEp+RlOxLTB52c0P3S4tW8b1EF91EOLGOgN2BwBujEa4F1qVvOcBL2O9hudzrhaoN9/AHYWqNX8yoztW5KyzmqbPaRc3olrrZxbofbcUz2IpnGRENWYQ6uQkX1+IOTcMto64LeVm/gVBc6S02h/baMfja9FvFoM30MLrSWoZWtCejZzrk/dKQXfs5H+IZtlEs6RnukNi3dmcFbcZ2cTVMoZOHdT6rd/cX2EzLSOtrO7ganqODH9TxtN7dn2dNxhRo9cMnrEiSktq8YbQVpdH7aALNRPP9Hqr3M7aR+f9fn3+dJntQEb8AVMhZhSWX4dUAAAAASUVORK5CYII=" InformativeScreenshot="d82dafb66a84acc609739e3f78083a72.png" ScopeSelectorArgument="&lt;html app='chrome.exe' htmlwindowname='mywindow' title='clientes.exitodesarrollos.co.cr/Aimi/AspNetForms/Exportaciones.aspx' /&gt;" SearchSteps="FuzzySelector, Image" Text="Exportar" TextMethod="AttributeText" TextSelector="&lt;webctrl tag='TD' type='' /&gt;">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                    <uix:Target DesignTimeRectangle="582, 550, 31, 13" ElementType="Text" FriendlyName="'Hasta:'" FullSelectorArgument="&lt;webctrl aaname=' Hasta:' parentid='div_dialog_bobjid_1686262102477_dialog' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname=' Hasta:' parentid='div_dialog_bobjid_1686262102477_dialog' tag='LABEL' type='' check:text='Hasta:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACMAAAARCAYAAABXaxX/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADZSURBVEhL7ZLLDcMgDIY9I1IWQqxC7l0CBskhY7g87IILpEkvTSV+CQmMbT7bAN5IE2akCTOSgHEaUK07naIcGlBoNzqeVJvnnP4VZke7AALQ0i55ZB+2B9+HKT4Uu6+qspkQQZHhvZKnA1OCeHU6s1lUZBcJvX3Z+p3JBfHdR5ijMckKZdXGZ5+oJk+C57gR6BUYH9vPLW7/UqqSoGSePEaGbd8ougaz2NBo2pPdaQbMI+jDMHgG47tUwHdjqj5wAGC7GJ2AjbZ3nxBXvXEI82tNmJFuBIP4BBlMWx38JhHdAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" Text="Hasta:" TextMethod="AttributeText" TextSelector="&lt;webctrl tag='LABEL' type='' /&gt;" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NClick.Target>
+                          </uix:NClick>
+                        </Sequence>
+                      </ActivityAction>
+                    </uix:NApplicationCard.Body>
+                    <uix:NApplicationCard.TargetApp>
+                      <uix:TargetApp BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFxSURBVDhPY6A64OTmlvT08T8Qk5D6NT454x8Ig9ggMZAcVBl2oK2rXxiXmPYLqOl/fHL63/CouOchEbGPoAb9B8mB1ECVowKQBEhhXFL6H31D41omJiZmkLiEpLQDxEA4/odhCMhpcYnpv0Ga+fkF1KHCDKbmVj1hUXHP0AwAuwTFOyD/gSRANkOFGERExUzRNSJjkB6oUgaGmPiUbyA/w5wNAhKSUvYBweFXQTg2IfU7ugGggIUqZWAACvwDBRiUiwHsnVxXIGuOTUz9CdIDlYYYgKwAFBbBYdF3DYxM6kGu4uTkEjc2teiwtnWYo6CoHAqyDMUAiBcQBiBjFVX1OKgyMAAZCPIuihdggYgNW9rYz4QqAwNQQIPEUQIRFo3IGq1sHWZraOlkS0pJO0GVMYCiGOQ9jGgEAVhCghkgr6gUDJUCOxtkM0gzSA2+1FgES8pxSWm/w6Jin0ICLP0vWAxfUoYBkNNA/iMrM5EOGBgAbhv5+a23N0oAAAAASUVORK5CYII=" InformativeScreenshot="37132e6f146ba9d97a24bd756a59d7e2.png" Selector="&lt;html app='chrome.exe' htmlwindowname='mywindow' title='clientes.exitodesarrollos.co.cr/Aimi/AspNetForms/Exportaciones.aspx'/&gt;" Url="https://clientes.exitodesarrollos.co.cr/Aimi/AspNetForms/Exportaciones.aspx" />
+                    </uix:NApplicationCard.TargetApp>
+                  </uix:NApplicationCard>
+                  <Delay DisplayName="Delay 7s" Duration="[TimeSpan.FromMilliseconds(7000)]" sap:VirtualizedContainerService.HintSize="484,32" sap2010:WorkflowViewState.IdRef="Delay_13" />
+                  <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" sap2010:Annotation.AnnotationText="Cerrar la ventana de exportacion de reportes." DisplayName="Close Window 'Exportaciones.aspx'" sap:VirtualizedContainerService.HintSize="484,147" sap2010:WorkflowViewState.IdRef="CloseWindow_2" InformativeScreenshot="5eeea1d36583c85ce627f6569d5eb417" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='*Exportaciones.aspx*' /&gt;" WaitForReady="INTERACTIVE">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:CloseWindow>
+                  <If sap2010:Annotation.AnnotationText="Ver si el archivo se descargo.&#xA;&#xA;SI se descargo, se movera el archivo.&#xA;&#xA;SI NO no sucede nada pero posteriormente se validara que no existe y no se puede seguir con el proceso." Condition="[System.IO.File.Exists(in_DownloadsPath + &quot;\CrystalReportViewer1.xls&quot;)]" sap:VirtualizedContainerService.HintSize="484,497" sap2010:WorkflowViewState.IdRef="If_3">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <ui:MoveFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Mover el archivo descargado a la carpeta del proyecto 'ReportesDescargados' y cambiarle el nombre." Destination="[&quot;ReportesDescargados\&quot; + &quot;Reporte_630101_Compras.xls&quot;]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="384,199" sap2010:WorkflowViewState.IdRef="MoveFile_2" Overwrite="True" Path="[in_DownloadsPath + &quot;\CrystalReportViewer1.xls&quot;]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MoveFile>
+                    </If.Then>
+                  </If>
+                </Sequence>
+              </If.Then>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:BrowserScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:BrowserScope>
+    <ui:UiElementExists DisplayName="Element Exists 'chrome.exe Nueva'" Exists="[chromeExist]" sap:VirtualizedContainerService.HintSize="638,106" sap2010:WorkflowViewState.IdRef="UiElementExists_5">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3a661e9b-36ef-46a7-86f7-8bbca217d5af" InformativeScreenshot="e19e58e35593cfcc9361bb6bc141679d" Selector="&lt;wnd app='chrome.exe' /&gt;">
+          <ui:Target.TimeoutMS>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:Target.TimeoutMS>
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:UiElementExists.Target>
+    </ui:UiElementExists>
+    <If Condition="[chromeExist]" sap:VirtualizedContainerService.HintSize="638,283" sap2010:WorkflowViewState.IdRef="If_6">
+      <If.Then>
+        <ui:CloseApplication DisplayName="Close Application 'chrome.exe Nueva'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="CloseApplication_1">
+          <ui:CloseApplication.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="71ad3c07-f2e0-4803-b3c3-9e4c9548125b" InformativeScreenshot="e19e58e35593cfcc9361bb6bc141679d" Selector="&lt;wnd app='chrome.exe' /&gt;">
+              <ui:Target.TimeoutMS>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:Target.TimeoutMS>
+              <ui:Target.WaitForReady>
+                <InArgument x:TypeArguments="ui:WaitForReady" />
+              </ui:Target.WaitForReady>
+            </ui:Target>
+          </ui:CloseApplication.Target>
+        </ui:CloseApplication>
+      </If.Then>
+    </If>
+    <ui:PathExists DisplayName="Path Exists" Exists="[ReporteComprasExist]" sap:VirtualizedContainerService.HintSize="638,89" sap2010:WorkflowViewState.IdRef="PathExists_2" Path="ReportesDescargados\Reporte_630101_Compras.xls" PathType="File" />
+    <If Condition="[ReporteComprasExist]" sap:VirtualizedContainerService.HintSize="638,1001" sap2010:WorkflowViewState.IdRef="If_7">
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="476,824" sap2010:WorkflowViewState.IdRef="Sequence_11">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="sd:DataTable" Name="HeaderReportVentas" />
+            <Variable x:TypeArguments="sd:DataTable" Name="ExcelReportCompras" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="434,260" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="ReportesDescargados\Reporte_630101_Compras.xls">
+            <ui:ExcelApplicationScope.Body>
+              <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ExcelReadRange AddHeaders="True" DataTable="[ExcelReportCompras]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" Range="A10" SheetName="Sheet1" />
+                </Sequence>
+              </ActivityAction>
+            </ui:ExcelApplicationScope.Body>
+          </ui:ExcelApplicationScope>
+          <ui:FilterDataTable DataTable="[ExcelReportCompras]" DisplayName="Delete Empty Rows" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="434,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[ExcelReportCompras]" SelectColumnsMode="Keep">
+            <ui:FilterDataTable.Filters>
+              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EMPTY">
+                  <ui:FilterOperationArgument.Column>
+                    <InArgument x:TypeArguments="x:String">["Column1"]</InArgument>
+                  </ui:FilterOperationArgument.Column>
+                </ui:FilterOperationArgument>
+                <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="Or" Operator="EMPTY">
+                  <ui:FilterOperationArgument.Column>
+                    <InArgument x:TypeArguments="x:String">["Column5"]</InArgument>
+                  </ui:FilterOperationArgument.Column>
+                </ui:FilterOperationArgument>
+                <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EMPTY">
+                  <ui:FilterOperationArgument.Column>
+                    <InArgument x:TypeArguments="x:String">["Column9"]</InArgument>
+                  </ui:FilterOperationArgument.Column>
+                </ui:FilterOperationArgument>
+              </scg:List>
+            </ui:FilterDataTable.Filters>
+            <ui:FilterDataTable.SelectColumns>
+              <scg:List x:TypeArguments="InArgument" Capacity="4">
+                <x:Null />
+              </scg:List>
+            </ui:FilterDataTable.SelectColumns>
+          </ui:FilterDataTable>
+          <ui:FilterDataTable DataTable="[ExcelReportCompras]" DisplayName="Delete Empty Columns" sap:VirtualizedContainerService.HintSize="434,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_4" OutputDataTable="[ExcelReportCompras]" SelectColumnsMode="Keep">
+            <ui:FilterDataTable.Filters>
+              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+              </scg:List>
+            </ui:FilterDataTable.Filters>
+            <ui:FilterDataTable.SelectColumns>
+              <scg:List x:TypeArguments="InArgument" Capacity="16">
+                <InArgument x:TypeArguments="x:String">["Column1"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column3"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column5"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column9"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column10"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column11"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column15"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column16"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column18"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column19"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column21"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column23"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column26"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column31"]</InArgument>
+                <InArgument x:TypeArguments="x:String">["Column33"]</InArgument>
+              </scg:List>
+            </ui:FilterDataTable.SelectColumns>
+          </ui:FilterDataTable>
+          <ui:WriteRange AddHeaders="True" DataTable="[ExcelReportCompras]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="ReportesDescargados\Reporte_630101_Compras.xlsx" />
+          <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="434,79" sap2010:WorkflowViewState.IdRef="Delete_2" Path="ReportesDescargados\Reporte_630101_Compras.xls" />
+        </Sequence>
+      </If.Then>
+    </If>
+  </Sequence>
+</Activity>
