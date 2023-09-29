@@ -1,0 +1,1510 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="PROMERICA_Extraction" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="out_MovementsDT" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_ShouldContinue" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_CuentaEnBanco" Type="InArgument(x:String)" />
+    <x:Property Name="in_FechaFinal" Type="InArgument(x:String)" />
+    <x:Property Name="in_FechaInicio" Type="InArgument(x:String)" />
+    <x:Property Name="out_MovimientosObtenidos" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Comentarios" Type="OutArgument(x:String)" />
+    <x:Property Name="out_SaldoDisponible" Type="OutArgument(x:String)" />
+    <x:Property Name="in_PerfilChanged" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_LinkPaginaBanco" Type="InArgument(x:String)" />
+    <x:Property Name="in_Perfil" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:PROMERICA_Extraction.in_ShouldContinue>
+    <InArgument x:TypeArguments="x:Boolean" />
+  </this:PROMERICA_Extraction.in_ShouldContinue>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1180,1163</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>PROMERICA_Extraction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="62">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.ExtractData</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.CV</x:String>
+      <x:String>UiPath.Shared.ObjectLibrary</x:String>
+      <x:String>UiPath.CV.Activities</x:String>
+      <x:String>UiPath.CV.Activities.Interfaces</x:String>
+      <x:String>UiPath.Vision.OCR</x:String>
+      <x:String>UiPath.OCR.Contracts</x:String>
+      <x:String>UiPath.OCR.Activities</x:String>
+      <x:String>UiPath.OCR.Contracts.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="58">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Callout.Activity</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.CV.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Contracts</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="PROMERICA_Extraction" sap:VirtualizedContainerService.HintSize="480,1098" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,875" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence DisplayName="Try - Body" sap:VirtualizedContainerService.HintSize="376,648" sap2010:WorkflowViewState.IdRef="Sequence_42">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;COMIENZA LA DESACARGA (&quot;+in_CuentaEnBanco+&quot;) - PROMERICA&quot;]" />
+          <If Condition="[in_PerfilChanged]" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="If_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="509,601" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Se cierra sesion y Google Chrome si sigue abierta alguna pagina bancaria." DisplayName="Invoke LogoutCloseWebPage.xaml" sap:VirtualizedContainerService.HintSize="467,154" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Generales\LogoutCloseWebPage.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_BankName">PROMERICA</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:InvokeWorkflowFile>
+                <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="467,215" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[in_LinkPaginaBanco]">
+                  <ui:OpenBrowser.Body>
+                    <ActivityAction x:TypeArguments="x:Object">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,114" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:MaximizeWindow Window="{x:Null}" DisplayName="Maximize Window" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="MaximizeWindow_1" />
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:OpenBrowser.Body>
+                </ui:OpenBrowser>
+                <Assign sap:VirtualizedContainerService.HintSize="467,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Boolean">[in_ShouldContinue]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </If.Else>
+          </If>
+          <If sap2010:Annotation.AnnotationText="Se revisa si la variable in_ShouldContinue es True o False.&#xA;&#xA;TRUE: En este caso el bot debe de saltarse toda la parte de login ya que se va a utilizar la misma pagina abierta anteriormente.&#xA;&#xA;FALSE: Se debe de realizar el Login a la pagina del banco." Condition="[in_ShouldContinue]" sap:VirtualizedContainerService.HintSize="334,243" sap2010:WorkflowViewState.IdRef="If_7">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="1907,5030" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:Boolean" Name="ChromeExist" />
+                </Sequence.Variables>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:UiElementExists DisplayName="Element Exists 'chrome.ex Promerica'" Exists="[ChromeExist]" sap:VirtualizedContainerService.HintSize="1865,106" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f0e1f4ce-1ba1-4667-a951-b8ff671267bc" InformativeScreenshot="67200067d74f9a1b018e71dec4e547ee" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='Ingreso*' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+                <If Condition="[ChromeExist]" DisplayName="If Chrome Exist" sap:VirtualizedContainerService.HintSize="1865,4792" sap2010:WorkflowViewState.IdRef="If_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence DisplayName="If Chrome Exist Then" sap:VirtualizedContainerService.HintSize="1516,4634" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="ss:SecureString" Name="password" />
+                        <Variable x:TypeArguments="x:String" Name="username" />
+                        <Variable x:TypeArguments="x:Boolean" Name="BienvenidaExist" />
+                        <Variable x:TypeArguments="x:Int32" Name="Count" />
+                        <Variable x:TypeArguments="x:Boolean" Name="UserInputExist" />
+                        <Variable x:TypeArguments="x:Boolean" Name="TokenInputExist" />
+                        <Variable x:TypeArguments="x:Boolean" Name="PasswordInputExist" />
+                        <Variable x:TypeArguments="x:Boolean" Name="PerfilSelected" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Delay DisplayName="Delay 15s" Duration="[TimeSpan.FromMilliseconds(15000)]" sap:VirtualizedContainerService.HintSize="1474,22" sap2010:WorkflowViewState.IdRef="Delay_10" />
+                      <ui:UiElementExists DisplayName="Element Exists 'INPUT  Username'" Exists="[UserInputExist]" sap:VirtualizedContainerService.HintSize="1474,106" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0e030554-cfdc-4941-ad0d-24c465f5ba13" InformativeScreenshot="85be1506baed53bb8185e1d77194ebfd" Selector="&lt;html app='chrome.exe' title='Ingreso' /&gt;&lt;webctrl tag='INPUT' type='text' /&gt;" TimeoutMS="10000">
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <If Condition="[NOT UserInputExist]" sap:VirtualizedContainerService.HintSize="1474,556" sap2010:WorkflowViewState.IdRef="If_2">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="509,369" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="467,215" sap2010:WorkflowViewState.IdRef="OpenBrowser_2" Url="[in_LinkPaginaBanco]">
+                              <ui:OpenBrowser.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,114" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:MaximizeWindow Window="{x:Null}" DisplayName="Maximize Window" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="MaximizeWindow_2" />
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:OpenBrowser.Body>
+                            </ui:OpenBrowser>
+                            <Delay DisplayName="Delay 9s" Duration="[TimeSpan.FromMilliseconds(9000)]" sap:VirtualizedContainerService.HintSize="467,22" sap2010:WorkflowViewState.IdRef="Delay_11" />
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                      <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="Credenciales_PROMERICA" DisplayName="Get Credential" FolderPath="Conciliaciones" sap:VirtualizedContainerService.HintSize="1474,79" sap2010:WorkflowViewState.IdRef="GetRobotCredential_2" Password="[password]" Username="[username]" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1474,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;El bot de loggea al banco - PROMERICA&quot;]" />
+                      <Assign sap:VirtualizedContainerService.HintSize="1474,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign sap:VirtualizedContainerService.HintSize="1474,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[PasswordInputExist]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:InterruptibleWhile Condition="[NOT PasswordInputExist AND Count &lt; 4]" DisplayName="While" sap:VirtualizedContainerService.HintSize="1474,783" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+                        <ui:InterruptibleWhile.Body>
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,618" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ContinueOnError="True" DisplayName="Type Into 'INPUT  Username'" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[username]">
+                              <ui:TypeInto.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="171c7c71-6477-4302-8f47-5851a56274d1" InformativeScreenshot="85be1506baed53bb8185e1d77194ebfd" Selector="&lt;html app='chrome.exe' title='Ingreso' /&gt;&lt;webctrl tag='INPUT' type='text' /&gt;">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:TypeInto.Target>
+                            </ui:TypeInto>
+                            <ui:Click AlterIfDisabled="{x:Null}" CursorMotionType="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  btValidateAlias'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_7" KeyModifiers="None" MouseButton="BTN_LEFT">
+                              <ui:Click.CursorPosition>
+                                <ui:CursorPosition Position="Center">
+                                  <ui:CursorPosition.OffsetX>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetX>
+                                  <ui:CursorPosition.OffsetY>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetY>
+                                </ui:CursorPosition>
+                              </ui:Click.CursorPosition>
+                              <ui:Click.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="aa88657c-d42a-4cc0-88dc-661b2faeaa9f" InformativeScreenshot="d02483071b2744a41b66501b4d0d0580" Selector="&lt;html app='chrome.exe' title='Ingreso' /&gt;&lt;webctrl tag='INPUT' type='submit' /&gt;">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:Click.Target>
+                            </ui:Click>
+                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Int32">[Count + 1]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:UiElementExists DisplayName="Element Exists 'INPUT  Password'" Exists="[PasswordInputExist]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
+                              <ui:UiElementExists.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a49094cf-1846-47ff-af7a-3cd864dfa21d" InformativeScreenshot="812265fa0abdf256a41b57c7114a2cf5" Selector="&lt;html app='chrome.exe' title='Ingreso' /&gt;&lt;webctrl tag='INPUT' type='password' /&gt;" TimeoutMS="6000">
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:UiElementExists.Target>
+                            </ui:UiElementExists>
+                          </Sequence>
+                        </ui:InterruptibleWhile.Body>
+                      </ui:InterruptibleWhile>
+                      <Assign sap:VirtualizedContainerService.HintSize="1474,60" sap2010:WorkflowViewState.IdRef="Assign_45">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[PerfilSelected]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <If Condition="[in_Perfil.Equals(&quot;DICOMA&quot;)]" sap:VirtualizedContainerService.HintSize="1474,608" sap2010:WorkflowViewState.IdRef="If_16">
+                        <If.Then>
+                          <ui:SelectItem AlterIfDisabled="{x:Null}" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  Perfil'" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="SelectItem_1" Item="CONTABILIDAD-DICOMA DISEÑO CONSTRUCCION Y MAQUINARIA SOCIEDAD ANONIMA">
+                            <ui:SelectItem.Items>
+                              <scg:List x:TypeArguments="x:String" Capacity="4">
+                                <x:String>PERSONAL</x:String>
+                                <x:String>CONTABILIDAD-DICOMA DISEÑO CONSTRUCCION Y MAQUINARIA SOCIEDAD ANONIMA</x:String>
+                                <x:String>CONTABILIDAD-SELCR</x:String>
+                                <x:String>CONTABILIDAD-DICOMA REFRIGERACION SOCIEDAD ANONIMA</x:String>
+                              </scg:List>
+                            </ui:SelectItem.Items>
+                            <ui:SelectItem.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="29b60d4b-adfc-47a4-a62b-9d68fd479621" InformativeScreenshot="ac48912c9377d8994280c9a411695d60" Selector="&lt;html app='chrome.exe' title='Ingreso' /&gt;&lt;webctrl tag='SELECT' /&gt;">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                                <ui:Target.WaitForReady>
+                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                </ui:Target.WaitForReady>
+                              </ui:Target>
+                            </ui:SelectItem.Target>
+                          </ui:SelectItem>
+                        </If.Then>
+                        <If.Else>
+                          <If Condition="[in_Perfil.Equals(&quot;REFRIGERACION&quot;)]" sap:VirtualizedContainerService.HintSize="1070,450" sap2010:WorkflowViewState.IdRef="If_18">
+                            <If.Then>
+                              <ui:SelectItem AlterIfDisabled="{x:Null}" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  Perfil'" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="SelectItem_2" Item="CONTABILIDAD-DICOMA REFRIGERACION SOCIEDAD ANONIMA">
+                                <ui:SelectItem.Items>
+                                  <scg:List x:TypeArguments="x:String" Capacity="4">
+                                    <x:String>PERSONAL</x:String>
+                                    <x:String>CONTABILIDAD-DICOMA DISEÑO CONSTRUCCION Y MAQUINARIA SOCIEDAD ANONIMA</x:String>
+                                    <x:String>CONTABILIDAD-SELCR</x:String>
+                                    <x:String>CONTABILIDAD-DICOMA REFRIGERACION SOCIEDAD ANONIMA</x:String>
+                                  </scg:List>
+                                </ui:SelectItem.Items>
+                                <ui:SelectItem.Target>
+                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="29b60d4b-adfc-47a4-a62b-9d68fd479621" InformativeScreenshot="ac48912c9377d8994280c9a411695d60" Selector="&lt;html app='chrome.exe' title='Ingreso' /&gt;&lt;webctrl tag='SELECT' /&gt;">
+                                    <ui:Target.TimeoutMS>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:Target.TimeoutMS>
+                                    <ui:Target.WaitForReady>
+                                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                                    </ui:Target.WaitForReady>
+                                  </ui:Target>
+                                </ui:SelectItem.Target>
+                              </ui:SelectItem>
+                            </If.Then>
+                            <If.Else>
+                              <If Condition="[in_Perfil.Equals(&quot;SEL&quot;)]" sap:VirtualizedContainerService.HintSize="666,292" sap2010:WorkflowViewState.IdRef="If_17">
+                                <If.Then>
+                                  <ui:SelectItem AlterIfDisabled="{x:Null}" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  Perfil'" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="SelectItem_3" Item="CONTABILIDAD-SELCR">
+                                    <ui:SelectItem.Items>
+                                      <scg:List x:TypeArguments="x:String" Capacity="4">
+                                        <x:String>PERSONAL</x:String>
+                                        <x:String>CONTABILIDAD-DICOMA DISEÑO CONSTRUCCION Y MAQUINARIA SOCIEDAD ANONIMA</x:String>
+                                        <x:String>CONTABILIDAD-SELCR</x:String>
+                                        <x:String>CONTABILIDAD-DICOMA REFRIGERACION SOCIEDAD ANONIMA</x:String>
+                                      </scg:List>
+                                    </ui:SelectItem.Items>
+                                    <ui:SelectItem.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="29b60d4b-adfc-47a4-a62b-9d68fd479621" InformativeScreenshot="ac48912c9377d8994280c9a411695d60" Selector="&lt;html app='chrome.exe' title='Ingreso' /&gt;&lt;webctrl tag='SELECT' /&gt;">
+                                        <ui:Target.TimeoutMS>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:Target.TimeoutMS>
+                                        <ui:Target.WaitForReady>
+                                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                                        </ui:Target.WaitForReady>
+                                      </ui:Target>
+                                    </ui:SelectItem.Target>
+                                  </ui:SelectItem>
+                                </If.Then>
+                                <If.Else>
+                                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_46">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:Boolean">[PerfilSelected]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </If.Else>
+                              </If>
+                            </If.Else>
+                          </If>
+                        </If.Else>
+                      </If>
+                      <If Condition="[PerfilSelected]" sap:VirtualizedContainerService.HintSize="1474,1717" sap2010:WorkflowViewState.IdRef="If_19">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="695,1559" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:TypeSecureText AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Secure Text 'INPUT  Password'" sap:VirtualizedContainerService.HintSize="653,106" sap2010:WorkflowViewState.IdRef="TypeSecureText_1" SecureText="[password]">
+                              <ui:TypeSecureText.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="6ceb88c9-84ec-486a-8ebe-04e3a1b50b4c" InformativeScreenshot="812265fa0abdf256a41b57c7114a2cf5" Selector="&lt;html app='chrome.exe' title='Ingreso' /&gt;&lt;webctrl tag='INPUT' type='password' /&gt;">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:TypeSecureText.Target>
+                            </ui:TypeSecureText>
+                            <ui:Click AlterIfDisabled="{x:Null}" CursorMotionType="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  Ingresar'" sap:VirtualizedContainerService.HintSize="653,106" sap2010:WorkflowViewState.IdRef="Click_8" KeyModifiers="None" MouseButton="BTN_LEFT">
+                              <ui:Click.CursorPosition>
+                                <ui:CursorPosition Position="Center">
+                                  <ui:CursorPosition.OffsetX>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetX>
+                                  <ui:CursorPosition.OffsetY>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetY>
+                                </ui:CursorPosition>
+                              </ui:Click.CursorPosition>
+                              <ui:Click.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c895f4dd-197c-4b1a-a622-9d85aebe589e" InformativeScreenshot="270f24264ee3f1647aca20a4da0d5ddc" Selector="&lt;html app='chrome.exe' title='Ingreso' /&gt;&lt;webctrl id='ctl00_PlaceHolder_pbLoginUC_btLogin' tag='INPUT' type='submit' /&gt;">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:Click.Target>
+                            </ui:Click>
+                            <Assign sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:InterruptibleWhile Condition="[NOT BienvenidaExist OR Count &gt; 10]" DisplayName="While" sap:VirtualizedContainerService.HintSize="653,525" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
+                              <ui:InterruptibleWhile.Body>
+                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,360" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Delay DisplayName="Delay 1s" Duration="[TimeSpan.FromMilliseconds(1000)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                                  <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:Int32">[Count + 1]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <ui:UiElementExists DisplayName="Element Exists 'Resumen de Cuentas'" Exists="[BienvenidaExist]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_5">
+                                    <ui:UiElementExists.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="da7e2011-c04f-4174-888d-cf0fa46db306" InformativeScreenshot="1a93dcd9e68059fc8e9afde2fc892d31" Selector="&lt;html app='chrome.exe' title='Resumen de productos' /&gt;&lt;webctrl id='clWindowTitle' tag='SPAN' innertext='*Resumen de productos*' /&gt;">
+                                        <ui:Target.TimeoutMS>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:Target.TimeoutMS>
+                                        <ui:Target.WaitForReady>
+                                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                                        </ui:Target.WaitForReady>
+                                      </ui:Target>
+                                    </ui:UiElementExists.Target>
+                                  </ui:UiElementExists>
+                                </Sequence>
+                              </ui:InterruptibleWhile.Body>
+                            </ui:InterruptibleWhile>
+                            <If Condition="[BienvenidaExist]" sap:VirtualizedContainerService.HintSize="653,510" sap2010:WorkflowViewState.IdRef="If_3">
+                              <If.Then>
+                                <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:Boolean">[in_ShouldContinue]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                              </If.Then>
+                              <If.Else>
+                                <Sequence sap:VirtualizedContainerService.HintSize="304,352" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[out_MovimientosObtenidos]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">NO</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:String">[out_Comentarios]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:String">["No se pudo Ingresar a la cuenta bancaria."]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:Boolean">[in_ShouldContinue]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap:VirtualizedContainerService.HintSize="304,352" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_47">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[out_MovimientosObtenidos]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">NO</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_48">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[out_Comentarios]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">["El perfil '"+in_Perfil+"' no existe."]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_49">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Boolean">[in_ShouldContinue]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence DisplayName="If Chrome Exist Else" sap:VirtualizedContainerService.HintSize="304,352" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_17">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[out_MovimientosObtenidos]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">NO</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_18">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[out_Comentarios]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">No se pudo abrir la pagina del banco.</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_19">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[in_ShouldContinue]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </If.Else>
+                </If>
+              </Sequence>
+            </If.Else>
+          </If>
+          <If Condition="[in_ShouldContinue]" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="If_15">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe  Lafise'" sap:VirtualizedContainerService.HintSize="1394,7598" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="a2bbfaf081463b7aa151d9fbaff73059" Selector="&lt;html app='chrome.exe' title='Resumen de productos' /&gt;">
+                <ui:BrowserScope.Body>
+                  <ActivityAction x:TypeArguments="x:Object">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1360,7452" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Boolean" Name="DontFoundMovements" />
+                        <Variable x:TypeArguments="x:Boolean" Name="FoundMovements" />
+                        <Variable x:TypeArguments="x:Boolean" Name="TablaMovimientos" />
+                        <Variable x:TypeArguments="x:Int32" Name="Count" />
+                        <Variable x:TypeArguments="x:Boolean" Name="ConsultasBoton" />
+                        <Variable x:TypeArguments="x:Boolean" Name="ErroresExist" />
+                        <Variable x:TypeArguments="x:Boolean" Name="ResumenCuentasExist" />
+                        <Variable x:TypeArguments="s:DateTime" Name="FechaInicioDateTime" />
+                        <Variable x:TypeArguments="s:DateTime" Name="FechaFinalDateTime" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Delay DisplayName="Delay 1s" Duration="[TimeSpan.FromMilliseconds(1000)]" sap:VirtualizedContainerService.HintSize="1318,22" sap2010:WorkflowViewState.IdRef="Delay_2" />
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_21">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[ConsultasBoton]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <If Condition="[NOT ConsultasBoton AND Count &lt; 5]" sap:VirtualizedContainerService.HintSize="1318,823" sap2010:WorkflowViewState.IdRef="If_8">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="376,637" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_22">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Int32">[Count + 1]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;CLICK en la cuenta &quot; + in_CuentaEnBanco + &quot; - PROMERICA&quot;]" />
+                            <ui:Click AlterIfDisabled="{x:Null}" CursorMotionType="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'IBAN de la Cuenta Bancaria '" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                              <ui:Click.CursorPosition>
+                                <ui:CursorPosition Position="Center">
+                                  <ui:CursorPosition.OffsetX>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetX>
+                                  <ui:CursorPosition.OffsetY>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetY>
+                                </ui:CursorPosition>
+                              </ui:Click.CursorPosition>
+                              <ui:Click.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="72ed1a60-4d58-42ac-85e1-1602ef13ed79" InformativeScreenshot="3ca31b3e71a2ff5b5dc1b4ae3e3b5dc8" Selector="[String.Format(&quot;&lt;webctrl parentid='ctGridCC' tag='TABLE' /&gt;&lt;webctrl tag='TD' innertext='{0}' /&gt;&quot;, in_CuentaEnBanco)]">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:Click.Target>
+                            </ui:Click>
+                            <Delay DisplayName="Delay 1s" Duration="[TimeSpan.FromMilliseconds(1000)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Delay_3" />
+                            <ui:UiElementExists DisplayName="Element Exists 'DIV'" Exists="[ConsultasBoton]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_6">
+                              <ui:UiElementExists.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0d522ae2-8623-46fb-acb8-c6d5fcd04e7e" InformativeScreenshot="f78d4df5db85223b23c5f8bd00b6e873" Selector="&lt;html app='chrome.exe' title='Información de la Cuenta de Ahorro/Corriente' /&gt;&lt;webctrl id='ctl00_PlaceHolder_cgTabs_cgTransaction_clStartDate' tag='SPAN' innertext='Fecha Inicial' /&gt;" TimeoutMS="7000">
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:UiElementExists.Target>
+                            </ui:UiElementExists>
+                          </Sequence>
+                        </If.Then>
+                      </If>
+                      <Delay DisplayName="Delay 6s" Duration="[TimeSpan.FromMilliseconds(6000)]" sap:VirtualizedContainerService.HintSize="1318,22" sap2010:WorkflowViewState.IdRef="Delay_5" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1318,91" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Info" Message="[&quot;Se selecciona como fecha de inicio &quot; + in_FechaInicio + &quot; - BAC&quot;]" />
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_84">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:DateTime">[FechaInicioDateTime]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(in_FechaInicio, "dd/MM/yyyy", Nothing)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:SetValue ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Set Text 'INPUT  FechaInicio'" sap:VirtualizedContainerService.HintSize="1318,134" sap2010:WorkflowViewState.IdRef="SetValue_1" Text="[FechaInicioDateTime.ToString(&quot;d/M/yyyy&quot;)]">
+                        <ui:SetValue.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ff71c507-d175-4886-8552-1ef9431d3b96" InformativeScreenshot="9440f6d1abc8b23fd22ae0cddacac07b" Selector="&lt;html app='chrome.exe' title='Información de la Cuenta de Ahorro/Corriente' /&gt;&lt;webctrl id='ctl00_PlaceHolder_cgTabs_cgTransaction_ctStartDateTxt' tag='INPUT' type='text' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:SetValue.Target>
+                      </ui:SetValue>
+                      <Delay DisplayName="Delay 1s" Duration="[TimeSpan.FromMilliseconds(1000)]" sap:VirtualizedContainerService.HintSize="1318,22" sap2010:WorkflowViewState.IdRef="Delay_8" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1318,91" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Info" Message="[&quot;Se selecciona como fecha final &quot; + in_FechaFinal + &quot; - BAC&quot;]" />
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_85">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:DateTime">[FechaFinalDateTime]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:DateTime">[DateTime.ParseExact(in_FechaFinal, "dd/MM/yyyy", Nothing)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:SetValue ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Set Text 'INPUT  FechaInicio'" sap:VirtualizedContainerService.HintSize="1318,134" sap2010:WorkflowViewState.IdRef="SetValue_2" Text="[FechaFinalDateTime.ToString(&quot;d/M/yyyy&quot;)]">
+                        <ui:SetValue.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ff71c507-d175-4886-8552-1ef9431d3b96" InformativeScreenshot="d4f474b25fd0dd85a91a56815e9adfbc" Selector="&lt;webctrl id='ctl00_PlaceHolder_cgTabs_cgTransaction_ctFinishDateTxt' tag='INPUT' type='text' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:SetValue.Target>
+                      </ui:SetValue>
+                      <Delay DisplayName="Delay 1s" Duration="[TimeSpan.FromMilliseconds(1000)]" sap:VirtualizedContainerService.HintSize="1318,22" sap2010:WorkflowViewState.IdRef="Delay_9" />
+                      <ui:Click AlterIfDisabled="{x:Null}" CursorMotionType="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  Buscar'" sap:VirtualizedContainerService.HintSize="1318,106" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="114c9d4f-9d4b-48d8-bd66-4da009b323ce" InformativeScreenshot="e965b31e997515f41b21bd6197a10b95" Selector="&lt;webctrl id='ctl00_PlaceHolder_cgTabs_cgTransaction_btSearch' tag='INPUT' type='submit' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_29">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[TablaMovimientos]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_87">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[DontFoundMovements]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_88">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[FoundMovements]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_30">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1318,91" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Info" Message="[&quot;Se revisa si existen movimientos bancarios'  - PROMERICA&quot;]" />
+                      <ui:InterruptibleWhile Condition="[NOT TablaMovimientos AND Count &lt; 3]" DisplayName="While" sap:VirtualizedContainerService.HintSize="1318,1253" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_5">
+                        <ui:InterruptibleWhile.Body>
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="683,1088" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="641,60" sap2010:WorkflowViewState.IdRef="Assign_31">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Int32">[Count + 1]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" ApiKey="+OyGIsthkGE9WD5Ahs3e7c0274W7R6IF/kSmcpbo7/cxyEPGQYeAC/rc4127IHC97fBokluDK3zJHuGGV6/3YA==" CvMethod="ElementDetection, OCR" DesignTimeCacheId="03a022eb-87a0-4fe0-aefd-f8dc0361291f" DisplayName="CV Screen Scope 'chrome.exe Información'" sap:VirtualizedContainerService.HintSize="641,447" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V2">
+                              <p:CVScope.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="CVSessionData" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                                    <p:CvElementExistsWithDescriptor Descriptor="[&quot;Target: Text 'No existen transacciones en el rango de fechas indicado.' (894,511,322,14)&quot; +&#xA;&quot;Anchor: Button (1341,483,103,28)&quot; +&#xA;&quot;Anchor: Text 'Fecha Inicial' (929,430,70,12)&quot; +&#xA;&quot;Anchor: Text 'Fecha Final' (1111,430,65,12)&quot; +&#xA;&quot;Anchor: Text 'Estado de Cuenta' (825,445,101,12)&quot;]" DesignTimeCacheId="03a022eb-87a0-4fe0-aefd-f8dc0361291f" DesignTimeScaleFactor="1" DisplayName="CV Element Exists - Text" sap:VirtualizedContainerService.HintSize="400,136" sap2010:WorkflowViewState.IdRef="CvElementExistsWithDescriptor_1" InformativeScreenshot="16ed3876e4fff8912798c259ce7daa5f" Result="[DontFoundMovements]" TimeoutMS="8000" Version="V2">
+                                      <p:CvElementExistsWithDescriptor.DesignTimeDescriptor>
+                                        <uc:CvDescriptor>
+                                          <uc:CvDescriptor.Anchors>
+                                            <x:Array Type="uc:CvElementDescriptor">
+                                              <uc:CvElementDescriptor DesignTimeArea="1341, 483, 103, 28" ElementType="Button" />
+                                              <uc:CvElementDescriptor DesignTimeArea="929, 430, 70, 12" ElementType="Text" Text="Fecha Inicial" />
+                                              <uc:CvElementDescriptor DesignTimeArea="1111, 430, 65, 12" ElementType="Text" Text="Fecha Final" />
+                                              <uc:CvElementDescriptor DesignTimeArea="825, 445, 101, 12" ElementType="Text" Text="Estado de Cuenta" />
+                                            </x:Array>
+                                          </uc:CvDescriptor.Anchors>
+                                          <uc:CvDescriptor.Target>
+                                            <uc:CvElementDescriptor DesignTimeArea="894, 511, 322, 14" ElementType="Text" Text="No existen transacciones en el rango de fechas indicado." />
+                                          </uc:CvDescriptor.Target>
+                                        </uc:CvDescriptor>
+                                      </p:CvElementExistsWithDescriptor.DesignTimeDescriptor>
+                                    </p:CvElementExistsWithDescriptor>
+                                  </Sequence>
+                                </ActivityAction>
+                              </p:CVScope.Body>
+                              <p:CVScope.DesignTimeCache>
+                                <uc:CVCache CvUiElements="{x:Null}" OcrTexts="{x:Null}" />
+                              </p:CVScope.DesignTimeCache>
+                              <p:CVScope.DesignTimeCacheContainer>
+                                <uc:CvCacheContainer>
+                                  <uc:CvCacheContainer.Caches>
+                                    <scg:List x:TypeArguments="uc:CVCache" Capacity="1">
+                                      <uc:CVCache DisplayName="Main Screen" Id="03a022eb-87a0-4fe0-aefd-f8dc0361291f" InformativeScreenshot="37202f8e6ddfacf03e37decb1b51aa7a" LogicalPosition="0, 0" OcrText="Informacion de la Cuenta de Aho X + = X banca.grupopromerica.com/PCRC/PB/pages/BankingAccounts/pbActivityInformationPageN.aspx?AuthorizationID=0006001&amp;ExecutionParams=E02644 uthorizationID=0006001&amp;ExecutionParams=E02644EE9D2E8CA32A0EEC7753B6CD2D7C6D315468BB4C32A3E63D8C582A53635EB14B7F17E6E06D#no-back-b. Buenas tardes ALBERT GERARDO CAMBRONERO BOLANOS Banco COSTA RICA Salir Promerica DOLARES : Compra 634.00 /Venta 652.00 Ultima visita: Hoy a las 14:09:13 Ultimo cambio contrasena: 2/2/2022 13:00:09 Perfil: CONTABILIDAD-DICOMA DISENO CONSTRUCCION Y MAQUINARIA Mis Productos Pagos y Transferencias Gestiones Configuracion Informacion de la Cuenta de Ahorro/Corriente ? Numero Cuenta 30000001774517-CUENTA CORRIENTE EMPRES Titular DICOMA DISENO CONSTRUCCIONY MAQUINARIA Moneda COLONES Saldos Transacciones Informacion SubCuentas Saldo Disponible 0.00 Saldo Total 0.00 Ver transacciones por Fecha Fecha Inicial 1/2/2022 Fecha Final 8/2/2022 Opciones rapidas Estado de Cuenta Mancomunadas Pendientes Buscar Transferencia entre mis cuentas No existen transacciones en el rango de fechas indicado. Transferencia a Bancos Locales O Pago de Tarjeta Pago de Servicios Grupo Promerica Todos los derechos reservados, 2022 Contacto" Position="0, 0" ScreenshotGuid="774c07e3-d716-4716-9450-398616e02521" ServerVersion="1">
+                                        <uc:CVCache.CvUiElements>
+                                          <scg:List x:TypeArguments="uc:CvElementInfo" Capacity="128">
+                                            <uc:CvElementInfo Category="RadioButton" Region="805, 424, 18, 17" />
+                                            <uc:CvElementInfo Category="Button" Region="795, 359, 132, 27" />
+                                            <uc:CvElementInfo Category="Button" Region="1341, 483, 103, 28" />
+                                            <uc:CvElementInfo Category="Icon" Region="42, 40, 22, 21" />
+                                            <uc:CvElementInfo Category="Button" Region="4, 0, 247, 34" />
+                                            <uc:CvElementInfo Category="Icon" Region="1783, 41, 22, 21" />
+                                            <uc:CvElementInfo Category="Icon" Region="1752, 42, 21, 20" />
+                                            <uc:CvElementInfo Category="Icon" Region="259, 7, 20, 19" />
+                                            <uc:CvElementInfo Category="Icon" Region="9, 41, 23, 21" />
+                                            <uc:CvElementInfo Category="MaximizeButton" Region="1841, 4, 19, 19" />
+                                            <uc:CvElementInfo Category="RadioButton" Region="806, 443, 16, 16" />
+                                            <uc:CvElementInfo Category="Icon" Region="1081, 423, 26, 24" />
+                                            <uc:CvElementInfo Category="Button" Region="925, 360, 133, 26" />
+                                            <uc:CvElementInfo Category="Icon" Region="1823, 40, 22, 21" />
+                                            <uc:CvElementInfo Category="Icon" Region="556, 89, 62, 58" />
+                                            <uc:CvElementInfo Category="Icon" Region="18, 7, 20, 19" />
+                                            <uc:CvElementInfo Category="Icon" Region="75, 41, 20, 20" />
+                                            <uc:CvElementInfo Category="CloseButton" Region="1888, 5, 18, 18" />
+                                            <uc:CvElementInfo Category="Icon" Region="1256, 423, 27, 26" />
+                                            <uc:CvElementInfo Category="Icon" Region="997, 268, 31, 31" />
+                                            <uc:CvElementInfo Category="Icon" Region="118, 42, 16, 18" />
+                                            <uc:CvElementInfo Category="Button" Region="828, 210, 214, 29" />
+                                            <uc:CvElementInfo Category="CloseButton" Region="223, 8, 17, 16" />
+                                            <uc:CvElementInfo Category="InputBox" Region="998, 429, 82, 20" />
+                                            <uc:CvElementInfo Category="Icon" Region="1890, 40, 18, 23" />
+                                            <uc:CvElementInfo Category="InputBox" Region="1174, 429, 82, 20" />
+                                            <uc:CvElementInfo Category="Button" Region="1035, 209, 216, 29" />
+                                            <uc:CvElementInfo Category="Button" Region="666, 359, 132, 28" />
+                                            <uc:CvElementInfo Category="ArrowButton" Region="1750, 5, 19, 17" />
+                                            <uc:CvElementInfo Category="InputBox" Region="1155, 261, 302, 27" />
+                                            <uc:CvElementInfo Category="Button" Region="620, 209, 211, 29" />
+                                            <uc:CvElementInfo Category="Icon" Region="1420, 112, 40, 39" />
+                                            <uc:CvElementInfo Category="Icon" Region="1855, 39, 24, 25" />
+                                            <uc:CvElementInfo Category="Button" Region="1258, 117, 104, 28" />
+                                            <uc:CvElementInfo Category="MinimizeButton" Region="1795, 5, 22, 18" />
+                                            <uc:CvElementInfo Category="Button" Region="461, 359, 204, 27" />
+                                            <uc:CvElementInfo Category="Icon" Region="1371, 113, 40, 38" />
+                                            <uc:CvElementInfo Category="Icon" Region="1382, 594, 60, 57" />
+                                            <uc:CvElementInfo Category="Icon" Region="460, 481, 15, 15" />
+                                            <uc:CvElementInfo Category="Icon" Region="1431, 267, 22, 19" />
+                                            <uc:CvElementInfo Category="Icon" Region="460, 496, 16, 15" />
+                                            <uc:CvElementInfo Category="Icon" Region="460, 523, 15, 15" />
+                                            <uc:CvElementInfo Category="InputBox" Region="473, 35, 1346, 31" />
+                                            <uc:CvElementInfo Category="RadioButton" Region="460, 482, 14, 14" />
+                                            <uc:CvElementInfo Category="RadioButton" Region="460, 523, 16, 15" />
+                                            <uc:CvElementInfo Category="Button" Region="1249, 210, 211, 28" />
+                                            <uc:CvElementInfo Category="Icon" Region="460, 538, 15, 14" />
+                                            <uc:CvElementInfo Category="RadioButton" Confidence="Runtime" Region="459, 537, 16, 15" />
+                                            <uc:CvElementInfo Category="CheckBox" Confidence="Runtime" Region="1432, 266, 22, 19" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="461, 445, 200, 27" />
+                                            <uc:CvElementInfo Category="Icon" Confidence="Runtime" Region="459, 551, 17, 16" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="1372, 113, 39, 37" />
+                                            <uc:CvElementInfo Category="RadioButton" Confidence="Runtime" Region="460, 495, 16, 15" />
+                                            <uc:CvElementInfo Category="RadioButton" Confidence="Runtime" Region="460, 550, 17, 17" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="1421, 111, 39, 39" />
+                                            <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="457, 359, 204, 27" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="1853, 39, 25, 25" />
+                                            <uc:CvElementInfo Category="ArrowButton" Confidence="Runtime" Region="460, 481, 15, 15" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="1156, 262, 298, 26" />
+                                            <uc:CvElementInfo Category="ArrowButton" Confidence="Runtime" Region="460, 522, 15, 14" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="1171, 428, 86, 21" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="75, 41, 21, 22" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="460, 496, 15, 15" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="997, 429, 84, 20" />
+                                            <uc:CvElementInfo Category="Icon" Confidence="Runtime" Region="1750, 6, 18, 15" />
+                                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="1431, 263, 25, 24" />
+                                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="7, 71, 464, 166" />
+                                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="470, 77, 168, 160" />
+                                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="446, 551, 220, 16" />
+                                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="874, 568, 321, 28" />
+                                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="456, 536, 20, 14" />
+                                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="1, 237, 435, 52" />
+                                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="474, 207, 172, 33" />
+                                          </scg:List>
+                                        </uc:CVCache.CvUiElements>
+                                        <uc:CVCache.OcrTexts>
+                                          <scg:List x:TypeArguments="uc:OcrTextInfo" Capacity="256">
+                                            <uc:OcrTextInfo Region="43, 9, 65, 14" Text="Informacion" />
+                                            <uc:OcrTextInfo Region="110, 10, 15, 12" Text="de" />
+                                            <uc:OcrTextInfo Region="126, 10, 11, 12" Text="la" />
+                                            <uc:OcrTextInfo Region="138, 10, 40, 12" Text="Cuenta" />
+                                            <uc:OcrTextInfo Region="179, 10, 16, 12" Text="de" />
+                                            <uc:OcrTextInfo Region="197, 9, 22, 13" Text="Aho" />
+                                            <uc:OcrTextInfo Region="225, 11, 12, 11" Text="X" />
+                                            <uc:OcrTextInfo Region="262, 9, 14, 15" Text="+" />
+                                            <uc:OcrTextInfo Region="1798, 4, 14, 14" Text="=" />
+                                            <uc:OcrTextInfo Region="1889, 7, 14, 13" Text="X" />
+                                            <uc:OcrTextInfo Region="133, 43, 941, 19" Text="banca.grupopromerica.com/PCRC/PB/pages/BankingAccounts/pbActivityInformationPageN.aspx?AuthorizationID=0006001&amp;ExecutionParams=E02644" />
+                                            <uc:OcrTextInfo Region="750, 44, 981, 16" Text="uthorizationID=0006001&amp;ExecutionParams=E02644EE9D2E8CA32A0EEC7753B6CD2D7C6D315468BB4C32A3E63D8C582A53635EB14B7F17E6E06D#no-back-b." />
+                                            <uc:OcrTextInfo Region="943, 87, 64, 17" Text="Buenas" />
+                                            <uc:OcrTextInfo Region="1011, 88, 54, 16" Text="tardes" />
+                                            <uc:OcrTextInfo Region="1067, 86, 70, 18" Text="ALBERT" />
+                                            <uc:OcrTextInfo Region="1141, 86, 89, 18" Text="GERARDO" />
+                                            <uc:OcrTextInfo Region="1234, 87, 133, 17" Text="CAMBRONERO" />
+                                            <uc:OcrTextInfo Region="1370, 86, 90, 18" Text="BOLANOS" />
+                                            <uc:OcrTextInfo Region="485, 125, 60, 20" Text="Banco" />
+                                            <uc:OcrTextInfo Region="655, 123, 86, 24" Text="COSTA" />
+                                            <uc:OcrTextInfo Region="747, 124, 60, 23" Text="RICA" />
+                                            <uc:OcrTextInfo Region="1295, 124, 31, 13" Text="Salir" />
+                                            <uc:OcrTextInfo Region="478, 146, 134, 26" Text="Promerica" />
+                                            <uc:OcrTextInfo Region="949, 158, 58, 12" Text="DOLARES" />
+                                            <uc:OcrTextInfo Region="1008, 159, 6, 11" Text=":" />
+                                            <uc:OcrTextInfo Region="1015, 158, 46, 14" Text="Compra" />
+                                            <uc:OcrTextInfo Region="1064, 158, 39, 12" Text="634.00" />
+                                            <uc:OcrTextInfo Region="1105, 158, 38, 12" Text="/Venta" />
+                                            <uc:OcrTextInfo Region="1145, 158, 39, 12" Text="652.00" />
+                                            <uc:OcrTextInfo Region="1281, 155, 38, 13" Text="Ultima" />
+                                            <uc:OcrTextInfo Region="1321, 156, 35, 12" Text="visita:" />
+                                            <uc:OcrTextInfo Region="1358, 156, 24, 14" Text="Hoy" />
+                                            <uc:OcrTextInfo Region="1383, 157, 9, 11" Text="a" />
+                                            <uc:OcrTextInfo Region="1393, 156, 18, 12" Text="las" />
+                                            <uc:OcrTextInfo Region="1413, 156, 48, 12" Text="14:09:13" />
+                                            <uc:OcrTextInfo Region="1206, 168, 41, 14" Text="Ultimo" />
+                                            <uc:OcrTextInfo Region="1247, 169, 45, 13" Text="cambio" />
+                                            <uc:OcrTextInfo Region="1293, 171, 67, 11" Text="contrasena:" />
+                                            <uc:OcrTextInfo Region="1361, 170, 50, 11" Text="2/2/2022" />
+                                            <uc:OcrTextInfo Region="1412, 170, 48, 12" Text="13:00:09" />
+                                            <uc:OcrTextInfo Region="1233, 184, 34, 11" Text="Perfil:" />
+                                            <uc:OcrTextInfo Region="1269, 184, 144, 12" Text="CONTABILIDAD-DICOMA" />
+                                            <uc:OcrTextInfo Region="1413, 183, 47, 13" Text="DISENO" />
+                                            <uc:OcrTextInfo Region="1270, 198, 100, 12" Text="CONSTRUCCION" />
+                                            <uc:OcrTextInfo Region="1368, 198, 10, 11" Text="Y" />
+                                            <uc:OcrTextInfo Region="1379, 198, 81, 12" Text="MAQUINARIA" />
+                                            <uc:OcrTextInfo Region="680, 218, 24, 13" Text="Mis" />
+                                            <uc:OcrTextInfo Region="705, 218, 66, 13" Text="Productos" />
+                                            <uc:OcrTextInfo Region="865, 218, 39, 14" Text="Pagos" />
+                                            <uc:OcrTextInfo Region="905, 219, 10, 14" Text="y" />
+                                            <uc:OcrTextInfo Region="913, 218, 93, 13" Text="Transferencias" />
+                                            <uc:OcrTextInfo Region="1113, 218, 64, 13" Text="Gestiones" />
+                                            <uc:OcrTextInfo Region="1310, 218, 89, 15" Text="Configuracion" />
+                                            <uc:OcrTextInfo Region="457, 271, 147, 22" Text="Informacion" />
+                                            <uc:OcrTextInfo Region="609, 271, 31, 22" Text="de" />
+                                            <uc:OcrTextInfo Region="646, 271, 20, 23" Text="la" />
+                                            <uc:OcrTextInfo Region="673, 271, 84, 23" Text="Cuenta" />
+                                            <uc:OcrTextInfo Region="763, 271, 31, 22" Text="de" />
+                                            <uc:OcrTextInfo Region="799, 270, 202, 26" Text="Ahorro/Corriente" />
+                                            <uc:OcrTextInfo Region="1007, 274, 13, 18" Text="?" />
+                                            <uc:OcrTextInfo Region="1063, 268, 48, 12" Text="Numero" />
+                                            <uc:OcrTextInfo Region="1114, 268, 41, 12" Text="Cuenta" />
+                                            <uc:OcrTextInfo Region="1163, 268, 149, 12" Text="30000001774517-CUENTA" />
+                                            <uc:OcrTextInfo Region="1315, 268, 67, 12" Text="CORRIENTE" />
+                                            <uc:OcrTextInfo Region="1383, 269, 48, 12" Text="EMPRES" />
+                                            <uc:OcrTextInfo Region="1061, 302, 40, 12" Text="Titular" />
+                                            <uc:OcrTextInfo Region="1102, 302, 50, 12" Text="DICOMA" />
+                                            <uc:OcrTextInfo Region="1154, 300, 47, 14" Text="DISENO" />
+                                            <uc:OcrTextInfo Region="1203, 302, 106, 12" Text="CONSTRUCCIONY" />
+                                            <uc:OcrTextInfo Region="1313, 302, 81, 12" Text="MAQUINARIA" />
+                                            <uc:OcrTextInfo Region="1060, 326, 49, 12" Text="Moneda" />
+                                            <uc:OcrTextInfo Region="1110, 326, 59, 12" Text="COLONES" />
+                                            <uc:OcrTextInfo Region="542, 365, 42, 12" Text="Saldos" />
+                                            <uc:OcrTextInfo Region="680, 366, 94, 13" Text="Transacciones" />
+                                            <uc:OcrTextInfo Region="819, 365, 76, 14" Text="Informacion" />
+                                            <uc:OcrTextInfo Region="946, 366, 81, 13" Text="SubCuentas" />
+                                            <uc:OcrTextInfo Region="462, 397, 31, 11" Text="Saldo" />
+                                            <uc:OcrTextInfo Region="495, 396, 57, 14" Text="Disponible" />
+                                            <uc:OcrTextInfo Region="638, 397, 24, 11" Text="0.00" />
+                                            <uc:OcrTextInfo Region="461, 420, 33, 11" Text="Saldo" />
+                                            <uc:OcrTextInfo Region="493, 420, 26, 11" Text="Total" />
+                                            <uc:OcrTextInfo Region="638, 420, 23, 11" Text="0.00" />
+                                            <uc:OcrTextInfo Region="677, 422, 23, 12" Text="Ver" />
+                                            <uc:OcrTextInfo Region="700, 422, 80, 12" Text="transacciones" />
+                                            <uc:OcrTextInfo Region="782, 424, 21, 12" Text="por" />
+                                            <uc:OcrTextInfo Region="826, 426, 34, 12" Text="Fecha" />
+                                            <uc:OcrTextInfo Region="929, 430, 34, 12" Text="Fecha" />
+                                            <uc:OcrTextInfo Region="965, 430, 34, 12" Text="Inicial" />
+                                            <uc:OcrTextInfo Region="1002, 431, 47, 13" Text="1/2/2022" />
+                                            <uc:OcrTextInfo Region="1111, 430, 34, 12" Text="Fecha" />
+                                            <uc:OcrTextInfo Region="1147, 430, 29, 12" Text="Final" />
+                                            <uc:OcrTextInfo Region="1178, 431, 47, 13" Text="8/2/2022" />
+                                            <uc:OcrTextInfo Region="513, 452, 55, 14" Text="Opciones" />
+                                            <uc:OcrTextInfo Region="569, 452, 44, 14" Text="rapidas" />
+                                            <uc:OcrTextInfo Region="825, 445, 40, 12" Text="Estado" />
+                                            <uc:OcrTextInfo Region="867, 445, 16, 12" Text="de" />
+                                            <uc:OcrTextInfo Region="885, 445, 41, 12" Text="Cuenta" />
+                                            <uc:OcrTextInfo Region="481, 482, 91, 11" Text="Mancomunadas" />
+                                            <uc:OcrTextInfo Region="575, 482, 64, 12" Text="Pendientes" />
+                                            <uc:OcrTextInfo Region="1371, 491, 44, 12" Text="Buscar" />
+                                            <uc:OcrTextInfo Region="480, 496, 78, 12" Text="Transferencia" />
+                                            <uc:OcrTextInfo Region="559, 497, 32, 11" Text="entre" />
+                                            <uc:OcrTextInfo Region="592, 497, 23, 10" Text="mis" />
+                                            <uc:OcrTextInfo Region="480, 511, 46, 11" Text="cuentas" />
+                                            <uc:OcrTextInfo Region="894, 511, 17, 12" Text="No" />
+                                            <uc:OcrTextInfo Region="913, 511, 42, 12" Text="existen" />
+                                            <uc:OcrTextInfo Region="958, 511, 79, 12" Text="transacciones" />
+                                            <uc:OcrTextInfo Region="1039, 513, 15, 10" Text="en" />
+                                            <uc:OcrTextInfo Region="1056, 511, 12, 12" Text="el" />
+                                            <uc:OcrTextInfo Region="1069, 513, 35, 12" Text="rango" />
+                                            <uc:OcrTextInfo Region="1106, 511, 16, 12" Text="de" />
+                                            <uc:OcrTextInfo Region="1123, 511, 38, 12" Text="fechas" />
+                                            <uc:OcrTextInfo Region="1162, 511, 54, 12" Text="indicado." />
+                                            <uc:OcrTextInfo Region="480, 524, 77, 12" Text="Transferencia" />
+                                            <uc:OcrTextInfo Region="559, 525, 9, 11" Text="a" />
+                                            <uc:OcrTextInfo Region="570, 524, 42, 12" Text="Bancos" />
+                                            <uc:OcrTextInfo Region="614, 524, 44, 12" Text="Locales" />
+                                            <uc:OcrTextInfo Region="459, 538, 16, 13" Text="O" />
+                                            <uc:OcrTextInfo Region="480, 538, 30, 14" Text="Pago" />
+                                            <uc:OcrTextInfo Region="512, 538, 15, 12" Text="de" />
+                                            <uc:OcrTextInfo Region="528, 538, 38, 14" Text="Tarjeta" />
+                                            <uc:OcrTextInfo Region="480, 552, 29, 14" Text="Pago" />
+                                            <uc:OcrTextInfo Region="512, 552, 16, 12" Text="de" />
+                                            <uc:OcrTextInfo Region="529, 552, 54, 12" Text="Servicios" />
+                                            <uc:OcrTextInfo Region="1258, 595, 53, 22" Text="Grupo" />
+                                            <uc:OcrTextInfo Region="1253, 614, 123, 25" Text="Promerica" />
+                                            <uc:OcrTextInfo Region="1251, 670, 35, 12" Text="Todos" />
+                                            <uc:OcrTextInfo Region="1288, 670, 18, 12" Text="los" />
+                                            <uc:OcrTextInfo Region="1308, 670, 53, 12" Text="derechos" />
+                                            <uc:OcrTextInfo Region="1363, 670, 68, 14" Text="reservados," />
+                                            <uc:OcrTextInfo Region="1432, 670, 29, 12" Text="2022" />
+                                            <uc:OcrTextInfo Region="1251, 684, 52, 12" Text="Contacto" />
+                                          </scg:List>
+                                        </uc:CVCache.OcrTexts>
+                                      </uc:CVCache>
+                                    </scg:List>
+                                  </uc:CvCacheContainer.Caches>
+                                </uc:CvCacheContainer>
+                              </p:CVScope.DesignTimeCacheContainer>
+                              <p:CVScope.OCREngine>
+                                <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                                  <ActivityFunc.Argument>
+                                    <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                                  </ActivityFunc.Argument>
+                                  <p1:UiPathScreenOCR Endpoint="{x:Null}" Output="{x:Null}" Text="{x:Null}" ApiKey="+OyGIsthkGE9WD5Ahs3e7c0274W7R6IF/kSmcpbo7/cxyEPGQYeAC/rc4127IHC97fBokluDK3zJHuGGV6/3YA==" ComputeSkewAngle="False" ExtractWords="True" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="UiPathScreenOCR_1" Image="[Image]" Language="en" Profile="Screen" Scale="1" />
+                                </ActivityFunc>
+                              </p:CVScope.OCREngine>
+                              <p:CVScope.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="a8c6eb17-463a-4db3-9bd3-219b2129630d" InformativeScreenshot="66e4afb27a203e1b9bae3714897c9b11" WaitForReady="INTERACTIVE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </p:CVScope.Target>
+                              <p:CVScope.UseLocalServer>
+                                <InArgument x:TypeArguments="x:Boolean" />
+                              </p:CVScope.UseLocalServer>
+                            </p:CVScope>
+                            <ui:UiElementExists DisplayName="Element Exists 'Se encontraron movientos'" Exists="[FoundMovements]" sap:VirtualizedContainerService.HintSize="641,106" sap2010:WorkflowViewState.IdRef="UiElementExists_13">
+                              <ui:UiElementExists.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="350ce020-d13b-41db-934b-520fad7a7baf" InformativeScreenshot="f633087f3d8be0406a97931752518a4a" Selector="&lt;html app='chrome.exe' title='Información de la Cuenta de Ahorro/Corriente' /&gt;&lt;webctrl parentid='ctl00_PlaceHolder_cgTabs_cgTransaction_ctStatementTransactions_c*' tag='DIV' /&gt;" TimeoutMS="4000">
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:UiElementExists.Target>
+                            </ui:UiElementExists>
+                            <If Condition="[NOT FoundMovements AND NOT DontFoundMovements]" sap:VirtualizedContainerService.HintSize="641,263" sap2010:WorkflowViewState.IdRef="If_10">
+                              <If.Then>
+                                <ui:Click AlterIfDisabled="{x:Null}" CursorMotionType="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  Buscar'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_14" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                  <ui:Click.CursorPosition>
+                                    <ui:CursorPosition Position="Center">
+                                      <ui:CursorPosition.OffsetX>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetX>
+                                      <ui:CursorPosition.OffsetY>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetY>
+                                    </ui:CursorPosition>
+                                  </ui:Click.CursorPosition>
+                                  <ui:Click.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="114c9d4f-9d4b-48d8-bd66-4da009b323ce" InformativeScreenshot="e965b31e997515f41b21bd6197a10b95" Selector="&lt;webctrl id='ctl00_PlaceHolder_cgTabs_cgTransaction_btSearch' tag='INPUT' type='submit' /&gt;">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </ui:Click.Target>
+                                </ui:Click>
+                              </If.Then>
+                              <If.Else>
+                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_86">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Boolean">[TablaMovimientos]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </ui:InterruptibleWhile.Body>
+                      </ui:InterruptibleWhile>
+                      <If Condition="[NOT DontFoundMovements]" DisplayName="If DontFoundMovements" sap:VirtualizedContainerService.HintSize="1318,2289" sap2010:WorkflowViewState.IdRef="If_14">
+                        <If.Then>
+                          <If Condition="[FoundMovements]" DisplayName="If FoundMovements" sap:VirtualizedContainerService.HintSize="897,2132" sap2010:WorkflowViewState.IdRef="If_13">
+                            <If.Then>
+                              <Sequence DisplayName="If FoundMovements Then" sap:VirtualizedContainerService.HintSize="476,1975" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="sd:DataTable" Name="MovementsDT" />
+                                  <Variable x:TypeArguments="sd:DataTable" Name="FinalMovementsDT" />
+                                </Sequence.Variables>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[&quot;Se encontraron movimientos  - PROMERICA&quot;]" />
+                                <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'Informaci Page'" sap:VirtualizedContainerService.HintSize="434,344" sap2010:WorkflowViewState.IdRef="BrowserScope_4" InformativeScreenshot="3725d86ccc053acb3e81c1f5d75eba80" Selector="&lt;html app='chrome.exe' title='Información de la Cuenta de Ahorro/Corriente' /&gt;">
+                                  <ui:BrowserScope.Body>
+                                    <ActivityAction x:TypeArguments="x:Object">
+                                      <ActivityAction.Argument>
+                                        <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                      </ActivityAction.Argument>
+                                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[MovementsDT]" DisplayName="Extract Structured Data 'TABLE'" ExtractMetadata="&lt;extract-table get_columns_name='1' get_empty_columns='1' columns_name_source='Longest' /&gt;" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ExtractData_3" MaxNumberOfResults="0" SimulateClick="True">
+                                          <ui:ExtractData.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="eac7061f-7337-4487-8dad-23c2a1f8e174" InformativeScreenshot="0cd1bb2e13eb4666c1ed75fef55defe7" Selector="&lt;webctrl idx='2' parentid='ctl00_PlaceHolder_cgTabs_cgTransaction_ctStatementTransactions_c*' tag='TABLE' /&gt;" WaitForReady="COMPLETE">
+                                              <ui:Target.TimeoutMS>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:Target.TimeoutMS>
+                                            </ui:Target>
+                                          </ui:ExtractData.Target>
+                                        </ui:ExtractData>
+                                      </Sequence>
+                                    </ActivityAction>
+                                  </ui:BrowserScope.Body>
+                                </ui:BrowserScope>
+                                <ui:BuildDataTable DataTable="[FinalMovementsDT]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="434,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;FECHA&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;1000&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;REFERENCIA&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;1000&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;DESCRIPCION&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;1000&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;DEBITO&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;CREDITO&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+                                <ui:FilterDataTable sap2010:Annotation.AnnotationText="Se borran las columnas y las lineas que no contienen informacion importante." DataTable="[MovementsDT]" DisplayName="Delete Rows and Columns" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="434,202" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[MovementsDT]" SelectColumnsMode="Keep">
+                                  <ui:FilterDataTable.Filters>
+                                    <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                      <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+                                    </scg:List>
+                                  </ui:FilterDataTable.Filters>
+                                  <ui:FilterDataTable.SelectColumns>
+                                    <scg:List x:TypeArguments="InArgument" Capacity="8">
+                                      <InArgument x:TypeArguments="x:String">["Column-0"]</InArgument>
+                                      <InArgument x:TypeArguments="x:String">["Column-1"]</InArgument>
+                                      <InArgument x:TypeArguments="x:String">["Column-2"]</InArgument>
+                                      <InArgument x:TypeArguments="x:String">["Column-4"]</InArgument>
+                                      <InArgument x:TypeArguments="x:String">["Column-5"]</InArgument>
+                                      <InArgument x:TypeArguments="x:String">["Column-14"]</InArgument>
+                                    </scg:List>
+                                  </ui:FilterDataTable.SelectColumns>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:FilterDataTable>
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;Se extraen los movimientos y se ajustan los formatos y columnas  - PROMERICA&quot;]" />
+                                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[MovementsDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="434,696" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                                  <ui:ForEachRow.Body>
+                                    <ActivityAction x:TypeArguments="sd:DataRow">
+                                      <ActivityAction.Argument>
+                                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                                      </ActivityAction.Argument>
+                                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,577" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_33">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:Object">[row(3)]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String">[row(3).ToString.Replace("€", "").Replace("$", "").Replace("¢", "").Replace(",", "").Replace(" ", "")]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_34">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:Object">[row(4)]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String">[row(4).ToString.Replace("€", "").Replace("$", "").Replace("¢", "").Replace(",", "").Replace(" ", "")]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_35">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:Object">[row(5)]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String">[row(5).ToString.Replace("€", "").Replace("$", "").Replace("¢", "").Replace(",", "").Replace(" ", "")]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(0).ToString, row(1).ToString,  row(2).ToString, row(3).ToString, row(4).ToString}]" DataTable="[FinalMovementsDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                                      </Sequence>
+                                    </ActivityAction>
+                                  </ui:ForEachRow.Body>
+                                </ui:ForEachRow>
+                                <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_36">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[out_SaldoDisponible]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[MovementsDT.Rows.Item(MovementsDT.Rows.Count - 1).Item("Column-14").ToString]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_37">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="sd:DataTable">[out_MovementsDT]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="sd:DataTable">[FinalMovementsDT]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="If FoundMovements Else" sap:VirtualizedContainerService.HintSize="376,383" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;Se encontraron movimientos  - PROMERICA&quot;]" />
+                                <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_38">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[out_MovimientosObtenidos]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">NO</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_39">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[out_Comentarios]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">["No se encontraron movimientos por un error desconocido."]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </If.Else>
+                          </If>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="If DontFoundMovements Else" sap:VirtualizedContainerService.HintSize="376,383" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[&quot;Se encontraron movimientos  - PROMERICA&quot;]" />
+                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_40">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[out_MovimientosObtenidos]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">NO</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_41">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[out_Comentarios]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">["No se encontraron movimientos entre las fechas " + in_FechaInicio + " y " + in_FechaFinal +"."]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_42">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign sap:VirtualizedContainerService.HintSize="1318,60" sap2010:WorkflowViewState.IdRef="Assign_43">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[ResumenCuentasExist]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:InterruptibleWhile Condition="[NOT ResumenCuentasExist AND Count &lt; 5]" DisplayName="While" sap:VirtualizedContainerService.HintSize="1318,740" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_7">
+                        <ui:InterruptibleWhile.Body>
+                          <Sequence sap:VirtualizedContainerService.HintSize="376,575" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Info" Message="[&quot;Se navega nuevamente a la pagina de Resumen e cuentas del banco  - PROMERICA&quot;]" />
+                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_44">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Int32">[Count]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Int32">[Count + 1]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:Click AlterIfDisabled="{x:Null}" CursorMotionType="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Volver a Resumen de Cuentas'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT">
+                              <ui:Click.CursorPosition>
+                                <ui:CursorPosition Position="Center">
+                                  <ui:CursorPosition.OffsetX>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetX>
+                                  <ui:CursorPosition.OffsetY>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetY>
+                                </ui:CursorPosition>
+                              </ui:Click.CursorPosition>
+                              <ui:Click.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="76f1c141-f836-425e-81b2-5b5ad948aa2e" InformativeScreenshot="23f830d36b45c7e83cf82d7d0355d46d" Selector="&lt;webctrl id='ctl00_btBack' tag='INPUT' type='submit' /&gt;" TimeoutMS="6000">
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:Click.Target>
+                            </ui:Click>
+                            <ui:UiElementExists DisplayName="Element Exists 'Resumen de Cuentas'" Exists="[ResumenCuentasExist]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_14">
+                              <ui:UiElementExists.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="da7e2011-c04f-4174-888d-cf0fa46db306" InformativeScreenshot="1a93dcd9e68059fc8e9afde2fc892d31" Selector="&lt;html app='chrome.exe' title='Resumen de productos' /&gt;&lt;webctrl id='clWindowTitle' tag='SPAN' innertext='*Resumen de productos*' /&gt;">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:UiElementExists.Target>
+                            </ui:UiElementExists>
+                          </Sequence>
+                        </ui:InterruptibleWhile.Body>
+                      </ui:InterruptibleWhile>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:BrowserScope.Body>
+              </ui:BrowserScope>
+            </If.Then>
+          </If>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Catches - Body" sap:VirtualizedContainerService.HintSize="376,514" sap2010:WorkflowViewState.IdRef="Sequence_43">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[&quot;Ocurrio un Error desconocido durante la descarga de los movimientos - PROMERICA&quot;]" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="Info" Message="[exception.ToString]" />
+              <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_89">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[out_MovimientosObtenidos]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">NO</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_90">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[out_Comentarios]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["Ocurrio un Error desconocido."]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="438,91" sap2010:WorkflowViewState.IdRef="LogMessage_22" Level="Info" Message="[&quot;FINALIZA LA DESACARGA  (&quot;+in_CuentaEnBanco+&quot;) - PROMERICA&quot;]" />
+  </Sequence>
+</Activity>

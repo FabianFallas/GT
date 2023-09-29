@@ -1,0 +1,529 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Reportes_IVA_QuickBooks" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_sociedad" Type="InArgument(x:String)" />
+    <x:Property Name="in_from_date" Type="InArgument(s:DateTime)" />
+    <x:Property Name="in_to_date" Type="InArgument(s:DateTime)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1497,5788</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Reportes_IVA_QuickBooks_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="47">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.CV</x:String>
+      <x:String>UiPath.Shared.ObjectLibrary</x:String>
+      <x:String>UiPath.CV.Activities</x:String>
+      <x:String>UiPath.CV.Activities.Interfaces</x:String>
+      <x:String>UiPath.Platform.Triggers</x:String>
+      <x:String>UiPath.Platform.Triggers.Scope</x:String>
+      <x:String>Google.Apis.Drive.v3.Data</x:String>
+      <x:String>Google.Apis.Requests</x:String>
+      <x:String>UiPath.GSuite.Activities.Drive</x:String>
+      <x:String>UiPath.GSuite.Activities</x:String>
+      <x:String>UiPath.GSuite.Activities.Contracts</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Callout.Activity</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.CV.Activities</AssemblyReference>
+      <AssemblyReference>Google.Apis.Drive.v3</AssemblyReference>
+      <AssemblyReference>Google.Apis</AssemblyReference>
+      <AssemblyReference>Google.Apis.Core</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Reportes_IVA_QuickBooks" sap:VirtualizedContainerService.HintSize="706,5723" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="644,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Generales\Directorios.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_sociedad_actual">[in_sociedad]</InArgument>
+        <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date_actual">[in_to_date]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:BlockUserInput TimeoutMS="{x:Null}" BlockType="All" DisplayName="Block User Input" sap:VirtualizedContainerService.HintSize="644,4168" sap2010:WorkflowViewState.IdRef="BlockUserInput_1" KeyModifiers="Alt" SpecialKey="True">
+      <ui:BlockUserInput.Body>
+        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="608,4041" sap2010:WorkflowViewState.IdRef="Sequence_12">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application:  - Intuit QuickBooks Enterprise Solutions 22.0(multi-user)(User01)" sap:VirtualizedContainerService.HintSize="546,812" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="0df2ef34-a790-4c2b-9dbc-a50883ba64db" Version="V1">
+            <uix:NApplicationCard.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="400,522" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NClick ClickType="Double" DisplayName="Click 'qbw.exe DICOMA'" sap:VirtualizedContainerService.HintSize="338,157" sap2010:WorkflowViewState.IdRef="NClick_1" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="0df2ef34-a790-4c2b-9dbc-a50883ba64db" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable DesignTimeRectangle="8, 8, 22, 22" FriendlyName="'System'" FullSelectorArgument="&lt;ctrl automationid='MenuBar' /&gt;&lt;ctrl name='System' role='menu item' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='MenuBar' /&gt;&lt;ctrl name='System' role='menu item' automationid='' check:text='System' /&gt;" Guid="b150e504-48cf-4805-86e1-517fe53cadc2" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKdSURBVEhL3ZHfS1NhGMf7O5ybR8/a2Q+L1tTNrdpWIGGa1tr6oYXSArtyERUtyIvCm26C6Hcymw6U6BfUTSCBBP4BLVOjfyCKblJwyZ7e5z3Pe7Zz9gbdnJsGHzh73uf7/bxn2/b/fsDmD2l0kbJ3yDZIo4ta9pxqWGhJZkDNJkG7vgt8tzSGlz+7swl+1rDPOmSQRi5SR/eD/74C7YVmKXiGO/UZq0BAGhLFToLChognF5GWh2e9lpmD74ocdsggjVnkPnPAUlZj5tMTmPhwqWGujrA3+1eRK3YCXPvSELjXahTsKDghWgpArNQOHcXtTDQFT8uPIMLeDM/EXuCuAq5EWu+QQJqaSB1JGuGri+PwfeMbVKtVPIZZJhGirz+/8LP8Ys7Yx6xVICBNTeTJB3lo+M0ArFd+QW7hHLu9D0rLBZOoa0aD8YUs3xl+O8gzmLUKBKQhUfQ4eCf9PIT/xfxK0bjtdPmhSSTmc5+LfIbP2qSPd8ggTaOo8PEBvFybNwr/JnqxNsfP8BmzVoGANCTqzoDncoiHUq96YOP3OtxcugYHn0VNIrxA3/M43FjK853U6x6e0a6wn451yCCNLnJGjkHbUMK47di707D6Y5kjRPg2la0KbG5t8vl5tiP2MYsdMkgjRClwRo+A706bERYIkXUuwAxmeYcE0pAofBRcbNiaSUJgylx08f0YFMuPTTMB7mIGs9ghgzS6qLmL3YgO1LNRVuAwFe6cdpm+I362o2a7jRx2yCANiToHwcmGAiWVAP9ttaFcgGe4U5/BDhmk0UWOzgFmZwd1NIX7QcnEwX0hCNqEn6OyZyUd52fWfeyQQRoSdRy2DdKQKNRvG6TRRU2hPtsgDYl2H7IN0ghRr22QhkRBNrSFXvgDJNWgEInFUAUAAAAASUVORK5CYII=" InformativeScreenshot="99535387af71ed0e9965cff51e0bf643.png" ScopeSelectorArgument="&lt;wnd app='qbw.exe' cls='MauiFrame' title='DICOMA  - Intuit QuickBooks Enterprise Solutions 22.0(multi-user*' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
+                        <uix:TargetAnchorable.Anchors>
+                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                            <uix:Target DesignTimeRectangle="25, 37, 26, 21" FriendlyName="'qbw.exe DICOMA'" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABoAAAAVCAYAAABYHP4bAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFaSURBVEhLvdFrasJAFAXgu6JZS+I+fKTLEB91ExIfpVsQKxLxR1BERRSJIiqiWzgdx0y4MyK0lM6PD+Z6ztxIQrfbDS7Q9XqFC3S5XOACnc9nuECn0wku0PF4hDJuICcEhCXXGKfZGz6zXnr+BTocDlBGjwUfen7lpz0L7fd7KNG7XBCgq2eOZ0+9LoLsDby4L9Fut4MS1eHLYkfPHM+sXicQ8OuROkd1HyLomHdTlCQJlGFNLjC/jyi1WVZC2z4nbZSEj9ow3aFmnZlou91CGVTlgiJaeuZ4ZvRaKNp/Tj64OmB3U7TZbKB8VeDJBaGeOZ4ZvVA+6MUdC63Xayj9+4ICQj1zPLN6YUHAq/QfvbAA4VXQTzOOVqsVlF5ZLsijqWeOZ0+9JvLZa/NQ7unfTbRcLuECLRYL3Jkf1KQ7f0Hz+Rwu0Gw2gws0nU7hAk0mE7hAcRzj/8X4BqYpLugOr8/LAAAAAElFTkSuQmCC" SearchSteps="Image" TargetType="ImageBased" />
+                          </scg:List>
+                        </uix:TargetAnchorable.Anchors>
+                      </uix:TargetAnchorable>
+                    </uix:NClick.Target>
+                  </uix:NClick>
+                  <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" sap2010:Annotation.AnnotationText="Para cerrar todas las ventanas dentro de QuickBooks" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="338,210" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_1" ScopeIdentifier="0df2ef34-a790-4c2b-9dbc-a50883ba64db" Shortcuts="[d(hk)][d(alt)][u(alt)][u(hk)][d(hk)]w[u(hk)][d(hk)]a[u(hk)]" Version="V1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NKeyboardShortcuts>
+                </Sequence>
+              </ActivityAction>
+            </uix:NApplicationCard.Body>
+            <uix:NApplicationCard.TargetApp>
+              <uix:TargetApp Area="-8, -8, 1936, 1176" FilePath="C:\Program Files\Intuit\QuickBooks Enterprise Solutions 22.0\qbw.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQJSURBVFhHpZdJTBRBFIYhnDxwMMZTYxQ3lAFjUFTEBYQoUeOOmhhjjHGNG64YE5eDIWiMUeNBYwaURREVwRCMG8Hl4MGDW4wrGBcOigYFBhzk+b+ye6iurhmmsZIv09T733s/PdXVNRFEFBkuCd6YPgkFMVPxmeMpiDmJ6yITXBs5IB3XfXS5wQjLAIqmmI2aAfUAa0pgJlVXSyWkARSJw39brTRwgVGDzzhdbYugBpC8Fsmt9oK9wgfW63owDgMQR4GjHq+22P9wDESp/ZwGvMYRJTEkY88PpQXXMrUxDUfVfjYDEKxUEnok63IqdXV10dmnp7RxFU+BsUruGTCAQCwEv9SEnmADPDr/+GlC8UitRoF7xFp9AwYwWSaJwsYywCPz0jitxolRDnm3AUwmgj92UTdJ5wbTjPIUmnl5ko3RhYMcBtIuJgkt5+hqmXCvRKQEDPCu5hDOq8igm/XV5PP7xPesDjahGrjdUCO0nHOroZrmVwRboMYppERG4A88dsZnVbCtdh21o0ioEcyAPNo722l77XpbbRPuGcUGPNKkYFHlDOro7BAFPjTXU27dZsoqn0jTysbSkqqZYp6HzkBqaYLQ5tZtoobm92Kea2VXZdl6MFj4iWxgmRp48KlWJL778YYmlnhsMTZhDZ0BWcu5b3+8FrGHn+psMZPlbGCPPMlJfjxSPDbfWSWLBW4MMBtvrxQxrjmpNFGN72UDefKkfItTSuJlscCtgfHFI8wo0dLrs9V4fgT2fJuBhZXTTTnRlAujZbHArYHJpaPMKFF2pWMd5PMd2ClPJhcNozZ/m0g48HCXLBa4NbDvwQ4R48cyuWi4Gt/NBhYqk1T5hjcqou++bzS3It0Wc2NgztU0amr7KmLX316xxUyy2QC/A2y7YAaaNKE5j9bfLXTu+RnKubsG3+GskAb23s+hDbdW0Na7q6nw2WmRy+O7r4kyy5LlxiZGrLUTvlSD/H01tnwWBaxx58ONkAZ0o7HlCy3Gwlbrg1cI/9uKsSHs1wgopTiejj/Opxdfn9DPjmaqeV/lMMD7fuvvVhusffHtKZ14fFj7JDEer3EQJQLvAgPw0UkrllEN6DRhwL0GoIT0OvYafGTSiW2wAevF1FsDONIft/p2Gygw+iL4URWrjDk/JLC4emkAPYy+Vt+AAQbBqaBDEmvZc28LtcCEewOGH5/pck+bAQYCPhcGPZxYJOFOjCocqI0FgWvazoOMwwAD4QrQ451wAdfit5Kjl9YAg4RUUG8W6D1eox6/ribrejBBDTAoEA0OYdW6Pi3jJfcLz3oecqN1tS1CGrBAwf5gO3gEeCFpm5qLjDWs7a+rpRKWARkU7of/jn+G82LFT3IBX/NcP11OcCjyLwwtgBSzfrS8AAAAAElFTkSuQmCC" InformativeScreenshot="622a9440fc2d7c5c462e5425b44a0345.png" Selector="&lt;wnd app='qbw.exe' cls='MauiFrame' title='DICOMA  - Intuit QuickBooks Enterprise Solutions 22.0(multi-user*'/&gt;" />
+            </uix:NApplicationCard.TargetApp>
+          </uix:NApplicationCard>
+          <Sequence DisplayName="Descaga de los 7 reportes" sap:VirtualizedContainerService.HintSize="546,1274" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporte 01 Venta de Materiales" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">01 - VENTAS DE MATERIALES</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">01 VENTA DE MATERIALES</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporte 02 Venta de Servicios" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">02 - VENTAS DE SERVICIOS</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">02 VENTA DE SERVICIOS</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporte 03 Compra de Materiales Totales" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">03 - COMPRA MATERIALES TOTALES</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">03 COMPRA DE MATERIALES TOTALES</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporte 04 Compra de Servicios Totales" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">04 - COMPRA DE SERVICIOS TOTALES</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">04 COMPRA DE SERVICIOS TOTALES</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporte 05 IVA en Ventas (Facturacion)" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">05 - IVA EN VENTAS</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">05 IVA EN VENTAS (FACTURACION)</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporte 06 IVA en Compras Gravadas (Materiales)" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">06 - IVA EN COMPRAS GRAVADAS</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">06 IVA EN COMPRAS GRAVADAS (MATERIALES)</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Reporte 07 IVA en Servicios Gravados (Compras)" sap:VirtualizedContainerService.HintSize="379,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_23" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">07 - IVA EN SERVICIOS GRAVADOS</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">07 IVA EN SERVICIOS GRAVADOS (COMPRAS)</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="379,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Reportes de QuickBooks descargados&quot;]" />
+          </Sequence>
+          <Sequence DisplayName="Descarga Reportes de Comprobacion" sap:VirtualizedContainerService.HintSize="546,1764" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="114241 IVA 13 MATERIALES" sap:VirtualizedContainerService.HintSize="484,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_24" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Reporte IVA.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_sociedad">[in_sociedad]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_names_dictionary" xml:space="preserve">[New Dictionary (Of String, String) From 
+{
+{"DICOMA","08 - 114241 · IVA 13%"},
+{"REFRIGERACION","08 - 114241 - IVA 13%"},
+{"MAQUINARIA","08 - 114241 - IVA 13%"},
+{"SOLID","08 - 114241 - IVA 13%"},
+{"SEL","08 - 114241 - IVA 13%"},
+{"KEYBUSINESS","08 - 114241 - IVA 13%"},
+{"KEYPLANNING","08 - 114241 - IVA 13%"},
+{"BRICK","08 - 114241 - IVA 13%"},
+{"FRATERNA","08 - 114241 - IVA 13%"},
+{"FORZALAB","08 - 114241 - IVA 13%"},
+{"GOLDENSEED","08 - 114241 - IVA 13%"},
+{"FARO","08 - 114241 - IVA 13%"},
+{"COISA","08 - 114241 - IVA 13%"}
+}]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114241 IVA 13 Materiales</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="114242 IVA 4 MATERIALES" sap:VirtualizedContainerService.HintSize="484,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_25" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Reporte IVA.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_sociedad">[in_sociedad]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_names_dictionary" xml:space="preserve">[New Dictionary (Of String, String) From 
+{
+{"DICOMA","09 - 114242 · IVA 4%"},
+{"REFRIGERACION","09 - 114242 - IVA 4%"},
+{"MAQUINARIA","09 - 114242 - IVA 4%"},
+{"SOLID","09 - 114242 - IVA 4%"},
+{"SEL","09 - 114242 - IVA 4%"},
+{"KEYBUSINESS","09 - 114242 - IVA 4%"},
+{"KEYPLANNING","09 - 114242 - IVA 4%"},
+{"BRICK","09 - 114242 - IVA 4%"},
+{"FRATERNA","09 - 114242 - IVA 4%"},
+{"FORZALAB","09 - 114242 - IVA 4%"},
+{"GOLDENSEED","09 - 114242 - IVA 4%"},
+{"FARO","09 - 114242 - IVA 4%"},
+{"COISA","09 - 114242 - IVA 4%"}
+}]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114242 IVA 4 Materiales</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="114252 IVA 4 SERVICIOS" sap:VirtualizedContainerService.HintSize="484,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_30" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Reporte IVA.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_sociedad">[in_sociedad]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_names_dictionary" xml:space="preserve">[New Dictionary (Of String, String) From 
+{
+{"DICOMA","14 - 114252 · IVA 4%"},
+{"REFRIGERACION","14 - 114252 - IVA 4%"},
+{"MAQUINARIA","14 - 114252 - IVA 4%"},
+{"SOLID","14 - 114252 - IVA 4%"},
+{"SEL","14 - 114252 - IVA 4%"},
+{"KEYBUSINESS","14 - 114252 - IVA 4%"},
+{"KEYPLANNING","14 - 114252 - IVA 4%"},
+{"BRICK","14 - 114252 - IVA 4%"},
+{"FRATERNA","14 - 114252 - IVA 4%"},
+{"FORZALAB","14 - 114252 - IVA 4%"},
+{"GOLDENSEED","14 - 114252 - IVA 4%"},
+{"FARO","14 - 114252 - IVA 4%"},
+{"COISA","14 - 114252 - IVA 4%"}
+}]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114252 IVA 4 Servicios</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <If sap2010:Annotation.AnnotationText="Para la actualizacion de IVA al 8% a partir de setiembre de 2022" Condition="[in_to_date &gt;= new DateTime(2022,09,1)]" sap:VirtualizedContainerService.HintSize="484,758" sap2010:WorkflowViewState.IdRef="If_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="414,540" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="352,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Descarga reportes 8%&quot;]" />
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Descargar reporte Actualización" DisplayName="114246 IVA 8 MATERIALES" sap:VirtualizedContainerService.HintSize="352,144" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_31" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Reporte IVA.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_sociedad">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_sociedad" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">
+                        <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="in_to_date" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">
+                        <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="in_from_date" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_names_dictionary">
+                        <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="New Dictionary (Of String, String) From &#xD;&#xA;{&#xD;&#xA;{&quot;DICOMA&quot;,&quot;20 - 114246 - IVA 8%&quot;},&#xD;&#xA;{&quot;REFRIGERACION&quot;,&quot;20 - 114246 - IVA 8%&quot;},&#xD;&#xA;{&quot;MAQUINARIA&quot;,&quot;20 - 114246 · IVA 8%&quot;},&#xD;&#xA;{&quot;SOLID&quot;,&quot;20 - 114246 · IVA 8%&quot;},&#xD;&#xA;{&quot;SEL&quot;,&quot;20 - 114246 · IVA 8%&quot;},&#xD;&#xA;{&quot;KEYBUSINESS&quot;,&quot;20 - 114246 · IVA 8%&quot;},&#xD;&#xA;{&quot;KEYPLANNING&quot;,&quot;20 - 114246 · IVA 8%&quot;},&#xD;&#xA;{&quot;BRICK&quot;,&quot;20 - 114246 · IVA 8%&quot;},&#xD;&#xA;{&quot;FRATERNA&quot;,&quot;20 - 114246 · IVA 8%&quot;},&#xD;&#xA;{&quot;FORZALAB&quot;,&quot;20 - 114246 · IVA 8%&quot;},&#xD;&#xA;{&quot;GOLDENSEED&quot;,&quot;20 - 114246 · IVA 8%&quot;},&#xD;&#xA;{&quot;FARO&quot;,&quot;20 - 114246 · IVA 8 %&quot;},&#xD;&#xA;{&quot;COISA&quot;,&quot;20 - 114246 · IVA 8 %&quot;}&#xD;&#xA;}" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_name_report">
+                        <Literal x:TypeArguments="x:String">114246 IVA 8 Materiales</Literal>
+                      </InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InvokeWorkflowFile>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="114256 IVA 8 SERVICIOS" sap:VirtualizedContainerService.HintSize="352,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_32" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Reporte IVA.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_sociedad">
+                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_sociedad" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">
+                        <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="in_to_date" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">
+                        <mva:VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="in_from_date" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_names_dictionary">
+                        <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="New Dictionary (Of String, String) From &#xD;&#xA;{&#xD;&#xA;{&quot;DICOMA&quot;,&quot;21 - 114256 - IVA 8%&quot;},&#xD;&#xA;{&quot;REFRIGERACION&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;MAQUINARIA&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;SOLID&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;SEL&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;KEYBUSINESS&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;KEYPLANNING&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;BRICK&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;FRATERNA&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;FORZALAB&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;GOLDENSEED&quot;,&quot;21 - 114256 · IVA 8%&quot;},&#xD;&#xA;{&quot;FARO&quot;,&quot;21 - 114256 · IVA 8 %&quot;},&#xD;&#xA;{&quot;COISA&quot;,&quot;21 - 114256 · IVA 8 %&quot;}&#xD;&#xA;}" />
+                      </InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_name_report">
+                        <Literal x:TypeArguments="x:String">114256 IVA 8 Servicios</Literal>
+                      </InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="200,83" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </If.Else>
+            </If>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="114251 IVA 13 SERVICIOS" sap:VirtualizedContainerService.HintSize="484,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_29" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Reporte IVA.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_sociedad">[in_sociedad]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_names_dictionary" xml:space="preserve">[New Dictionary (Of String, String) From 
+{
+{"DICOMA","13 - 114251 · IVA 13%"},
+{"REFRIGERACION","13 - 114251 - IVA 13%"},
+{"MAQUINARIA","13 - 114251 - IVA 13%"},
+{"SOLID","13 - 114251 - IVA 13%"},
+{"SEL","13 - 114251 - IVA 13%"},
+{"KEYBUSINESS","13 - 114251 - IVA 13%"},
+{"KEYPLANNING","13 - 114251 - IVA 13%"},
+{"BRICK","13 - 114251 - IVA 13%"},
+{"FRATERNA","13 - 114251 - IVA 13%"},
+{"FORZALAB","13 - 114251 - IVA 13%"},
+{"GOLDENSEED","13 - 114251 - IVA 13%"},
+{"FARO","13 - 114251 - IVA 13%"},
+{"COISA","13 - 114251 - IVA 13%"}
+}]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114251 IVA 13 Servicios</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="2430 IMPUESTO AL VALOR AGREGADO" sap:VirtualizedContainerService.HintSize="484,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_28" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Reporte IVA.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_sociedad">[in_sociedad]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_names_dictionary" xml:space="preserve">[New Dictionary (Of String, String) From 
+{
+{"DICOMA","19 - 2430 · Impuesto al Valor Agregado"},
+{"REFRIGERACION","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"MAQUINARIA","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"SOLID","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"SEL","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"KEYBUSINESS","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"KEYPLANNING","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"BRICK","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"FRATERNA","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"FORZALAB","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"GOLDENSEED","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"FARO","19 - 2430 IMPUESTO AL VALOR AGREGADO"},
+{"COISA","19 - 2430 IMPUESTO AL VALOR AGREGADO"}
+}]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">2430 Impuesto al Valor Agregado</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Reportes de comprobacion descargados&quot;]" />
+          </Sequence>
+        </Sequence>
+      </ui:BlockUserInput.Body>
+    </ui:BlockUserInput>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="604,982" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="463,904" sap2010:WorkflowViewState.IdRef="Sequence_11">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Descargar reportes de Comprobacion" sap:VirtualizedContainerService.HintSize="421,812" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">114241 IVA 13 Materiales</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\Comprobacion\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114241 IVA 13 Materiales</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">114242 IVA 4 Materiales</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\Comprobacion\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114242 IVA 4 Materiales</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">114251 IVA 13 Servicios</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\Comprobacion\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114251 IVA 13 Servicios</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">114252 IVA 4 Servicios</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\Comprobacion\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114252 IVA 4 Servicios</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Generales\Reports\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">2430 IVA</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\Comprobacion\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">2430 Impuesto al Valor Agregado</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <Sequence sap2010:Annotation.AnnotationText="Cerrar Quick Books despues de haber descargado los reportes" sap:VirtualizedContainerService.HintSize="604,229" sap2010:WorkflowViewState.IdRef="Sequence_6">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="ui:UiElement" Name="elementQuickBooks" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:CloseApplication DisplayName="Close Application 'QuickBooks''" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="CloseApplication_2">
+        <ui:CloseApplication.Target>
+          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="420df997-511a-4d2f-b5e5-a507c4b2933f" InformativeScreenshot="02eafcf25da254376137870f0ef03d70" Selector="&lt;wnd app='qbw*.exe' /&gt;" TimeoutMS="3000">
+            <ui:Target.WaitForReady>
+              <InArgument x:TypeArguments="ui:WaitForReady" />
+            </ui:Target.WaitForReady>
+          </ui:Target>
+        </ui:CloseApplication.Target>
+      </ui:CloseApplication>
+    </Sequence>
+  </Sequence>
+</Activity>

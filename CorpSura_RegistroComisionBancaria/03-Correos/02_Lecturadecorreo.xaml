@@ -1,0 +1,418 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Lecturadecorreo" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_lista_correos" Type="InArgument(scg:List(snm:MailMessage))" />
+    <x:Property Name="in_SistemaEnEjecucionExcel" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_RutaInventarioExcel" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_CredencialInventarioExcel" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_out_EmpresaEnEjecucionExcel" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_out_DTInformacionCompleta" Type="InOutArgument(sd:DataTable)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>947.2,3948</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="39">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>System.Xml.XPath</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.Management.Automation</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>System.Globalization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="72">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="Lectura de correo" sap:VirtualizedContainerService.HintSize="957.6,3883.2" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[in_lista_correos]">
+    <ui:ForEach.Body>
+      <ActivityAction x:TypeArguments="snm:MailMessage">
+        <ActivityAction.Argument>
+          <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="item" />
+        </ActivityAction.Argument>
+        <Sequence DisplayName="Obtener la informacion de los correos" sap:VirtualizedContainerService.HintSize="922.4,3748.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="DireccionEmisor" />
+            <Variable x:TypeArguments="x:String" Name="DetalleCorreoMail" />
+            <Variable x:TypeArguments="x:String" Name="AsuntoCorreoMail" />
+            <Variable x:TypeArguments="x:Boolean" Name="ExisteCarpeta" />
+            <Variable x:TypeArguments="x:String" Name="DatosXML" />
+            <Variable x:TypeArguments="x:String" Name="CedulaProvedorXML" />
+            <Variable x:TypeArguments="x:String" Name="MontoTotalXML" />
+            <Variable x:TypeArguments="x:String" Name="CredencialHaciendaExcel" />
+            <Variable x:TypeArguments="x:String" Name="CredencialInventarioExcel" />
+            <Variable x:TypeArguments="x:String" Name="EmpresaEnEjecucionExcel" />
+            <Variable x:TypeArguments="x:String" Name="SistemaEnEjecucionExcel" />
+            <Variable x:TypeArguments="x:String" Name="TipoCorreo" />
+            <Variable x:TypeArguments="x:String" Name="NombreProvedorXML" />
+            <Variable x:TypeArguments="x:String" Name="NumeroConsecutivoXML" />
+            <Variable x:TypeArguments="x:String" Name="FechaEmisionXML" />
+            <Variable x:TypeArguments="x:String" Name="DocTypeXML" />
+            <Variable x:TypeArguments="x:String" Name="DireccionCarpeta" />
+            <Variable x:TypeArguments="x:String" Name="RutaArchivoPDF" />
+            <Variable x:TypeArguments="x:String" Name="RutaArchivoHac" />
+            <Variable x:TypeArguments="x:String" Name="RutaArchivoResp" />
+            <Variable x:TypeArguments="x:String" Name="Hora" />
+            <Variable x:TypeArguments="x:Boolean" Name="ExisteCarpetaNombre" />
+            <Variable x:TypeArguments="x:String" Name="CSE" />
+            <Variable x:TypeArguments="x:String" Name="start" />
+            <Variable x:TypeArguments="x:String" Name="CarpetaTemporal" />
+            <Variable x:TypeArguments="x:String" Name="CarpetaReal" />
+            <Variable x:TypeArguments="x:String" Name="RutaInventarioExcel" />
+            <Variable x:TypeArguments="x:String" Name="RutaHaciendaExcel" />
+            <Variable x:TypeArguments="x:String" Name="NRuta" />
+            <Variable x:TypeArguments="x:String" Name="NRuta1" />
+            <Variable x:TypeArguments="x:Boolean" Name="XMLDañado" />
+            <Variable x:TypeArguments="x:Int32" Name="BorrarFolderFalse" />
+            <Variable x:TypeArguments="x:Boolean" Name="BorrarFolderTrue" />
+            <Variable x:TypeArguments="sd:DataTable" Name="DTInformacionCuentas" />
+            <Variable x:TypeArguments="sd:DataRow" Name="DatosAsociados" />
+            <Variable x:TypeArguments="x:String" Name="RangoDeFechas" />
+            <Variable x:TypeArguments="x:String" Name="NumeroDeCuenta" />
+            <Variable x:TypeArguments="x:String" Default="[Datetime.Now.ToString(&quot;MMMM&quot;,new System.Globalization.CultureInfo(&quot;es-ES&quot;))]" Name="Mes" />
+            <Variable x:TypeArguments="x:Boolean" Name="ExisteCarpetaTremporal" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:GetRobotAsset TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Traer la variable global de la direccion de la carpeta donde se guardaran los archivos y la asigna" AssetName="DirecciondeCarpeta" DisplayName="Direccion Carpeta de descargas" sap:VirtualizedContainerService.HintSize="879.2,192.8" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
+            <ui:GetRobotAsset.Value>
+              <OutArgument x:TypeArguments="x:String">[DireccionCarpeta]</OutArgument>
+            </ui:GetRobotAsset.Value>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:GetRobotAsset>
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="879.2,62.4" sap2010:WorkflowViewState.IdRef="CommentOut_16">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,160.8" sap2010:WorkflowViewState.IdRef="Sequence_111">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_173">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[DireccionCarpeta]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">C:\Users\fabian.fallas\OneDrive - Grant Thornton CR\Escritorio\Documentos Sura 3proceso\New folder\</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </ui:CommentOut.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:CommentOut>
+          <Assign sap:VirtualizedContainerService.HintSize="879.2,69.6" sap2010:WorkflowViewState.IdRef="Assign_34">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[CarpetaTemporal]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[DireccionCarpeta+ in_SistemaEnEjecucionExcel +"\"+ "Temporal"]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:FolderExistsX DisplayName="Folder Exists" Exists="[ExisteCarpetaTremporal]" sap:VirtualizedContainerService.HintSize="879.2,144" sap2010:WorkflowViewState.IdRef="FolderExistsX_1" Path="[CarpetaTemporal]" />
+          <If Condition="[ExisteCarpetaTremporal]" sap:VirtualizedContainerService.HintSize="879.2,528.8" sap2010:WorkflowViewState.IdRef="If_15">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="427.2,360" sap2010:WorkflowViewState.IdRef="Sequence_112">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:DeleteFolderX DisplayName="Delete Folder" sap:VirtualizedContainerService.HintSize="384,90.4" sap2010:WorkflowViewState.IdRef="DeleteFolderX_4" Path="[CarpetaTemporal]" Recursive="True" />
+                <ui:CreateDirectory ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Crea un folder temporal para guardar los archivos para posterirmente guardarlos en la carpeta correspondiente" DisplayName="Creacion de folder temporal" sap:VirtualizedContainerService.HintSize="384,138.4" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="[CarpetaTemporal]">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:CreateDirectory>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,241.6" sap2010:WorkflowViewState.IdRef="Sequence_113">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:CreateDirectory ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Crea un folder temporal para guardar los archivos para posterirmente guardarlos en la carpeta correspondiente" DisplayName="Creacion de folder temporal" sap:VirtualizedContainerService.HintSize="356.8,150.4" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="[CarpetaTemporal]">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:CreateDirectory>
+              </Sequence>
+            </If.Else>
+          </If>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="879.2,102.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Creo careta temporal&quot;]" />
+          <ui:SaveMailAttachments Attachments="{x:Null}" DisplayName="Guardar archivos en folder temporal" ExcludeInlineAttachments="False" FolderPath="[CarpetaTemporal]" sap:VirtualizedContainerService.HintSize="879.2,97.6" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[item]" OverwriteExisting="False">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:SaveMailAttachments>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="879.2,102.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Apartir de aqui debes cmabiar&quot;]" />
+          <If Condition="[in_SistemaEnEjecucionExcel = &quot;Nova&quot;]" sap:VirtualizedContainerService.HintSize="879.2,383.2" sap2010:WorkflowViewState.IdRef="If_14">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="419.2,214.4" sap2010:WorkflowViewState.IdRef="Sequence_88">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke 02_ExcelInformacionCuentas(Nova) workflow" sap:VirtualizedContainerService.HintSize="376,123.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="01-Excel\02_ExcelInformacionCuentas(Nova).xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_InfoCuentasNova">[DTInformacionCuentas]</OutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_EmpresaEnEjecucion">[in_out_EmpresaEnEjecucionExcel]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="416,214.4" sap2010:WorkflowViewState.IdRef="Sequence_89">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke 03_ExcelInformacionCuentas(Seven) workflow" sap:VirtualizedContainerService.HintSize="372.8,123.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="01-Excel\03_ExcelInformacionCuentas(Seven).xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_InfoCuentasSeven">[DTInformacionCuentas]</OutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_EmpresaEnEjecucion">[in_out_EmpresaEnEjecucionExcel]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </If.Else>
+          </If>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="879.2,102.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Procede a leer el excel&quot;]" />
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke 01_LecturaDeExcel workflow" sap:VirtualizedContainerService.HintSize="879.2,123.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="04-ExcelMovimientosBancarios\01_LecturaDeExcel.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InOutArgument x:TypeArguments="x:String" x:Key="in_CarpetaTemporal">[CarpetaTemporal]</InOutArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="in_out_EmpresaEnEjecucion">[in_out_EmpresaEnEjecucionExcel]</InOutArgument>
+              <InOutArgument x:TypeArguments="x:Boolean" x:Key="in_out_EncontroValor" />
+              <InOutArgument x:TypeArguments="sd:DataRow" x:Key="in_out_DatosAsociados">[DatosAsociados]</InOutArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="in_out_DTInformacionCompleta">[in_out_DTInformacionCompleta]</InOutArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="in_out_SistemaEnEjecucionExcel">[in_SistemaEnEjecucionExcel]</InOutArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="in_out_RutaInventarioExcel">[in_RutaInventarioExcel]</InOutArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="in_out_CredencialInventarioExcel">[in_CredencialInventarioExcel]</InOutArgument>
+              <InArgument x:TypeArguments="sd:DataTable" x:Key="in_out_DTInformacionCuentas">[DTInformacionCuentas]</InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="in_out_RangoDeFechas">[RangoDeFechas]</InOutArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="out_ValorEncontrado">[NumeroDeCuenta]</InOutArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="in_out_Direccioncarpeta">[DireccionCarpeta]</InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_CantidadCorreosLeidos">[in_lista_correos.Count.ToString]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeWorkflowFile>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="879.2,102.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Ya se leyó el correo&quot;]" />
+          <ui:InterruptibleDoWhile Condition="[BorrarFolderFalse &lt; 20 and BorrarFolderTrue &lt;&gt; True]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="879.2,1024" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+            <ui:InterruptibleDoWhile.Body>
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="507.2,847.2" sap2010:WorkflowViewState.IdRef="Sequence_79">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="464,644" sap2010:WorkflowViewState.IdRef="TryCatch_24">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <TryCatch.Try>
+                    <Sequence sap:VirtualizedContainerService.HintSize="427.2,403.2" sap2010:WorkflowViewState.IdRef="Sequence_80">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:DeleteFolderX DisplayName="Delete Folder" sap:VirtualizedContainerService.HintSize="384,90.4" sap2010:WorkflowViewState.IdRef="DeleteFolderX_3" Path="[CarpetaTemporal]" Recursive="True">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:DeleteFolderX>
+                      <Assign sap:VirtualizedContainerService.HintSize="384,69.6" sap2010:WorkflowViewState.IdRef="Assign_148">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[BorrarFolderTrue]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="384,72" sap2010:WorkflowViewState.IdRef="WriteLine_7" Text="Se borro el folder" />
+                    </Sequence>
+                  </TryCatch.Try>
+                  <TryCatch.Catches>
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="430.4,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_24">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ActivityAction x:TypeArguments="s:Exception">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                        <Sequence sap:VirtualizedContainerService.HintSize="400,454.4" sap2010:WorkflowViewState.IdRef="Sequence_81">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_146">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[BorrarFolderFalse]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[BorrarFolderFalse + 1]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_147">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Boolean">[BorrarFolderTrue]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="356.8,72" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="No se boorro" />
+                          <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="356.8,32" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                        </Sequence>
+                      </ActivityAction>
+                    </Catch>
+                  </TryCatch.Catches>
+                </TryCatch>
+                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="464,72" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[BorrarFolderFalse.ToString]" />
+              </Sequence>
+            </ui:InterruptibleDoWhile.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InterruptibleDoWhile>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="879.2,102.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Se procede a leer el proximo correo&quot;]" />
+        </Sequence>
+      </ActivityAction>
+    </ui:ForEach.Body>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+  </ui:ForEach>
+</Activity>

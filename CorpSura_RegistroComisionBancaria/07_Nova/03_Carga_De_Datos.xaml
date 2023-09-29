@@ -1,0 +1,955 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="_03_Carga_De_Datos" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Banco" Type="InArgument(x:String)" />
+    <x:Property Name="in_Referencia" Type="InArgument(x:String)" />
+    <x:Property Name="in_FechaDocumento" Type="InArgument(x:String)" />
+    <x:Property Name="in_CuentaBancaria" Type="InArgument(x:String)" />
+    <x:Property Name="in_DescripcionMovimiento" Type="InArgument(x:String)" />
+    <x:Property Name="in_Monto" Type="InArgument(x:String)" />
+    <x:Property Name="in_PalabraABuscar" Type="InArgument(x:String)" />
+    <x:Property Name="out_CargadeDocumentos" Type="OutArgument(x:Int32)" />
+    <x:Property Name="out_InformacionRegistro" Type="OutArgument(x:String)" />
+    <x:Property Name="out_InformacionNumNDB" Type="OutArgument(x:String)" />
+    <x:Property Name="in_out_RutadeArchivo" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1248,6392</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>_03_Carga_De_Datos_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="36">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="35">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPathTeam.Excel.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="_03_Carga_De_Datos" sap:VirtualizedContainerService.HintSize="1258.4,6327.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="MontoVerTotales" />
+      <Variable x:TypeArguments="x:String" Name="OrdenCorrecta" />
+      <Variable x:TypeArguments="x:String" Name="DirectionFolder" />
+      <Variable x:TypeArguments="x:Boolean" Name="MontosIguales" />
+      <Variable x:TypeArguments="x:Int32" Name="ContadorIntentos" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: 35.227.77.69/SYSWEB/pages/main.aspx#" sap:VirtualizedContainerService.HintSize="1215.2,6236" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Version="V1" WindowResize="Maximize">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1181.6,6009.6" sap2010:WorkflowViewState.IdRef="Sequence_13">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="ValorBanco" />
+              <Variable x:TypeArguments="x:String" Name="ValorCuenta" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InjectJsScript DisplayName="Inject Js Script 'TD'" sap:VirtualizedContainerService.HintSize="1138.4,165.6" sap2010:WorkflowViewState.IdRef="InjectJsScript_9" InputParameter="[in_Banco]" ScriptCode="js\\02_GetBancos.js">
+              <ui:InjectJsScript.ScriptOutput>
+                <OutArgument x:TypeArguments="x:String">[ValorBanco]</OutArgument>
+              </ui:InjectJsScript.ScriptOutput>
+              <ui:InjectJsScript.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="28c248f9-52b2-41ae-b358-52e7ed2cab0b" InformativeScreenshot="1d27bb7efa6b02bddf017f98093b553f" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl parentid='ContentMantBody_pnEnc' tag='TABLE' /&gt;&lt;webctrl tableRow='2' tag='TD' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:InjectJsScript.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InjectJsScript>
+            <uix:NSelectItem DisplayName="Select Item 'Banco'" sap:VirtualizedContainerService.HintSize="1138.4,62.4" sap2010:WorkflowViewState.IdRef="NSelectItem_1" Item="[ValorBanco]" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Version="V1">
+              <uix:NSelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="6">
+                  <x:String>Ninguno</x:String>
+                  <x:String>[BNCR] BANCO NACIONAL DE COSTA RICA</x:String>
+                  <x:String>[BCR] BANCO DE COSTA RICA</x:String>
+                  <x:String>[BAC] BAC SAN JOSE</x:String>
+                  <x:String>[TRAN] TRANSITORIA</x:String>
+                  <x:String>[BCCR] BANCO CENTRAL DE COSTARICA</x:String>
+                </scg:List>
+              </uix:NSelectItem.Items>
+              <uix:NSelectItem.Target>
+                <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="504, 311, 283, 23" ElementType="DropDown" FriendlyName="'[BAC] BAC SAN JOSE'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='SELECT' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='SELECT' type='' aaname='' /&gt;" Guid="4b499223-93e2-4a49-bb2d-2ade9c41c4c7" InformativeScreenshot="ea8628b71028764cf50eee40aadbd2c4.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="3">
+                      <uix:Target DesignTimeRectangle="341, 313, 51, 18" ElementType="Text" FriendlyName="'Banco'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblBanco' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblBanco' tag='SPAN' type='' aaname='Banco:' check:text='Banco:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADcAAAAWCAYAAABkKwTVAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFQSURBVFhH7ZXbrYMwDIazE1NlEjpMJoEt6Az01S2JE3wL0B5VOqE8/KrsGOPPdqib5wecVRdcq7rgWtUPwQ036LrOVD+QuEbkmCPCeQgT8RV/e4DH4OY7BN+BD3fh/9/6E9zQi/X1ASb1zBh/7ZikKXiWRzVxCuDJucoRz3XdjhqbaykSRjDmG6FfXtyPaCe4pZiyzlgkLT416AYD2jlPicErsT6DeY0mSRlwqSAtXYC8gxwYiyiwVoydZ5WdIzdp7xvgmKM2ubwW8iVROLEsAWeuco6pva9ITLGoAi10DO6ldC/W6aV14kDW5Pbh6EZI1Sb7TbjKWnwG9/nktJ/rPbjNjuN6vgO3e3cqE/rGnSvJ0KaFx6IXuAJ9AC7brFECKNZE8+A5yVGTYw5MZEl1Sca+ikmrm5tzDG6R/J+rTWr7XA/FUeNsuuBa1YnhHvAEFCr1Zg/Z8hMAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                      <uix:Target DesignTimeRectangle="816, 313, 51, 18" ElementType="Text" FriendlyName="'Estado'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblEstado' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblEstado' tag='SPAN' type='' aaname='Estado' check:text='Estado' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADcAAAAWCAYAAABkKwTVAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFZSURBVFhH7VXBkcMgDKQnqqISpxgqcbpwaki+CgEBEl5i38WTGTt+7AOQVrtCxuZ+f9BRcZrbK05ze8WvmLuRd5as7WMYdfJbTJ7ccMVnf8F4CbUd+QmcLcDUBZvbQtCWXKc5jH+bG4cQK0bW+RufXWkQ+9ZeaMx5Uag8A6JVTDj3wNxr5CWP8zRJDoapi/XmojFJyMXqNwm4wA2kBs3NF55iQuRxTG0m1wIGTV1wUCRDyCLWNGEeE420Ocow5p28W4yZNzfB1MUa0QmpYIiVXVd4z6VHOgtP4zx7kVUDUky9tQxczywFdMHjUaDGAnCpeBYrhXe6n/YXGrC5OYksvOS2XB1ucCuf3Fy7v425gDiq5fZaLiw8jWcWjut/+ZtDcW1H2xhey9EVY1pE8V5Zf++1DGjFwjNGEa9HquaEx4jFq3ESpmPumv9c50IM2jwKTnN7xYHNPegJpJTEvFZ4zeEAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                      <uix:Target DesignTimeRectangle="504, 278, 171, 18" ElementType="Text" FriendlyName="'Nota de Débito General'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNDBanc' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNDBanc' tag='SPAN' type='' aaname='Nota de Débito  General' check:text='Nota de Débito  General' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAK8AAAAWCAYAAAC2V8zIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOiSURBVGhD7ZjrbeQwDITT01blSpxiXMmmi00NyV+fLIkyH0NLfgBZ4/TjwyGSTA2HYye4j5+f37nTuSM9vJ3b0sPbuS09vJ3b0sPbuS09vJ3b0sPbuS0svN/zNDzmx+NzfrIDhedn2Bvm6QX2NnhNwzw+8d4pXtM8PB7na8e+lr4ttdpLb8u5Yfpm61/zaNY0yWt+5nKfUF/jFz779iRPtT8f6w8UXqfJI+G9KmCIS8ML+sr1/RBiQ9vCq7jUJ+8jlHS5H6e3Zk94kZH/W3hrey5/G97nGOY3TPML7B3S9ha0hnec0r/aADhIepsJ9lbH82yPfc2jwXzPNZuRB0zPjBMauNLTUnczoOSJ/E0k9WNPhqCPa5GBSXXj2oZP9GcJUQ8dHjLnOS5/nqg6ylvdb9QRvHwKPcCzljqUL7EvP5z22ebwhoeyCGGWHjIJZZekobIA5zP8UvtlyIFTjQqMnjWka21bx+hBbIbX6jU1c/iMDr5m9LPwsn3jE/B7M8BRy84/CxxtvOfyEhVv7Zk9dWQPLHe0ZmrtCW/42ZinhqyHmkiXlEvNULAIXKuyr0KTjNGDU3oQlfDSVyfebfpJSH05vOpllPqS165Pzj24x/Z9BPRW3Q/rtuShpU48o/3Xgd4Z3jIEEiTEgrclI5pwhpDI9QndeEENmhC1K3rAemFHeN1wxBq0jo2WQ1I9aZ88TZt+evqyN4vHBanVvtxSH/egnBEaT9Th5P6KzuPhDUSB+XIhVpnPqIU37pO4fA6+tQXPGN4QGhDjRHi5thQOVbtwdXjBS1IJr/scQwY8acX9VEInfDtRR88uzkpnEXv6sf6gH0iksIVmQXhRKOJ5WtdmO+Zvh1cNmhC1fD1VNsMr75aD93DCC/zbDi/QFM95WgOOvxwUXuOtojW85+sQep4Hw0sPpjdjvQQHTjUBh6KHn+u74XXuirXW2liPCgnCCwrac87KoeBBytBUwuuEUNbAbH8IsA5v5nR/PXTH68Dauf8LwhvIQRGDMxdk47i5zlD4YNMz6jmNeS4HntemNaanZdhueIHWhWqPSJupVQlvIN1j/dZ6LHmOpidaVzVAXf0C1MMbOFWH977qXM+eCa9ryDooedlKCSftlRchE+5LIQMB4mRz6Lmm/+etBXdB62Fos4jSEzxHRkst8kzy0wx6OauH7daogPoC84kob/W5pvAuHKlD6+y5xZfkB82vGt5O51708HZuSw9v56b8zv8Axod6L7yhvq8AAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NSelectItem.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NSelectItem>
+            <ui:InjectJsScript DisplayName="Inject Js Script 'TD'" sap:VirtualizedContainerService.HintSize="1138.4,165.6" sap2010:WorkflowViewState.IdRef="InjectJsScript_3" InputParameter="[in_CuentaBancaria]" ScriptCode="js\\03_SetCuentaBancaria.js">
+              <ui:InjectJsScript.ScriptOutput>
+                <OutArgument x:TypeArguments="x:String">[ValorCuenta]</OutArgument>
+              </ui:InjectJsScript.ScriptOutput>
+              <ui:InjectJsScript.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="28c248f9-52b2-41ae-b358-52e7ed2cab0b" InformativeScreenshot="5f27afb1c3192d7c939aa2f1d724b83b" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNumCtaBancaria' tag='SPAN' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:InjectJsScript.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InjectJsScript>
+            <uix:NSelectItem DisplayName="Select Item '# Cuenta Bancaria'" sap:VirtualizedContainerService.HintSize="1138.4,167.2" sap2010:WorkflowViewState.IdRef="NSelectItem_2" Item="[ValorCuenta]" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Version="V1">
+              <uix:NSelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="9">
+                  <x:String>Ninguna</x:String>
+                  <x:String>[¢] BNCR 001462-1 Colones</x:String>
+                  <x:String>[¢] BNCR 001613-4 Colones</x:String>
+                  <x:String>[¢] BNCR 001994-0 Colones</x:String>
+                  <x:String>[¢] BNCR 001997-5 Colones</x:String>
+                  <x:String>[¢] BNCR 001998-3 Colones</x:String>
+                  <x:String>[¢] BNCR 001999-1 Colones</x:String>
+                  <x:String>[¢] BNCR 002000-0 Colones</x:String>
+                  <x:String>[$] BNCR 600616-1 Dólares</x:String>
+                </scg:List>
+              </uix:NSelectItem.Items>
+              <uix:NSelectItem.Target>
+                <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="504, 340, 283, 23" ElementType="DropDown" FriendlyName="'Ninguna'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_ddlNumCtaBancaria' tag='SELECT' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_ddlNumCtaBancaria' tag='SELECT' type='' aaname='' /&gt;" Guid="9c79cf64-726d-4983-ae0d-17ae04b11be3" InformativeScreenshot="333264cac95cf6cdbee0b8cdd7442020.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                      <uix:Target DesignTimeRectangle="341, 342, 150, 19" ElementType="Text" FriendlyName="'# Cuenta Bancaria'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNumCtaBancaria' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNumCtaBancaria' tag='SPAN' type='' aaname='# Cuenta Bancaria:' check:text='# Cuenta Bancaria:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJoAAAAXCAYAAADz0VYRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAMaSURBVGhD7ZbdcesgEIXpSVWpEqcYVWJ34dSQvBIvLGj/JHCwuTcz+/DNRBgth7MHlPD19R0d59140JwpeNCcKXjQnCl40JwpeNCcKXjQnCmYQbtva1y3z/p8vSzxctXzFPctrssSF0LXe28E9jKu4TNuK99XZd3i3Xzn/wU8ma076EEwdY3b/ejZBsK4LGJeCd7lxuZOA9d/WdDUPnD8D4ZtNkbQbvGyfMQrfW4Zef3QIWO//aOb7e1Be5D2R/1yLHTQoDk0WGDk6Y100oTELV5po63GmIGAwD/qFmTYSx0McqHWEONUX759Cc0b6cmglZucwPbW0l4RHqhAoy46h2mE9x8XwFbWyZeB/nS26qBnhz1uE8ofynzF0eczm9F9a5w0Zq+BBqtwkPdKk4hhao4R4DSHmazX0hwFLY+zvRtrpsZS/57QTv9XznXKHEOTeqcElfvNg9ZTZ5wgB2DDsjHMSIlh7CkdQeOGFrJpdfOpjgi/1KK02YdCh09inHiCCoOsJXV0aDfrUNJ8efhlaIRnCKvdVWecwAdgAbooPMuGC1QzGzSDdrzJFIgy3hHYc23ltCM9QTvSpBqVyQdmX6PqGPDABN+ta9X37IN1GOLDOuMEPgDCiAGw8GkDAHszh/SaTDdMGQxaDgaCe+u+0Uzjxa0hmpXWljo6PTj/dAmfkjapsydoPXXGCeUP1gAT+9S2RYnfX3WafxM0+Yy8MmhmLbnuKzxINfo+nXK/LGhddcYJbAAWJcVB0PmpQkyx9Ddpspgr5tiNz5uvetI7TwbNegebMRq0vIbQiJRP6KkOobUVfvPzhzWeCVpfnXECfYDNUVHy+YxkjAyQJRjH9mZgo5khOCZCz5rzm6CptYtuQAaQchw0GYhcj9QqHtB1n9DOQpveQ4/T39Qz1AhrVT3toPXVGSfsD7AADQqIPDPfAEVT5Cb1PFjTMmQPYEZoSTUazXpQgySMrTzCk0MsDgmDmC9RzZBz9/3VoHZq1x5wjVn3/juEkgfd8lXfYu066KNx0HoJ1qDjvBoPmjMFD5ozBQ+aM4Hv+AOgaOc3F7gfmwAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector" />
+                      <uix:Target DesignTimeRectangle="816, 342, 75, 19" ElementType="Text" FriendlyName="'Sucursal'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblSucursal' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblSucursal' tag='SPAN' type='' aaname='Sucursal:' check:text='Sucursal:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAXCAYAAABK6RIcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAG1SURBVFhH7ZVNmoMgDEC9k6fiJPYwnMTewp6h3VIgIElAZUA7M/2yeAv55yXB4fl8GaENkdeByOtA5HUg8joQeR2IvA5yefPNjONIme50zBewaGVGpc1S6KuFyPMLjsroBQ96GK2swM6N/honywNJSj/IAM+ijbIZOM2s/R9zsry7maygojyOL+2bmXFbUTCsmZ4APAf66PiQ5esz4cbYStDxKYlVEcahtbPAZs8PrSgur0XmgD/mKWx0tEiNvPCNgwHPQpxXK8+dCe/Fx1j8eZAc/m2Bu6V1Ts48YBWIKEd1X97x4erl0WootVH8HfhPjgm9RF4iRj2CZB3KK2RHRr08HrzqCrHQZPiYPISXhaJdKW///WyX54AnAInBgQrnBYKwz2Yehl3qlzOPE0VCsDb2vlQeW5wCB6KZx8b6tnRRXy67hwMxNDuh7afyHOmdK8+B8r0s80LEeEY5eKZlf9JwaXzobIyFSA/7oQus79OuPGgj65ayHosJgcXnu6RsYwkQeAk40IFAyPZF6bjtfickZVDqp2vm8+Lc7X4beBZMLq9F5lBqFOoQeR2IvA5EXjMv8wYW7cA52dAFJAAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NSelectItem.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NSelectItem>
+            <ui:InjectJsScript ScriptOutput="{x:Null}" DisplayName="Inject Js Script 'TD'" sap:VirtualizedContainerService.HintSize="1138.4,62.4" sap2010:WorkflowViewState.IdRef="InjectJsScript_4" InputParameter="[in_FechaDocumento]" ScriptCode="js\\04_SetFechaDocumento.js">
+              <ui:InjectJsScript.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="28c248f9-52b2-41ae-b358-52e7ed2cab0b" InformativeScreenshot="21e3727f964f2a2efdde22efc03bc91f" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblFecha' tag='SPAN' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:InjectJsScript.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InjectJsScript>
+            <ui:InjectJsScript ScriptOutput="{x:Null}" DisplayName="Inject Js Script 'TD'" sap:VirtualizedContainerService.HintSize="1138.4,165.6" sap2010:WorkflowViewState.IdRef="InjectJsScript_5" InputParameter="[in_Referencia]" ScriptCode="js\\10_SetReferencia.js">
+              <ui:InjectJsScript.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="28c248f9-52b2-41ae-b358-52e7ed2cab0b" InformativeScreenshot="f01352941cc17d9996f2b7a3eaf7522d" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNumReferencia' tag='SPAN' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:InjectJsScript.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InjectJsScript>
+            <ui:InjectJsScript ScriptOutput="{x:Null}" DisplayName="Inject Js Script 'TD'" sap:VirtualizedContainerService.HintSize="1138.4,165.6" sap2010:WorkflowViewState.IdRef="InjectJsScript_6" InputParameter="[in_PalabraABuscar]" ScriptCode="js\\11_SetNota1.js">
+              <ui:InjectJsScript.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="28c248f9-52b2-41ae-b358-52e7ed2cab0b" InformativeScreenshot="4764127eec6849544724cc7594472829" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNota1' tag='SPAN' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:InjectJsScript.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InjectJsScript>
+            <ui:InjectJsScript ScriptOutput="{x:Null}" DisplayName="Inject Js Script 'TD'" sap:VirtualizedContainerService.HintSize="1138.4,165.6" sap2010:WorkflowViewState.IdRef="InjectJsScript_7" InputParameter="[in_PalabraABuscar]" ScriptCode="js\\12_SetLinea1(Motivo).js">
+              <ui:InjectJsScript.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="28c248f9-52b2-41ae-b358-52e7ed2cab0b" InformativeScreenshot="1f2886480b23abc39cfcfbd3d7af0aa3" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_GridView1' tag='TABLE' /&gt;&lt;webctrl aaname='Motivo' tag='TH' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:InjectJsScript.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InjectJsScript>
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1138.4,62.4" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,356" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into '# Referencia'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="356.8,264.8" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Text="[in_Referencia]" Version="V1">
+                    <uix:NTypeInto.Target>
+                      <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="1310, 309, 160, 27" ElementType="InputBox" FriendlyName="'INPUT ContentMantBody_t…'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_txtNumReferencia' tag='INPUT' type='text' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_txtNumReferencia' tag='INPUT' type='text' aaname='' /&gt;" Guid="19400522-3423-4131-a03b-2ded96b2e1bf" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAKQAAAAfCAYAAABpuGb3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAENSURBVHhe7dwxioRAGEThPYI3EBQPpgh6TAMPowfQZGT+oRqUFdxsdSp4H1SgYvbS7p9lWYMxlxEksxpBMqulINd1jddri/c7gEepObWnBo8gt22LaZqi67qoqiqyLGPs9qk1Naf21OARpNR1ffkTY3dP7ckpyDzP08dxHNMzcDe1puaKokjPpyD3WoEn/e6OIPF1BAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrBAkrfwapgzb6wCEvPGUYhtTc5SEvjsGyb61pmtTgEeR+UUDbtlGW5eVPjP33dFFA3/cxz/P5ogBdY6EXwNP2q1TU4bKs8QGdav/SNmd37AAAAABJRU5ErkJggg==" InformativeScreenshot="9cf4a2fe1892f8e66a199aecabfaa649.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector, Image">
+                        <uix:TargetAnchorable.Anchors>
+                          <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                            <uix:Target DesignTimeRectangle="1198, 313, 100, 19" ElementType="Text" FriendlyName="'# Referencia'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNumReferencia' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNumReferencia' tag='SPAN' type='' aaname='# Referencia:' check:text='# Referencia:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGgAAAAXCAYAAADnaAq1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJrSURBVGhD7ZXdjcMgDIDZKVNlknQYJkm3SGdoX7nYQLCN+WlOJ3ESD59UEmJsf0DN+/1xk3GZggZnChqcKWhwpqDBmYIGRxH0dNvycHscH9atq3UHm0PYH25ZlgKrs4fyTZOXs2uMQXIZmMOubqn16SYmewgN357lsQQF6SL27V6Dsdh/IuavyQRBc1b7YuNt53MYFUH+NC4sXg9TUCITBLs+CYGrpnFNVQWFq0qcQC8gXmF0vXjqEkmul329k9cJ5HE+s/F78r62XsxxtU9yrfLvIzKO3Mj8G3pNB0QfsNba7XRi8Af8z9BAGqVAX54gXySZH9bO59ATFOSQHLLrE/PI82yvlxp5iVNyyq9rXhsXpGxMJWYPhj2AIHQXyLFGRVCrqIgU0hp7RCw1j5719FOOuV+1+zi1q54JQhkyF32dFoY9gCJpgHPcNB53ropoakmmKKingQC7IjD2nfV8fFknE1SKQ2CCKLhW7IdeRw1DB7AITRSSrO0aREneN1j5FueSZBkNQeo3J01ByjfIt4JEbAEXJHLGHMsbrYbBH9KyRimwIgjAAuXzwlyJKqhVWFFQa71eQfU4TJA6/zeCEAhAg8K9W981SDF5f2+zYx82gn6y0lpckGjWhWisiIF0rdchqBSHQAXx0xSIh+C2IAggm5k1RaEoKL7jxfvmy42gzaHNDrJJcdkcTdBJe70OQXHM4vMTwaSEupPQMBdq6OkpwVwDCCoaIJNWqQk68YXx3eebFhI+ketkzUeCpAvxviAIqK/XJwiQcbINQ+Zra0rJOG6cKKM9nIzDFDQ4U9DgTEGDMwUNzcf9AMmMl1xcVznkAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                            <uix:Target DesignTimeRectangle="1198, 275, 100, 26" ElementType="Text" FriendlyName="'NDB-'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNumNDBanc' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNumNDBanc' tag='SPAN' type='' aaname='NDB-' check:text='NDB-' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGgAAAAeCAYAAADAZ1t9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAL2SURBVGhD7Zgtm+IwEIDzn1BRqFWoqCrUqioUZ3YNZ8AsPwC1qqqqCsyeAVNM13QNa8Bwpqhi59KmKS1MP6DikruI99nnmU4ImzeZDCVxfAaDuhhBimMEKY4RpDhGkOIYQYqjvaC9a0Ov14MetcHb4zkSmWu7h0t874KdjK+APlnwPJ6D6xfGlNjCFBmX02dgjWY14+shWFAnckEcanuwR3Ikjwgq0h95sCt8nqBBUA6F4fsnRDfj6yFYUCeKgpJFGC9/o3kJ9YJm4BdyJdHxAIH7ChYVc9DxCo6lHCnIBhc7wZEYz9KcITg7JKcGggV1IhdEKdD07w9YHutz7xEkiYIFDNM8CpP1qfCsQVDKCdYTms5tOV/I82oIFtSJXNDUg+VYLAKd/EJLSRdBCaEzFHPxUnc5RW0EFb/nFn1eBcGCOlH6x48rGKeliO/yj+IuL+c+KigOHbDS3J/wEcl4O0H+VGyeuhKMQbCgTlzvzL1ni1I3mME6X8Ry7sOCchkDWATXsRZ3EFtAcP28AYIFdeK2dHyDa4vdOphuSqWuu6AD/+wktwdTX8akoHqeRg6EVxumDQQL6sStIM5OLjrjC3kpdX9TUFJ2rZcV0qbXQ7CgTqCCODsZZ3Pws53bXRA/nc9iwW8FVd1BJ9gHLrwwMa6qgamCYEGdqBIUx1/gDMWisLdtuijdBW0yGRY4oYw1CcrIT7X8LVR98i7y/2lBHN51id8uLL3UOwvq0MUVT5/o5IyglGDBxHPeQS07CgoWg3Q8nRSbj0cFYTm3ECyoE02C4vgTFrL+U9HdPSQofM9OY7HFTmgpKJ+nWB6bIVhQJ5oFnSHy59m7MME9gqLjN/jO5V0c4/OUL/kmQbxJCD2YWmJz9Gy39oXuNQQL6kQbQcki+W9ZqePggpphaJtcfZfc0B+B99++LK0VxIn4Qmal7h5BfWbBaOLAR1h1bzQJ6gOzRjBxNnedHAnBggZ1MIIUxwhSHCNIcYwgxTGCFMcIUpoz/AGLN28YVpy3tgAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                          </scg:List>
+                        </uix:TargetAnchorable.Anchors>
+                      </uix:TargetAnchorable>
+                    </uix:NTypeInto.Target>
+                    <uix:NTypeInto.VerifyOptions>
+                      <uix:VerifyExecutionTypeIntoOptions DisplayName="{x:Null}" Mode="Appears">
+                        <uix:VerifyExecutionTypeIntoOptions.Retry>
+                          <InArgument x:TypeArguments="x:Boolean" />
+                        </uix:VerifyExecutionTypeIntoOptions.Retry>
+                        <uix:VerifyExecutionTypeIntoOptions.Timeout>
+                          <InArgument x:TypeArguments="x:Double" />
+                        </uix:VerifyExecutionTypeIntoOptions.Timeout>
+                      </uix:VerifyExecutionTypeIntoOptions>
+                    </uix:NTypeInto.VerifyOptions>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NTypeInto>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1138.4,62.4" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,356" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Nota 1'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="356.8,264.8" sap2010:WorkflowViewState.IdRef="NTypeInto_3" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Text="[in_DescripcionMovimiento]" Version="V1">
+                    <uix:NTypeInto.Target>
+                      <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="504, 423, 375, 27" ElementType="InputBox" FriendlyName="'INPUT ContentMantBody_t…'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_txtNota1' tag='INPUT' type='text' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_txtNota1' tag='INPUT' type='text' aaname='' /&gt;" Guid="f04996bd-8bd2-4063-a94c-050f0d340c9c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAXsAAAAfCAYAAAAGLG3zAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAACsSURBVHhe7dQxDoNAEARBv/p+DinIga1D4gXbVVJHk8/nOM5LkjQ7Zy9JgZy9JAVy9pIU6HH2ay1J0pD2f/+f/XcAYI798J09wFDOHiDA2QMEOHuAAGcPEODsAQKcPUCAswcIcPYAAc4eIMDZAwQ4e4AAZw8Q4OwBApw9QICzBwhw9gABzh4gwNkDBDh7gABnDxDg7AECnD1AwOvZ/w5fkjSj/d8fZy9Jmth53WXRCSfLrSNqAAAAAElFTkSuQmCC" InformativeScreenshot="9f9d59233dff8d883ff9e61f0e92d355.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector, Image">
+                        <uix:TargetAnchorable.Anchors>
+                          <scg:List x:TypeArguments="uix:ITarget" Capacity="3">
+                            <uix:Target DesignTimeRectangle="341, 427, 150, 19" ElementType="Text" FriendlyName="'Nota 1'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNota1' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNota1' tag='SPAN' type='' aaname='Nota 1:' check:text='Nota 1:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJoAAAAXCAYAAADz0VYRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAG8SURBVGhD7dfBbcJAFIRheqIL14ArIAW4CdIDOVIHKQGO5ERu5AbXjcbSRI/nt9hCzspGc/gV7N01kfbTWiyu11tS6r8TNFUkQVNFEjRVJEFTRRI0VSRBU0W6g7bff6blcpl2u93dJHS5/KSmadJm894Ze9T5/N2uwfpo/JkOh2Nar9/aZ0fjanqF0KqqajfTjj0LDfOxbixowFXXdZugzacQGvI4pgDN/n+CNq860HCabbcf7WbimmM5aHjNcvMRX7ucz/v2lMRfXNt19ruiiAzPRxE03B8LtRq3hb0gNEAAKLuZETR8jgARG+fYzeccCwvz7XP6ykFT0y0LjSAIy0OLwCCPwEOLTp3cs3IJ2vzKQsM1NpSvNQ/Nz2UejYdm4/OHvj6ZoM2vh9CIC5t6On11oEWb3QeN4xaXX9OXoM2vh9AQEeAHwtATbbVa/d330KITjt8haK9bLzRkX3GElsPhEVhYPCExx6/Rq/O1GwSNQCw0hM92PvFZSP4Ew7VFwjV4tgeYS9Dm1yBoHPPQEE8j5k8lCwljFi3CGO4Djn92rhw03Leo1XRaRDeVGjtBU0USNFUkQVMFuqVfiGNPFPieWrgAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                            <uix:Target DesignTimeRectangle="341, 385, 125, 19" ElementType="Text" FriendlyName="'Centro de Costo'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblCentroCosto' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblCentroCosto' tag='SPAN' type='' aaname='Centro de Costo:' check:text='Centro de Costo:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIEAAAAXCAYAAAAsnywOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAL4SURBVGhD7ZgxcttADEV1J91CZ5DuoV61cwen1Dmc0umcGzid08kt46eZn/mEgSVlk0XGW7yxiMUCH5+QCm8ul9eh87XpS9DpS9DpS9B5oy9Bpy9Bpy9B541yCe7uvg3b7fYfx+NxeHn5k+Z+lufn39d+a9WPPD39Gna73fDw8CM9vxX0Hw6HkV/n8znN/SxreLWJARlEI4/zTJxzjy8BtddcssiSS8DL5qV7LS3FGjOt4dVoCShMg7gAfva/DNZiqSVo1dHZ0r8Iqy8Bw7S+7Y+PP9811zdBuCFanPv779e/ytEQOldcvalB/HQ6jfKzfnNM1gvRHfTElxd/0r1nReuFEMOvGOeOekBcIJ79XPWBz4r7e4ra+UxMNXUee4mNP2DonOEF+S5GZuvFuHAJiDkQzZQRxJWjvFa/jJjjhkmTYt6Pz9FMR7O1ejvK95qaUzr46/PpTtTlXmm+W7RHRksQG7SQcdEEniUgGwJin/gczQANK8OE9/O4yGaK5mc1qvnmnkeymcD1Tc0CU97Brdo+vATVUDzv9/vrX+pQL4qZGoTa0YxWv2w5oOrvd5SDBs8BYlkcbjW6esE+l3T5gkbcqynt7mmL0RIgdO5FRCI2Q0NJ5FJLkJnYWoLqRSnOHWnM5oDMYKhmq6i8RYP84lna1N/PwL1qafjwEkRBET+fyoVK5EeXIOvHs355PA5Vf3KpRU3lVC+7xZTRfo6GbImzWYUWws+9Zks7sSyeMVqCVlGdSYAb6Xk+lO4ssQRVv8pcEWsDNfiWqVaWU2l3Kk1+pvvk8Ezc87LeDvm+5FPegZanpd0ZLQFIPMU9znMcgiYei80rI6cGwbDsxUYN0toaNuZIoy+BYj4z+ZmGCHleC1TPZ5IXXpM7fjfrOeWV5nPtfJ6jXbxbApBgBApv7MgEIbNBdTwG1SDcxxCohoj93PwKrw9z/k9wi4mxPsSZBbMrhzvc9fM4X9QRvSIWtcd3pfPKq00W7Hwt+hJ0+hJ0+hJ0Lq/DX0kqAEsiCmzjAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                            <uix:Target DesignTimeRectangle="816, 384, 150, 19" ElementType="Text" FriendlyName="'Fecha'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblFecha' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblFecha' tag='SPAN' type='' aaname='Fecha:' check:text='Fecha:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJoAAAAXCAYAAADz0VYRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAGTSURBVGhD7ZbBbcMwEATZk7pQDVIfasIpRG+nA6cEpwPn5/zsL4MNsMaBPgmkIBNSso+BqePqxMfg6HC73aMQr0aiiSpINFEFiSaqINFEFSSaqMJDtOv1Ow7DEJumccEeMvblpVwuX7Hv+3g6fbj74u8RuKBoh8PbU2htJNr/Q6KJKiwWDTleq23bxvP5czYDKBZFOx7ff3+5n37bu87TzDiOq17r4jUELkpEQwaCQBg8QyBIQJHYywoAESEkMhTNCjrVw56HPSAXa2IfFItmhbF1vEexkOm67iFRCkWzwqTf93rknlFsjyfR7DVF7PSCHPaZQDzWpzKEollZ5ySi3DyPRNsfgYvcaQGJrIQWKxp6oafXI0e0VHzUc88otkfgokS0uWkF1pho2LP/4byM2A/FonkCADvFpjIkRzRvKvIKlWj7o1g0gIydWBSA4rCXFYVyQaDciYYrM+2Jmu0r9sEi0QBy/P9khZjLQDLUc0QDyKfvY99K7k0+sT2CVxRibSSaqIJEE1WQaKIKEk1U4B5/AM+xXlKdOGvRAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                          </scg:List>
+                        </uix:TargetAnchorable.Anchors>
+                      </uix:TargetAnchorable>
+                    </uix:NTypeInto.Target>
+                    <uix:NTypeInto.VerifyOptions>
+                      <uix:VerifyExecutionTypeIntoOptions DisplayName="{x:Null}" Mode="Appears">
+                        <uix:VerifyExecutionTypeIntoOptions.Retry>
+                          <InArgument x:TypeArguments="x:Boolean" />
+                        </uix:VerifyExecutionTypeIntoOptions.Retry>
+                        <uix:VerifyExecutionTypeIntoOptions.Timeout>
+                          <InArgument x:TypeArguments="x:Double" />
+                        </uix:VerifyExecutionTypeIntoOptions.Timeout>
+                      </uix:VerifyExecutionTypeIntoOptions>
+                    </uix:NTypeInto.VerifyOptions>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NTypeInto>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1138.4,62.4" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,236" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT  ContentMantBody_...'" sap:VirtualizedContainerService.HintSize="356.8,144.8" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[in_PalabraABuscar]">
+                    <ui:TypeInto.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3c1087a4-13fb-4bfe-bcba-458a04683ff0" InformativeScreenshot="0c3cc1828052ae2907bbae48f009d331" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_GridView1_txtMotivo_0' tag='INPUT' type='text' colName='Motivo' rowName='                                         001                                                                                                 ' tableCol='2' tableRow='2' name='ctl00$ContentMantBody$GridView1$ctl02$txtMotivo' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:TypeInto.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:TypeInto>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  ContentMantBody_...'" sap:VirtualizedContainerService.HintSize="1138.4,62.4" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0e863d52-0190-48bd-8c01-26dfbe8abde9" InformativeScreenshot="a8321cdadab6ea68fa76982df75feafc" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_GridView1_ibtnBuscarMotivo_0' tag='INPUT' type='image' name='ctl00$ContentMantBody$GridView1$ctl02$ibtnBuscarMotivo' rowName='                                         001                                                                                                 ' tableCol='3' tableRow='2' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:Click>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke 04_SeleccionDeMotivo workflow" sap:VirtualizedContainerService.HintSize="1138.4,123.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="07_Nova\04_SeleccionDeMotivo.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InterruptibleDoWhile Condition="[MontosIguales &lt;&gt; True And ContadorIntentos &lt;&gt; 5]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="1138.4,3801.6" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+              <ui:InterruptibleDoWhile.Body>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1103.2,3624.8" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Int32" Name="CantDecimales" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If Condition="[in_Monto.Contains(&quot;,&quot;)]" sap:VirtualizedContainerService.HintSize="1060,359.2" sap2010:WorkflowViewState.IdRef="If_3">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="400,160.8" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[in_Monto]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[in_Monto.Replace(",", ".")]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="400,83.2" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <If Condition="[in_Monto.Contains(&quot; &quot;)]" sap:VirtualizedContainerService.HintSize="1060,62.4" sap2010:WorkflowViewState.IdRef="If_4">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="400,160.8" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_9">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[in_Monto]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[in_Monto.Replace(" ", ",")]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="400,83.2" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <ui:InjectJsScript ScriptOutput="{x:Null}" DisplayName="Inject Js Script 'TD'" sap:VirtualizedContainerService.HintSize="1060,165.6" sap2010:WorkflowViewState.IdRef="InjectJsScript_8" InputParameter="[in_Monto]" ScriptCode="js\\13_SetLinea1(Monto).js">
+                    <ui:InjectJsScript.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="28c248f9-52b2-41ae-b358-52e7ed2cab0b" InformativeScreenshot="c846e933c8e108823e79e3c858b90e96" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_GridView1' tag='TABLE' /&gt;&lt;webctrl aaname='Monto' tag='TH' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:InjectJsScript.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InjectJsScript>
+                  <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="1060,32" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                  <uix:NClick ClickType="Single" DisplayName="Click 'Monto'" sap:VirtualizedContainerService.HintSize="1060,204" sap2010:WorkflowViewState.IdRef="NClick_5" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Timeout="100" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="1472, 549, 143, 28" ElementType="InputBox" FriendlyName="'INPUT ContentMantBody_i…'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_ibtnVerTotales' tag='INPUT' type='image' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_ibtnVerTotales' tag='INPUT' type='image' aaname='Ver totales' /&gt;" Guid="fbd1c376-f500-4f65-8f5f-6c021b389628" ImageBase64="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" InformativeScreenshot="079960f32104862f4c42de15c6e0fe2f.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector, Image">
+                        <uix:TargetAnchorable.Anchors>
+                          <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                            <uix:Target DesignTimeRectangle="1372, 585, 220, 43" ElementType="Text" FriendlyName="'Monto'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_GridView1' tag='TABLE' /&gt;&lt;webctrl aaname='Monto' tag='TH' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_GridView1' tag='TABLE' /&gt;&lt;webctrl aaname='Monto' tag='TH' type='' check:text='Monto' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAOAAAAAvCAYAAAD6k8aAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJKSURBVHhe7ds5bsMwFITh3Dh1TpMqJ8gBcgH1rtQbbuzKgCsmErdHarIB1HOA/A/4gHgoL4UGpA3k4eHpJQC4ExkC8BEYhrnbsAMC9yRDAD5kCMCHDAH4kCEAHzIE4EOGAHzIEIAPGQLwIUMAPmQIwIcMAfiQIQAfMgTgQ4YAfMgQA83hkP73a53T3K6/HsM5LS1znqd2faTlva7H8KjWcB8yxEBdAcMlPJv1x/mW8ji7FXC6xDeggH+LDDFQX8BbeHvNa1N4u6Y4DQX8Z2SIgWoBz9e429WS5bXbx9r6x6aAz6eY5/l0/eNo2+6mdaftd9llmtfJ5cxDSf3IEAPVAh7m9H0vfw/MN/7pWHbCWozt7ljGfI/sC9pMKtJXBVRrcdqjMnYiQwxkCjjlv+PNnW/+8zxvCliLYY6s5gebwxSzWsB6nXyuOoKa15PF738wwngyxEC2gLUwhynf6EtJ6k0fi9A/rq9nj5zq8aoU6+sClqL2R85yJGUX3J0MMVBbwLLrnS6xJOvN/3kB806XldKMLGC/05XnU8DdyRADtQW0x7511pufHfDfkiEG6gpoHi8Ts23hSjlsiUx588746wLaUpnXq0Wvn2WzM2I8GWKgvoCmNKUgasdri9qMKcbvC5gmXV8/Sz/sfi5kiIG2Bdwe/X5w5Ezz3ZF0pQpor13GXt+Xsz+SYj8yBOBDhgB8yBCADxkC8CFDAD5kCMCHDAH4kCEAHzIE4EOGAHzIEIAPGQLwIUMAPmQIwIcMAfiQIQAfMgTg4CW8A+fmxss6mAUsAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                            <uix:Target DesignTimeRectangle="1091, 469, 200, 19" ElementType="Text" FriendlyName="'Total Nota de Débito'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblTotalNDBanc' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblTotalNDBanc' tag='SPAN' type='' aaname='Total Nota de Débito:' check:text='Total Nota de Débito:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMwAAAAXCAYAAABH26AeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAOZSURBVHhe7ZnBceMwDEXVk6tyJUoxqkTpwqkhuWopEqTAD4AibecQLQ5vdkyKAAj8r2hmp+/vn81xnD7cMI4zgBvGcQZwwzjOAG4YxxnADeM4A1zIMF/bcr9tt1ubedXOIp/bfF+2h7pnsH6E+B/bqu3tPJbtvtcwf6r76xz2RnMG1vm+LQ997yWo3r5+2cR7sf4fNHpFPJZ7fPa+fB3rXXWF+cEze6xX77IzaYvXIDWtanYnT4m31zDGsJ/P+QcMo9wrmaFVuxR95Jm63nSXHTeMwm8bRnvufzPM2Z6JG+a3sA0TBxWFmzgaiZ91TIyV4BPVADoNMy/pX6xLFQ/mZPv5cyVzxFM+TY3PwArIleusRZZ6WuJ2iL1pCkPI9XzghQB9zM9pdca1OBcWj/XC7iHbh9on/sC10AyTxcSETQ3lDRdDVgYrPil6DRNiaJ8jIifVJYwgnuFx6BluEMqLYqgQzxzGOO5Mayx2EnbjzoGmYZQZiZg4H6pV9l7WimeO/ZyHxejpU2DSFq+BYhghsAQOFX9rbxoxhBi7zzBFfGZORfg7ak4cOt7PiMXA+0ZAhMnkeD+lx4Aau5BqK+fxfkQVg57BnHWeE8MYefQ71kza4jWQwzQbAsJrDTnFCPtEafqQYQIkyFyfNnApRBA/GoZD+UqtpmFAtJmqXtt0se5RMxbq3O350HqsS7lz1f8Tw1h9w+cUJm3xGhiG0YYHDRRDBvHFhqpDGDBMIOahvJph5ODODEP7VGd6zhZ7wjInrwHiIk8bps6NL6OadxtGmZUyI2TSFq+BFELXGyyAQ1aH/gbD5Bp3wWmGkSKu38jCMPibnbFFDTEzVb1nMWyahok5jnrN+XDgTKY+22MYxXRGbM6kLV4DRXRGo9oG0QWV34avGSYQz4V8O5BTCPRk8LEmFCedGf4rQHXlXLrwDbMxWoYRe8Z8qnsZfaxjnRjGiNFj2ElbvAbaW5qEyJsCwtjBQcbf/EwWIY8f4zxhmECKX+fMdR31U+0tgYm75PvCOYRqO3Kl3tWxaI0Zr0dgwhREOmu8vJRelzpK71v3PjFMIOVhMUQPdCZt8RpohkkUgUbk0I6h5CYz4ZUzIKAXDFPyobBYHRHxV4LVRXtJiMeZ/f5ChBqQq+v/Yc5iBupec+yzeKaqIdYZ+r/yenGGYJhAicl6jL3C2cR9mMnEH3Acp40bxnEGcMM4zgBuGMcZwA3jON38bP8AAirJYnTW46cAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                          </scg:List>
+                        </uix:TargetAnchorable.Anchors>
+                      </uix:TargetAnchorable>
+                    </uix:NClick.Target>
+                    <uix:NClick.VerifyOptions>
+                      <uix:VerifyExecutionOptions DisplayName="Verification target" Mode="Appears">
+                        <uix:VerifyExecutionOptions.Retry>
+                          <InArgument x:TypeArguments="x:Boolean" />
+                        </uix:VerifyExecutionOptions.Retry>
+                        <uix:VerifyExecutionOptions.Timeout>
+                          <InArgument x:TypeArguments="x:Double" />
+                        </uix:VerifyExecutionOptions.Timeout>
+                      </uix:VerifyExecutionOptions>
+                    </uix:NClick.VerifyOptions>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NClick>
+                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1060,62.4" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <TryCatch.Try>
+                      <uix:NGetText DisplayName="Get Text 'Total Nota de Débito'" sap:VirtualizedContainerService.HintSize="333.6,167.2" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Version="V1">
+                        <uix:NGetText.Target>
+                          <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="1310, 469, 160, 27" ElementType="InputBox" FriendlyName="'0.00'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_txtTotalNDBanc' tag='INPUT' type='text' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_txtTotalNDBanc' tag='INPUT' type='text' aaname='' /&gt;" Guid="481033fd-374c-40a8-94b0-a312e51e5402" InformativeScreenshot="ddabc481b844ee549ec0864c7400a327.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector">
+                            <uix:TargetAnchorable.Anchors>
+                              <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                                <uix:Target DesignTimeRectangle="1091, 469, 200, 19" ElementType="Text" FriendlyName="'Total Nota de Débito'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblTotalNDBanc' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblTotalNDBanc' tag='SPAN' type='' aaname='Total Nota de Débito:' check:text='Total Nota de Débito:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMwAAAAXCAYAAABH26AeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAOZSURBVHhe7ZnBceMwDEXVk6tyJUoxqkTpwqkhuWopEqTAD4AibecQLQ5vdkyKAAj8r2hmp+/vn81xnD7cMI4zgBvGcQZwwzjOAG4YxxnADeM4A1zIMF/bcr9tt1ubedXOIp/bfF+2h7pnsH6E+B/bqu3tPJbtvtcwf6r76xz2RnMG1vm+LQ997yWo3r5+2cR7sf4fNHpFPJZ7fPa+fB3rXXWF+cEze6xX77IzaYvXIDWtanYnT4m31zDGsJ/P+QcMo9wrmaFVuxR95Jm63nSXHTeMwm8bRnvufzPM2Z6JG+a3sA0TBxWFmzgaiZ91TIyV4BPVADoNMy/pX6xLFQ/mZPv5cyVzxFM+TY3PwArIleusRZZ6WuJ2iL1pCkPI9XzghQB9zM9pdca1OBcWj/XC7iHbh9on/sC10AyTxcSETQ3lDRdDVgYrPil6DRNiaJ8jIifVJYwgnuFx6BluEMqLYqgQzxzGOO5Mayx2EnbjzoGmYZQZiZg4H6pV9l7WimeO/ZyHxejpU2DSFq+BYhghsAQOFX9rbxoxhBi7zzBFfGZORfg7ak4cOt7PiMXA+0ZAhMnkeD+lx4Aau5BqK+fxfkQVg57BnHWeE8MYefQ71kza4jWQwzQbAsJrDTnFCPtEafqQYQIkyFyfNnApRBA/GoZD+UqtpmFAtJmqXtt0se5RMxbq3O350HqsS7lz1f8Tw1h9w+cUJm3xGhiG0YYHDRRDBvHFhqpDGDBMIOahvJph5ODODEP7VGd6zhZ7wjInrwHiIk8bps6NL6OadxtGmZUyI2TSFq+BFELXGyyAQ1aH/gbD5Bp3wWmGkSKu38jCMPibnbFFDTEzVb1nMWyahok5jnrN+XDgTKY+22MYxXRGbM6kLV4DRXRGo9oG0QWV34avGSYQz4V8O5BTCPRk8LEmFCedGf4rQHXlXLrwDbMxWoYRe8Z8qnsZfaxjnRjGiNFj2ElbvAbaW5qEyJsCwtjBQcbf/EwWIY8f4zxhmECKX+fMdR31U+0tgYm75PvCOYRqO3Kl3tWxaI0Zr0dgwhREOmu8vJRelzpK71v3PjFMIOVhMUQPdCZt8RpohkkUgUbk0I6h5CYz4ZUzIKAXDFPyobBYHRHxV4LVRXtJiMeZ/f5ChBqQq+v/Yc5iBupec+yzeKaqIdYZ+r/yenGGYJhAicl6jL3C2cR9mMnEH3Acp40bxnEGcMM4zgBuGMcZwA3jON38bP8AAirJYnTW46cAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                                <uix:Target DesignTimeRectangle="1472, 549, 143, 28" ElementType="InputBox" FriendlyName="'INPUT ContentMantBody_i…'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_ibtnVerTotales' tag='INPUT' type='image' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_ibtnVerTotales' tag='INPUT' type='image' aaname='Ver totales' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector, Image" />
+                              </scg:List>
+                            </uix:TargetAnchorable.Anchors>
+                          </uix:TargetAnchorable>
+                        </uix:NGetText.Target>
+                        <uix:NGetText.Text>
+                          <OutArgument x:TypeArguments="x:String">[MontoVerTotales]</OutArgument>
+                        </uix:NGetText.Text>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </uix:NGetText>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="403.2,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                          </ActivityAction.Argument>
+                          <uix:NGetText DisplayName="Get Text 'Total Nota de Débito'" sap:VirtualizedContainerService.HintSize="333.6,167.2" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="1310, 469, 160, 27" ElementType="InputBox" FriendlyName="'40.00'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_txtTotalNDBanc' tag='INPUT' type='text' tableCol='4' tableRow='10' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_txtTotalNDBanc' tag='INPUT' type='text' aaname='' /&gt;" Guid="481033fd-374c-40a8-94b0-a312e51e5402" InformativeScreenshot="f83878ccaf54a28c0e089cdb1c2ae14c.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                    <uix:Target DesignTimeRectangle="1091, 469, 200, 19" ElementType="Text" FriendlyName="'Total Nota de Débito'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblTotalNDBanc' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblTotalNDBanc' tag='SPAN' type='' aaname='Total Nota de Débito:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMwAAAAXCAYAAABH26AeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAOZSURBVHhe7ZnBceMwDEXVk6tyJUoxqkTpwqkhuWopEqTAD4AibecQLQ5vdkyKAAj8r2hmp+/vn81xnD7cMI4zgBvGcQZwwzjOAG4YxxnADeM4A1zIMF/bcr9tt1ubedXOIp/bfF+2h7pnsH6E+B/bqu3tPJbtvtcwf6r76xz2RnMG1vm+LQ997yWo3r5+2cR7sf4fNHpFPJZ7fPa+fB3rXXWF+cEze6xX77IzaYvXIDWtanYnT4m31zDGsJ/P+QcMo9wrmaFVuxR95Jm63nSXHTeMwm8bRnvufzPM2Z6JG+a3sA0TBxWFmzgaiZ91TIyV4BPVADoNMy/pX6xLFQ/mZPv5cyVzxFM+TY3PwArIleusRZZ6WuJ2iL1pCkPI9XzghQB9zM9pdca1OBcWj/XC7iHbh9on/sC10AyTxcSETQ3lDRdDVgYrPil6DRNiaJ8jIifVJYwgnuFx6BluEMqLYqgQzxzGOO5Mayx2EnbjzoGmYZQZiZg4H6pV9l7WimeO/ZyHxejpU2DSFq+BYhghsAQOFX9rbxoxhBi7zzBFfGZORfg7ak4cOt7PiMXA+0ZAhMnkeD+lx4Aau5BqK+fxfkQVg57BnHWeE8MYefQ71kza4jWQwzQbAsJrDTnFCPtEafqQYQIkyFyfNnApRBA/GoZD+UqtpmFAtJmqXtt0se5RMxbq3O350HqsS7lz1f8Tw1h9w+cUJm3xGhiG0YYHDRRDBvHFhqpDGDBMIOahvJph5ODODEP7VGd6zhZ7wjInrwHiIk8bps6NL6OadxtGmZUyI2TSFq+BFELXGyyAQ1aH/gbD5Bp3wWmGkSKu38jCMPibnbFFDTEzVb1nMWyahok5jnrN+XDgTKY+22MYxXRGbM6kLV4DRXRGo9oG0QWV34avGSYQz4V8O5BTCPRk8LEmFCedGf4rQHXlXLrwDbMxWoYRe8Z8qnsZfaxjnRjGiNFj2ElbvAbaW5qEyJsCwtjBQcbf/EwWIY8f4zxhmECKX+fMdR31U+0tgYm75PvCOYRqO3Kl3tWxaI0Zr0dgwhREOmu8vJRelzpK71v3PjFMIOVhMUQPdCZt8RpohkkUgUbk0I6h5CYz4ZUzIKAXDFPyobBYHRHxV4LVRXtJiMeZ/f5ChBqQq+v/Yc5iBupec+yzeKaqIdYZ+r/yenGGYJhAicl6jL3C2cR9mMnEH3Acp40bxnEGcMM4zgBuGMcZwA3jON38bP8AAirJYnTW46cAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[MontoVerTotales]</OutArgument>
+                            </uix:NGetText.Text>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </uix:NGetText>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
+                  <If Condition="[in_Monto.Contains(&quot;.&quot;)]" sap:VirtualizedContainerService.HintSize="1060,728.8" sap2010:WorkflowViewState.IdRef="If_7">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="526.4,560" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="483.2,69.6" sap2010:WorkflowViewState.IdRef="Assign_15">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[CantDecimales]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[in_Monto.Substring(in_Monto.LastIndexOf(".") +1 ).Length]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <If Condition="[CantDecimales &lt; 2]" sap:VirtualizedContainerService.HintSize="483.2,359.2" sap2010:WorkflowViewState.IdRef="If_8">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Sequence sap:VirtualizedContainerService.HintSize="400,160.8" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_16">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[in_Monto]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[in_Monto + "0"]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_42">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Sequence>
+                          </If.Else>
+                        </If>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="489.6,160.8" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="446.4,69.6" sap2010:WorkflowViewState.IdRef="Assign_13">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[in_Monto]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[in_Monto+".00"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1060,72" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[&quot;monto ver totales: &quot; + MontoVerTotales + &quot;, monto ingresado: &quot; + in_Monto]" />
+                  <If Condition="[MontoVerTotales = in_Monto]" sap:VirtualizedContainerService.HintSize="1060,1527.2" sap2010:WorkflowViewState.IdRef="If_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence sap:VirtualizedContainerService.HintSize="400,1358.4" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Boolean">[MontosIguales]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:InjectJsScript InputParameter="{x:Null}" DisplayName="Inject Js Script 'TD'" sap:VirtualizedContainerService.HintSize="356.8,165.6" sap2010:WorkflowViewState.IdRef="InjectJsScript_10" ScriptCode="js\\16_GetNumND.js">
+                          <ui:InjectJsScript.ScriptOutput>
+                            <OutArgument x:TypeArguments="x:String">[out_InformacionNumNDB]</OutArgument>
+                          </ui:InjectJsScript.ScriptOutput>
+                          <ui:InjectJsScript.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="28c248f9-52b2-41ae-b358-52e7ed2cab0b" InformativeScreenshot="52e174efc34f0538162fcd1d2f87beff" Selector="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblNumNDBanc' tag='SPAN' /&gt;">
+                              <ui:Target.TimeoutMS>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:Target.TimeoutMS>
+                              <ui:Target.WaitForReady>
+                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                              </ui:Target.WaitForReady>
+                            </ui:Target>
+                          </ui:InjectJsScript.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:InjectJsScript>
+                        <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_12">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[out_InformacionNumNDB]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["NDB-"+out_InformacionNumNDB]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="356.8,62.4" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+                          <ui:CommentOut.Body>
+                            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,258.4" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <uix:NClick ClickType="Single" DisplayName="Click 'INPUT btnRegresar'" sap:VirtualizedContainerService.HintSize="356.8,167.2" sap2010:WorkflowViewState.IdRef="NClick_10" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Version="V1">
+                                <uix:NClick.Target>
+                                  <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="57, 142, 38, 38" ElementType="Button" FriendlyName="'INPUT btnRegresar'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='submit' aaname='' /&gt;" Guid="8a941979-e10c-4c47-b6ea-6446e48b1acc" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAATDSURBVFhH7ZZdKJ9tHMdtGJt5WyxjB0TkZTNSsslIbV5S3rJ24EDeJrWRLYQciLC2k81OpoSF0JaXOFCLZQdo1DA02aZsBzSzzWKN7/r+dt97/M3fW/89eZ7+37rq7u66ftfn+r1dlwH+I9KD6lp6UF1LD6pr6UF1rf836OTkJNra2tDU1ISZmRl8+/YNy8vLGB0dRV1dHZqbm/H27Vtltm60Z1ACFBYWwtXVFXZ2dnjy5Alev36N58+fIysrC0eOHIG9vT1aWlqUFbrRnkGvXLkCCwsLGBgY4PTp03j58iUaGhpw6dIlHDp0CIcPH4aVlRUaGxuVFbrRrkC/fPmCvr4+XL58WbxobGwMT09PlJSU4NatWwgMDMSJEyd+g/L7XwedmppCdXU1oqKiYGRkBBMTE0RGRiIvLw+JiYlwc3ODmZmZeJiDoDY2NpK/utS2oGNjY7h9+zaCg4MF0tzcHBcvXkRRURFyc3Nx6tQpAVMhVVCGnnN6e3sxODiIiYkJLC4u4sePH4rlvWtL0NXVVczNzeHatWuShwy1ra0tLly4gEePHoknTU1NNQDVwfAbGhpKinh7eyM8PFyKrKOjA69evcKHDx/w+fNnZafda0vQFy9ewN/fH5aWluIhJycnpKeno7W1Vf4TkkDaQNVcZRTYBTifBchuwKJ7+PChstPupQG6tLQkPZBFwzDTMyEhIeLZpKQkBAQECLw2yO0G1xCchXbu3DlcvXpVvDw/P6/svr00QNlmQkNDxQs0zrAzzKmpqTh79uwfm+930NssSqbF/fv35aLYSRqgDC8NqAYJl5aWhpiYmH15cadBmz4+PiguLpYbbm1tTSH5UxqgBQUFcHBwkBDREAvi5s2buHHjhqQCDf8NYLa4O3fu4OvXr1hfX1doNKUB+vHjR+mZPCUNENjd3R3Z2dmoqamRotjcjnQxmGoeHh7o7+/Hp0+fFBpNaYBSs7Oz8rCIj4+HtbU1jh8/Lm2GBVVVVQU/Pz8cPXp0yw33OxglXhrR0dHSd7fSH6AUPdvT04OMjAw4OzvLidmiSktLJQ3YCZgW2jZlJDj/zJkzsp5zeWD2Y22pw0gxYnfv3pUevllbgqriqyg/Px9eXl4Cy3ZF0JycHERERMDR0VH+bdyc34RKTk6WvONLi9FghMLCwnD+/Hl5eTHneaDN4GyNbFubtS0o9f37d9TX18v9rRrjhvQuq/XYsWMam9EzvMW03fXv3r3DgwcPpA7UAlXXcjCtysrKlNn/aEdQViFToaurC76+vmKctwyTn0373r178p+eVUHZ1LWB8uALCwvy2Hn27BlSUlJw8uTJ36BczwhMT08rK35pR1BVvJ+7u7vFMEPOfGJKPH78WDweFxcn3uBGfJTw8thJKysrGB4eRmVlpRxWbYt8NtbW1iqzfmnXoKqePn2K69evSycgcGdnJ96/f4/29napWqaIi4uLHGC3evPmDSoqKqQA6QD2cvbvjdozKMWwMc8SEhIwMjIiD2tqaGhI0iEzMxMDAwPyb7diOtABPDxvR9rZqH2B/k3FxsZK+vDa3qgDB8rWx+cg02ijDhwoH+ZBQUEH36Pj4+PSBcrLy5U/v3TgQLVJD6pr6UF1LT2obgX8BEfPCuipp883AAAAAElFTkSuQmCC" InformativeScreenshot="e742813fe9775bf2828036066e9c1018.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector, Image">
+                                    <uix:TargetAnchorable.Anchors>
+                                      <scg:List x:TypeArguments="uix:ITarget" Capacity="3">
+                                        <uix:Target DesignTimeRectangle="100, 142, 38, 38" ElementType="Button" FriendlyName="'INPUT btnLimpiar'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='btnLimpiar' tag='INPUT' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='btnLimpiar' tag='INPUT' type='submit' aaname='' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAASESURBVFhH7ZjLTxtXFMbZsUGCBf8AYsOCBRJSVSRWFV20bthVpEkfAZIW2kUhlSpSsaEtJSEOpEQBy3F5pALzNO/UMZhH4vBIDNiiuE0JMaHGELB42WAehq/3XA1tpomnYAcTq/lJo6s552rmm7nn3HNmQhAkvBb6svl/CF1ZWYHRaIRCoUBWVhbkcjm0Wi1mZ2eFGS8Pv4SOj48jLy8P8fHxCA8PR0xMDNLS0tDe3o7d3V1YrVbodDo0NDTwkc7J7gt+CW1tbUVCQgJCQkL+PqKiopCTk4OtrS2Ul5cjOTkZcXFxfKRzsvuCX0JLS0sRFhYmEhoaGgqZTAan04mUlBRERkZyO410TnZf8EsoLXFiYqJIaHR0NHJzc18toRaLBQUFBXz5IyIiEBsbi4yMDJ5Qm5ubKCkpQVJSEo9dGinZzCYzmjUaVFVW4VZnJ6ampoSrSeOXUKms93g8MJvNUKlU/GFoNBgMqKqoROZnGTj5fgrOZ2WjpblFuJo0fgk9LA6HA19ln8fbbyUh4Y03IXvnXeR/ny94pXkt9EWsu9ahadIg+8ssfPzhR/gm5wJua28LXmkCKtSz44HNZsPgwAD03Xr06HvQ3dXN4rSZH8YHD+BYdAizxTwndGdnh2Wsm2ftUWN9/BiqGyqcSz/Lj+IrRRgbHRW8Yp4T6nI58fTpPBYXF3wudwfl/vB9fJH5OY9ZOtLOpPI3+yKCV2jQLH0gcblcePj7Q5b5Wn5QgVhaWhK8Yo5VKLG9vc0rmdlkwqPJSayurgoeMSKhe3t7PC5pDBT0BtU1alZWM3H5UiFGD7L09DSURN6e6iiYmZnBp+nncEL2Hk6fPIU6da3gESMSury8zDOexkCxsLCAInkRr1QXvs5BX2+f4BEjErqxsYG1tTU+Bgq32w0Ti8/G+gYu0tv31rEn00EJTqF2+xyGWLXov2OAdfrJkVcm+6wdLZpm3kXRSOfeEAk1joyivqEJ1TW16O3r53vcUTJiHOFdfrLsBB/p3BvBKTRolv5VxqtQ6qKm2Vu9axjA2JiZbcyLgsd/aN+s+KkCKuUNyeV+Fq9CaSPW9/TyeG1iyzL+64Tg8R8SeTY1HamfnEHZ9TLBKo1XoVSdftHqcPPnatTVN2LMZBY8/qMoLeMl8/QHp1gPWixYpfEqlDL+j8lH0HXpMTg0DPvcHO+q6E2vrq7xL0oKj32o0abfNdRjbm39s1vQdZxOF/ftN+PDw8NcIHVL9wz3uO2/kEwmj2eX34gE0Q6wvr7OviCHoGSx1dbWAat1WpjnYZ25CVWVN1GrroNlwsLtBDXGjWzLIx/Nobl0PXpg94Zb9LBSSAr9N/QDQalU4btv81Fc/CMGBga5nX4lqpnAgh8uorBQjo6OTm4nunTdkF++wn00JyC/HZeWllFTrWY3vQSFQokRViAIWurWljYu6OrVEvatrud24k7/XVy7dp37aM6zYXEYDiWUlssy8Rs6O29hcHAI8/Pz3E5hMcnimd5eL2vVnrBtbR/bnzYulnw0x9ciciihx0mQCAX+Ahl3E3waRobAAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                                        <uix:Target DesignTimeRectangle="284, 214, 33, 28" ElementType="InputBox" FriendlyName="'INPUT ContentMantBody_i…'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='image' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='image' aaname='Guarda registros de transacción' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACUAAAAgCAYAAACVU7GwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAOwSURBVFhH7ZdJTBNRGMdFhLLJVgIa0bigEAoUKIiCinoiEkA9SKIGvaJGiMRELJWDS0DCph4ATQQiUDQGW1lDXUENFlQqpSGBA5QYo1HClkgg+fveBBqmfYJlsRyc5HeYr1+/+c1737w3s2pVegVWHMygpWEGLQ0zaGmYwXn4+OUn5jpqtHrm//4aZnAeqFRdXT3S0i4iMfG4gfR0KVpaWi0nVVBwC0HiUNgKHA1E7IpCZaXcclJ5eQXw9w+C1WpbAxJJBB48qLScVH5+IUQiMU8qLGwXKiqq/ksZWDFS4XcakN+q4/g29guFhbcRGBjMk9oZEYmqKjl6f4wacrflKJj15oQZZHDq0VuMj4+jo6MDbW1tuECWAx8fP55UQIAYV6/dIL+/x+fPXZicnER0STOz3pwwgwyo1IBej+TkszhxMgmhoeFwcfXgSbkLvbA7ci+Skk4jI+MKdxPLLqXVdmPrtu0Q2DnyZIxxdHJF9P6DGB4eXn6pkZERqFQqRO3ZRy7sQgRsjIRs4OzihoSEI9wUL/v00YaVNn7E6OgoioqLyeodCVtbB56U9RoBoqMPoLS0FAPfh5D85D28rj9m1psTZvAP0AtkNmvQrutFdnY2gkMksLIiozWNWByC3Nw8NH/QIuVpOwQZVcw682Ic8M1VIqH8lQkht+oNOXktOtS3tpEN+DK8vTdjtbUAnp7rIZVm4NHzN7hERnQmN6qoiVlvY1aNIccE4wAdCdoLdJpoD9EniJ7fb+/j5eW87kbjy1byNJ6B1zpvHDuWiHpyfl6p5uW96PuKiYkJjI2NcfVo3ampKa5HZ+fxMA5QqcHBQcjlcpSVlaG2thb9/f0mUvYyOVKfvINGo0FWVhbUajXi7jaYTBmV6unpgUKhQHl5OaqrqzE0NGS+lEr1jLwBBMLXT4Twnbshr35oIkWho0JHUk/WLzoScaUvTHKoFH3NkYRFwI/U8xcFQafTmS+lUChhM/1k0QWyqLiEKRVM+ow29Axbb5puKVRKKpVhrbM713v0vevTp07zpZTKWtjZr+Wk3IWeKC65y5T6G6iUTJZJbk7ISTk4uqCzU7N4qRIipejWQ1xYZzbqwR9LLyX08CJS96Y/CRZ2yK5kwtXNY+mkaA+IgyWIJ1vHQtnhK+J6dFFSsxudYu/gTPY04YIR2DkZai240RubmrDBexNXgMotFfTmNm7agq4urflSdEE8c/YcDsXGIyYmdslIOHwUKSmp3OJsttS/OMySsjwV+A3r1k0TbhN4kAAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                                        <uix:Target DesignTimeRectangle="27, 105, 29, 29" FriendlyName="'DIV NotasDebitoBancaria…'" FullSelectorArgument="&lt;webctrl aaname=' ' idx='3' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname=' ' type='' tag='DIV' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJ5SURBVFhH7ZVPS2pRFMX9FCZijjSaWCpqDUorSstmzho4CCwMcRAUBEnQoD8USEQOBKG5pqFUI5Eig4gGOQkR/Czrsc7jPl66rz168F6De+E38OzF3evcs8/ShG/wGCa0x5TP5/G/MdXrdUjc3NxgZWUF4XAYi4uLfXCddepWV1cH6mKxGMrlstiHmF5fXyFxf38Pr9eL+fl5JBIJrK2t/YK/FxYWEAgE8PDwgJmZGYWki0ajGB0dxe3trdiH6Jrgy/1+Pw4PD8X6yckJgsGg0nG3e3t7ou7i4gJjY2NfN8GdHh0difXT01OEQiGli0QiA02Mj4/j7u5OrBPDhManJvRm4ncTn83EX5nw+XzY3NxEqVTqY3t7G1NTU0rHG5RKpURdJpOBy+X62mDyirrdbpjNZgwPD8Nut3/AYrGoK0zd9PQ0hoaG+jSazuFwqDyR+hBdEy8vL6hUKigWi+IOuX59fa101Wp1oO7q6grPz89iH6Jr4unpCVtbW1hfX8fGxkYfXOeRULe7u6vCqVeTTCaVLp1Oo9FoiH3IwOPg5+bwxePxPmZnZz8kJudD0jFZv0ViGmFF/shEu92GBIuTk5PIZrNi/fz8XM0FdfynPDg4EHWFQkFddc6YVCembrcLiVarpUycnZ2J9Vwuh7m5OaVbXl7G8fGxqLu8vITH41G3SKqTgSYmJiawv7+vXtALd87joG5paQk7Ozuijl+Sx9FsNsU+RNfE29ubim2bzQan09kH11mnjsditVpFHdN2ZGQEj4+PYh+ia6LT6aBWq6nUY+L1wnXWqePQacko6Zis7+/vYh+ia+JfYpjQMExoGCY0DBM/6eIHZi+boxl66WoAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                                      </scg:List>
+                                    </uix:TargetAnchorable.Anchors>
+                                  </uix:TargetAnchorable>
+                                </uix:NClick.Target>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </uix:NClick>
+                            </Sequence>
+                          </ui:CommentOut.Body>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:CommentOut>
+                        <uix:NClick ClickType="Single" DisplayName="Click 'Transacción'" sap:VirtualizedContainerService.HintSize="356.8,167.2" sap2010:WorkflowViewState.IdRef="NClick_11" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Version="V1">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="284, 214, 33, 28" ElementType="InputBox" FriendlyName="'INPUT ContentMantBody_i…'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='image' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='image' aaname='Guarda registros de transacción' /&gt;" Guid="d0db7814-11cd-4d78-af78-be0fd7c48b24" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACUAAAAgCAYAAACVU7GwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAOwSURBVFhH7ZdJTBNRGMdFhLLJVgIa0bigEAoUKIiCinoiEkA9SKIGvaJGiMRELJWDS0DCph4ATQQiUDQGW1lDXUENFlQqpSGBA5QYo1HClkgg+fveBBqmfYJlsRyc5HeYr1+/+c1737w3s2pVegVWHMygpWEGLQ0zaGmYwXn4+OUn5jpqtHrm//4aZnAeqFRdXT3S0i4iMfG4gfR0KVpaWi0nVVBwC0HiUNgKHA1E7IpCZaXcclJ5eQXw9w+C1WpbAxJJBB48qLScVH5+IUQiMU8qLGwXKiqq/ksZWDFS4XcakN+q4/g29guFhbcRGBjMk9oZEYmqKjl6f4wacrflKJj15oQZZHDq0VuMj4+jo6MDbW1tuECWAx8fP55UQIAYV6/dIL+/x+fPXZicnER0STOz3pwwgwyo1IBej+TkszhxMgmhoeFwcfXgSbkLvbA7ci+Skk4jI+MKdxPLLqXVdmPrtu0Q2DnyZIxxdHJF9P6DGB4eXn6pkZERqFQqRO3ZRy7sQgRsjIRs4OzihoSEI9wUL/v00YaVNn7E6OgoioqLyeodCVtbB56U9RoBoqMPoLS0FAPfh5D85D28rj9m1psTZvAP0AtkNmvQrutFdnY2gkMksLIiozWNWByC3Nw8NH/QIuVpOwQZVcw682Ic8M1VIqH8lQkht+oNOXktOtS3tpEN+DK8vTdjtbUAnp7rIZVm4NHzN7hERnQmN6qoiVlvY1aNIccE4wAdCdoLdJpoD9EniJ7fb+/j5eW87kbjy1byNJ6B1zpvHDuWiHpyfl6p5uW96PuKiYkJjI2NcfVo3ampKa5HZ+fxMA5QqcHBQcjlcpSVlaG2thb9/f0mUvYyOVKfvINGo0FWVhbUajXi7jaYTBmV6unpgUKhQHl5OaqrqzE0NGS+lEr1jLwBBMLXT4Twnbshr35oIkWho0JHUk/WLzoScaUvTHKoFH3NkYRFwI/U8xcFQafTmS+lUChhM/1k0QWyqLiEKRVM+ow29Axbb5puKVRKKpVhrbM713v0vevTp07zpZTKWtjZr+Wk3IWeKC65y5T6G6iUTJZJbk7ISTk4uqCzU7N4qRIipejWQ1xYZzbqwR9LLyX08CJS96Y/CRZ2yK5kwtXNY+mkaA+IgyWIJ1vHQtnhK+J6dFFSsxudYu/gTPY04YIR2DkZai240RubmrDBexNXgMotFfTmNm7agq4urflSdEE8c/YcDsXGIyYmdslIOHwUKSmp3OJsttS/OMySsjwV+A3r1k0TbhN4kAAAAABJRU5ErkJggg==" InformativeScreenshot="bbc6f95c6d7b297db5e170ef4dba4815.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector, Image">
+                              <uix:TargetAnchorable.Anchors>
+                                <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                                  <uix:Target DesignTimeRectangle="341, 278, 92, 18" ElementType="Text" FriendlyName="'Transacción'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblTransaccion' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='ContentMantBody_lblTransaccion' tag='SPAN' type='' aaname='Transacción:' check:text='Transacción:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGAAAAAWCAYAAAA/45nkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAH0SURBVGhD7ZXZkcMgDIbpyVW5EqcYKnG6cGpIXlkOcUgWh70zq51dHr5JIoGQ9Aui3u+PmcgxBRBmCiDMFECYKYAwUwBhpgDCZAH2h1mWpc2qzVFs/rP4XjzMXvXZXmzPs+8GijM6Dr3Wk/i3vIxeF7PqF+O7xxRAmOsCuCtonyK9nZ+lPdrYJytOz9N/8msshzZrGaOWA1qzGn2QNTRO75zSzzxBoR95Pb4FY7X5GMSm4hdKUwAXnLyBvvko+NNsaF1I0u3ddlgDTUjFwO/kt5zi+vNxw4PwRa6QYzXOkD/HC/GLM2neI7VVUJzR0RaATlxodlmQAzcPkmwJx8bG+PX0D5DsY9cU9PxIAGYoHLg/A7VVUJzR0RaAsSdg8iNEADoROMm8tzc5Dr83nRUFCDHq+3t+S1ljbSiQMCO18SjO6LgqAGoGHIoTGE0SpinGSkUC/vzog8agJvG3MdPzW04CMH34VQJUruk9AUqiGLG58Lv5BP3kDcB5yQnA2aDQ7wngKCeWn14foydSoue3lPVc+A+QEwCSLBMITXFcSJKZNq5QVJTfE85KTQJb2TQUZ8ifa8QCW071SguQ7KERHjthIcbFa0rjEEHSzUrYXJgBiE1C61KMjp+pMdSS1+MbMVabj0EEUfHLRIYpgDBTAFE+5guM351eV60NogAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                                  <uix:Target DesignTimeRectangle="100, 142, 38, 38" ElementType="Button" FriendlyName="'INPUT btnLimpiar'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='btnLimpiar' tag='INPUT' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='btnLimpiar' tag='INPUT' type='submit' aaname='' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAASESURBVFhH7ZjLTxtXFMbZsUGCBf8AYsOCBRJSVSRWFV20bthVpEkfAZIW2kUhlSpSsaEtJSEOpEQBy3F5pALzNO/UMZhH4vBIDNiiuE0JMaHGELB42WAehq/3XA1tpomnYAcTq/lJo6s552rmm7nn3HNmQhAkvBb6svl/CF1ZWYHRaIRCoUBWVhbkcjm0Wi1mZ2eFGS8Pv4SOj48jLy8P8fHxCA8PR0xMDNLS0tDe3o7d3V1YrVbodDo0NDTwkc7J7gt+CW1tbUVCQgJCQkL+PqKiopCTk4OtrS2Ul5cjOTkZcXFxfKRzsvuCX0JLS0sRFhYmEhoaGgqZTAan04mUlBRERkZyO410TnZf8EsoLXFiYqJIaHR0NHJzc18toRaLBQUFBXz5IyIiEBsbi4yMDJ5Qm5ubKCkpQVJSEo9dGinZzCYzmjUaVFVW4VZnJ6ampoSrSeOXUKms93g8MJvNUKlU/GFoNBgMqKqoROZnGTj5fgrOZ2WjpblFuJo0fgk9LA6HA19ln8fbbyUh4Y03IXvnXeR/ny94pXkt9EWsu9ahadIg+8ssfPzhR/gm5wJua28LXmkCKtSz44HNZsPgwAD03Xr06HvQ3dXN4rSZH8YHD+BYdAizxTwndGdnh2Wsm2ftUWN9/BiqGyqcSz/Lj+IrRRgbHRW8Yp4T6nI58fTpPBYXF3wudwfl/vB9fJH5OY9ZOtLOpPI3+yKCV2jQLH0gcblcePj7Q5b5Wn5QgVhaWhK8Yo5VKLG9vc0rmdlkwqPJSayurgoeMSKhe3t7PC5pDBT0BtU1alZWM3H5UiFGD7L09DSURN6e6iiYmZnBp+nncEL2Hk6fPIU6da3gESMSury8zDOexkCxsLCAInkRr1QXvs5BX2+f4BEjErqxsYG1tTU+Bgq32w0Ti8/G+gYu0tv31rEn00EJTqF2+xyGWLXov2OAdfrJkVcm+6wdLZpm3kXRSOfeEAk1joyivqEJ1TW16O3r53vcUTJiHOFdfrLsBB/p3BvBKTRolv5VxqtQ6qKm2Vu9axjA2JiZbcyLgsd/aN+s+KkCKuUNyeV+Fq9CaSPW9/TyeG1iyzL+64Tg8R8SeTY1HamfnEHZ9TLBKo1XoVSdftHqcPPnatTVN2LMZBY8/qMoLeMl8/QHp1gPWixYpfEqlDL+j8lH0HXpMTg0DPvcHO+q6E2vrq7xL0oKj32o0abfNdRjbm39s1vQdZxOF/ftN+PDw8NcIHVL9wz3uO2/kEwmj2eX34gE0Q6wvr7OviCHoGSx1dbWAat1WpjnYZ25CVWVN1GrroNlwsLtBDXGjWzLIx/Nobl0PXpg94Zb9LBSSAr9N/QDQalU4btv81Fc/CMGBga5nX4lqpnAgh8uorBQjo6OTm4nunTdkF++wn00JyC/HZeWllFTrWY3vQSFQokRViAIWurWljYu6OrVEvatrud24k7/XVy7dp37aM6zYXEYDiWUlssy8Rs6O29hcHAI8/Pz3E5hMcnimd5eL2vVnrBtbR/bnzYulnw0x9ciciihx0mQCAX+Ahl3E3waRobAAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                                </scg:List>
+                              </uix:TargetAnchorable.Anchors>
+                            </uix:TargetAnchorable>
+                          </uix:NClick.Target>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uix:NClick>
+                        <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_10">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[out_InformacionRegistro]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["El movimiento no se registró con éxito”]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke 10_DescargaND workflow" sap:VirtualizedContainerService.HintSize="356.8,123.2" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="07_Nova\10_DescargaND.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_RutaXML">[in_out_RutadeArchivo]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_AsuntoCorreo">[out_InformacionNumNDB]</InArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="356.8,188" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_2" Shortcuts="[d(hk)][k(esc)][u(hk)]" Version="V1" />
+                        <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="356.8,32" sap2010:WorkflowViewState.IdRef="Delay_2" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="400,380" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Boolean">[MontosIguales]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[ContadorIntentos]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[ContadorIntentos + 1]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign sap:VirtualizedContainerService.HintSize="356.8,69.6" sap2010:WorkflowViewState.IdRef="Assign_11">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[out_InformacionRegistro]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">["El movimiento no se registró, debido a que al comparar el monto ingresado por el Bot y el monto que genera el sistema no son el mismo”]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </ui:InterruptibleDoWhile.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InterruptibleDoWhile>
+            <If Condition="[MontosIguales &lt;&gt; True]" sap:VirtualizedContainerService.HintSize="922.4,62.4" sap2010:WorkflowViewState.IdRef="If_6">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="400,260" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NClick ClickType="Single" DisplayName="Click 'INPUT btnRegresar'" sap:VirtualizedContainerService.HintSize="356.8,167.2" sap2010:WorkflowViewState.IdRef="NClick_8" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="5e53eccc-5368-4e6c-9f77-16eaddce0b26" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable BrowserURL="http://35.227.77.69/SYSWEB/SWDefault/pages/Financiero/fncTransNDBancariasMant.aspx?action=kw55k55vkF&amp;value=kvkwkmkwkkk2momomomi&amp;texto=kwkF5kki2okkk52okkk5k2kp5kkF2ok2kikwkmki52kpki" DesignTimeRectangle="57, 142, 38, 38" ElementType="Button" FriendlyName="'INPUT btnRegresar'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='submit' aaname='' /&gt;" Guid="8a941979-e10c-4c47-b6ea-6446e48b1acc" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAATDSURBVFhH7ZZdKJ9tHMdtGJt5WyxjB0TkZTNSsslIbV5S3rJ24EDeJrWRLYQciLC2k81OpoSF0JaXOFCLZQdo1DA02aZsBzSzzWKN7/r+dt97/M3fW/89eZ7+37rq7u66ftfn+r1dlwH+I9KD6lp6UF1LD6pr6UF1rf836OTkJNra2tDU1ISZmRl8+/YNy8vLGB0dRV1dHZqbm/H27Vtltm60Z1ACFBYWwtXVFXZ2dnjy5Alev36N58+fIysrC0eOHIG9vT1aWlqUFbrRnkGvXLkCCwsLGBgY4PTp03j58iUaGhpw6dIlHDp0CIcPH4aVlRUaGxuVFbrRrkC/fPmCvr4+XL58WbxobGwMT09PlJSU4NatWwgMDMSJEyd+g/L7XwedmppCdXU1oqKiYGRkBBMTE0RGRiIvLw+JiYlwc3ODmZmZeJiDoDY2NpK/utS2oGNjY7h9+zaCg4MF0tzcHBcvXkRRURFyc3Nx6tQpAVMhVVCGnnN6e3sxODiIiYkJLC4u4sePH4rlvWtL0NXVVczNzeHatWuShwy1ra0tLly4gEePHoknTU1NNQDVwfAbGhpKinh7eyM8PFyKrKOjA69evcKHDx/w+fNnZafda0vQFy9ewN/fH5aWluIhJycnpKeno7W1Vf4TkkDaQNVcZRTYBTifBchuwKJ7+PChstPupQG6tLQkPZBFwzDTMyEhIeLZpKQkBAQECLw2yO0G1xCchXbu3DlcvXpVvDw/P6/svr00QNlmQkNDxQs0zrAzzKmpqTh79uwfm+930NssSqbF/fv35aLYSRqgDC8NqAYJl5aWhpiYmH15cadBmz4+PiguLpYbbm1tTSH5UxqgBQUFcHBwkBDREAvi5s2buHHjhqQCDf8NYLa4O3fu4OvXr1hfX1doNKUB+vHjR+mZPCUNENjd3R3Z2dmoqamRotjcjnQxmGoeHh7o7+/Hp0+fFBpNaYBSs7Oz8rCIj4+HtbU1jh8/Lm2GBVVVVQU/Pz8cPXp0yw33OxglXhrR0dHSd7fSH6AUPdvT04OMjAw4OzvLidmiSktLJQ3YCZgW2jZlJDj/zJkzsp5zeWD2Y22pw0gxYnfv3pUevllbgqriqyg/Px9eXl4Cy3ZF0JycHERERMDR0VH+bdyc34RKTk6WvONLi9FghMLCwnD+/Hl5eTHneaDN4GyNbFubtS0o9f37d9TX18v9rRrjhvQuq/XYsWMam9EzvMW03fXv3r3DgwcPpA7UAlXXcjCtysrKlNn/aEdQViFToaurC76+vmKctwyTn0373r178p+eVUHZ1LWB8uALCwvy2Hn27BlSUlJw8uTJ36BczwhMT08rK35pR1BVvJ+7u7vFMEPOfGJKPH78WDweFxcn3uBGfJTw8thJKysrGB4eRmVlpRxWbYt8NtbW1iqzfmnXoKqePn2K69evSycgcGdnJ96/f4/29napWqaIi4uLHGC3evPmDSoqKqQA6QD2cvbvjdozKMWwMc8SEhIwMjIiD2tqaGhI0iEzMxMDAwPyb7diOtABPDxvR9rZqH2B/k3FxsZK+vDa3qgDB8rWx+cg02ijDhwoH+ZBQUEH36Pj4+PSBcrLy5U/v3TgQLVJD6pr6UF1LT2obgX8BEfPCuipp883AAAAAElFTkSuQmCC" InformativeScreenshot="e742813fe9775bf2828036066e9c1018.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#' /&gt;" SearchSteps="FuzzySelector, Image">
+                        <uix:TargetAnchorable.Anchors>
+                          <scg:List x:TypeArguments="uix:ITarget" Capacity="3">
+                            <uix:Target DesignTimeRectangle="100, 142, 38, 38" ElementType="Button" FriendlyName="'INPUT btnLimpiar'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='btnLimpiar' tag='INPUT' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl id='btnLimpiar' tag='INPUT' type='submit' aaname='' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAASESURBVFhH7ZjLTxtXFMbZsUGCBf8AYsOCBRJSVSRWFV20bthVpEkfAZIW2kUhlSpSsaEtJSEOpEQBy3F5pALzNO/UMZhH4vBIDNiiuE0JMaHGELB42WAehq/3XA1tpomnYAcTq/lJo6s552rmm7nn3HNmQhAkvBb6svl/CF1ZWYHRaIRCoUBWVhbkcjm0Wi1mZ2eFGS8Pv4SOj48jLy8P8fHxCA8PR0xMDNLS0tDe3o7d3V1YrVbodDo0NDTwkc7J7gt+CW1tbUVCQgJCQkL+PqKiopCTk4OtrS2Ul5cjOTkZcXFxfKRzsvuCX0JLS0sRFhYmEhoaGgqZTAan04mUlBRERkZyO410TnZf8EsoLXFiYqJIaHR0NHJzc18toRaLBQUFBXz5IyIiEBsbi4yMDJ5Qm5ubKCkpQVJSEo9dGinZzCYzmjUaVFVW4VZnJ6ampoSrSeOXUKms93g8MJvNUKlU/GFoNBgMqKqoROZnGTj5fgrOZ2WjpblFuJo0fgk9LA6HA19ln8fbbyUh4Y03IXvnXeR/ny94pXkt9EWsu9ahadIg+8ssfPzhR/gm5wJua28LXmkCKtSz44HNZsPgwAD03Xr06HvQ3dXN4rSZH8YHD+BYdAizxTwndGdnh2Wsm2ftUWN9/BiqGyqcSz/Lj+IrRRgbHRW8Yp4T6nI58fTpPBYXF3wudwfl/vB9fJH5OY9ZOtLOpPI3+yKCV2jQLH0gcblcePj7Q5b5Wn5QgVhaWhK8Yo5VKLG9vc0rmdlkwqPJSayurgoeMSKhe3t7PC5pDBT0BtU1alZWM3H5UiFGD7L09DSURN6e6iiYmZnBp+nncEL2Hk6fPIU6da3gESMSury8zDOexkCxsLCAInkRr1QXvs5BX2+f4BEjErqxsYG1tTU+Bgq32w0Ti8/G+gYu0tv31rEn00EJTqF2+xyGWLXov2OAdfrJkVcm+6wdLZpm3kXRSOfeEAk1joyivqEJ1TW16O3r53vcUTJiHOFdfrLsBB/p3BvBKTRolv5VxqtQ6qKm2Vu9axjA2JiZbcyLgsd/aN+s+KkCKuUNyeV+Fq9CaSPW9/TyeG1iyzL+64Tg8R8SeTY1HamfnEHZ9TLBKo1XoVSdftHqcPPnatTVN2LMZBY8/qMoLeMl8/QHp1gPWixYpfEqlDL+j8lH0HXpMTg0DPvcHO+q6E2vrq7xL0oKj32o0abfNdRjbm39s1vQdZxOF/ftN+PDw8NcIHVL9wz3uO2/kEwmj2eX34gE0Q6wvr7OviCHoGSx1dbWAat1WpjnYZ25CVWVN1GrroNlwsLtBDXGjWzLIx/Nobl0PXpg94Zb9LBSSAr9N/QDQalU4btv81Fc/CMGBga5nX4lqpnAgh8uorBQjo6OTm4nunTdkF++wn00JyC/HZeWllFTrWY3vQSFQokRViAIWurWljYu6OrVEvatrud24k7/XVy7dp37aM6zYXEYDiWUlssy8Rs6O29hcHAI8/Pz3E5hMcnimd5eL2vVnrBtbR/bnzYulnw0x9ciciihx0mQCAX+Ahl3E3waRobAAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                            <uix:Target DesignTimeRectangle="284, 214, 33, 28" ElementType="InputBox" FriendlyName="'INPUT ContentMantBody_i…'" FullSelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='image' /&gt;" FuzzySelectorArgument="&lt;webctrl src='../SWDefault/pages/Financiero/fncTransNDBancariasView.aspx' tag='IFRAME' /&gt;&lt;webctrl tag='INPUT' type='image' aaname='Guarda registros de transacción' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACUAAAAgCAYAAACVU7GwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAOwSURBVFhH7ZdJTBNRGMdFhLLJVgIa0bigEAoUKIiCinoiEkA9SKIGvaJGiMRELJWDS0DCph4ATQQiUDQGW1lDXUENFlQqpSGBA5QYo1HClkgg+fveBBqmfYJlsRyc5HeYr1+/+c1737w3s2pVegVWHMygpWEGLQ0zaGmYwXn4+OUn5jpqtHrm//4aZnAeqFRdXT3S0i4iMfG4gfR0KVpaWi0nVVBwC0HiUNgKHA1E7IpCZaXcclJ5eQXw9w+C1WpbAxJJBB48qLScVH5+IUQiMU8qLGwXKiqq/ksZWDFS4XcakN+q4/g29guFhbcRGBjMk9oZEYmqKjl6f4wacrflKJj15oQZZHDq0VuMj4+jo6MDbW1tuECWAx8fP55UQIAYV6/dIL+/x+fPXZicnER0STOz3pwwgwyo1IBej+TkszhxMgmhoeFwcfXgSbkLvbA7ci+Skk4jI+MKdxPLLqXVdmPrtu0Q2DnyZIxxdHJF9P6DGB4eXn6pkZERqFQqRO3ZRy7sQgRsjIRs4OzihoSEI9wUL/v00YaVNn7E6OgoioqLyeodCVtbB56U9RoBoqMPoLS0FAPfh5D85D28rj9m1psTZvAP0AtkNmvQrutFdnY2gkMksLIiozWNWByC3Nw8NH/QIuVpOwQZVcw682Ic8M1VIqH8lQkht+oNOXktOtS3tpEN+DK8vTdjtbUAnp7rIZVm4NHzN7hERnQmN6qoiVlvY1aNIccE4wAdCdoLdJpoD9EniJ7fb+/j5eW87kbjy1byNJ6B1zpvHDuWiHpyfl6p5uW96PuKiYkJjI2NcfVo3ampKa5HZ+fxMA5QqcHBQcjlcpSVlaG2thb9/f0mUvYyOVKfvINGo0FWVhbUajXi7jaYTBmV6unpgUKhQHl5OaqrqzE0NGS+lEr1jLwBBMLXT4Twnbshr35oIkWho0JHUk/WLzoScaUvTHKoFH3NkYRFwI/U8xcFQafTmS+lUChhM/1k0QWyqLiEKRVM+ow29Axbb5puKVRKKpVhrbM713v0vevTp07zpZTKWtjZr+Wk3IWeKC65y5T6G6iUTJZJbk7ISTk4uqCzU7N4qRIipejWQ1xYZzbqwR9LLyX08CJS96Y/CRZ2yK5kwtXNY+mkaA+IgyWIJ1vHQtnhK+J6dFFSsxudYu/gTPY04YIR2DkZai240RubmrDBexNXgMotFfTmNm7agq4urflSdEE8c/YcDsXGIyYmdslIOHwUKSmp3OJsttS/OMySsjwV+A3r1k0TbhN4kAAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                            <uix:Target DesignTimeRectangle="27, 105, 29, 29" FriendlyName="'DIV NotasDebitoBancaria…'" FullSelectorArgument="&lt;webctrl aaname=' ' idx='3' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname=' ' type='' tag='DIV' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAJ5SURBVFhH7ZVPS2pRFMX9FCZijjSaWCpqDUorSstmzho4CCwMcRAUBEnQoD8USEQOBKG5pqFUI5Eig4gGOQkR/Czrsc7jPl66rz168F6De+E38OzF3evcs8/ShG/wGCa0x5TP5/G/MdXrdUjc3NxgZWUF4XAYi4uLfXCddepWV1cH6mKxGMrlstiHmF5fXyFxf38Pr9eL+fl5JBIJrK2t/YK/FxYWEAgE8PDwgJmZGYWki0ajGB0dxe3trdiH6Jrgy/1+Pw4PD8X6yckJgsGg0nG3e3t7ou7i4gJjY2NfN8GdHh0difXT01OEQiGli0QiA02Mj4/j7u5OrBPDhManJvRm4ncTn83EX5nw+XzY3NxEqVTqY3t7G1NTU0rHG5RKpURdJpOBy+X62mDyirrdbpjNZgwPD8Nut3/AYrGoK0zd9PQ0hoaG+jSazuFwqDyR+hBdEy8vL6hUKigWi+IOuX59fa101Wp1oO7q6grPz89iH6Jr4unpCVtbW1hfX8fGxkYfXOeRULe7u6vCqVeTTCaVLp1Oo9FoiH3IwOPg5+bwxePxPmZnZz8kJudD0jFZv0ViGmFF/shEu92GBIuTk5PIZrNi/fz8XM0FdfynPDg4EHWFQkFddc6YVCembrcLiVarpUycnZ2J9Vwuh7m5OaVbXl7G8fGxqLu8vITH41G3SKqTgSYmJiawv7+vXtALd87joG5paQk7Ozuijl+Sx9FsNsU+RNfE29ubim2bzQan09kH11mnjsditVpFHdN2ZGQEj4+PYh+ia6LT6aBWq6nUY+L1wnXWqePQacko6Zis7+/vYh+ia+JfYpjQMExoGCY0DBM/6eIHZi+boxl66WoAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                          </scg:List>
+                        </uix:TargetAnchorable.Anchors>
+                      </uix:TargetAnchorable>
+                    </uix:NClick.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NClick>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_33">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-9, -9, 1938, 1048" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="1cf7fae7f94f7b60fd5d1eb30018cdca.png" Selector="&lt;html app='chrome.exe' title='35.227.77.69/SYSWEB/pages/main.aspx#'/&gt;" Url="http://35.227.77.69/SYSWEB/pages/main.aspx#" />
+      </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>

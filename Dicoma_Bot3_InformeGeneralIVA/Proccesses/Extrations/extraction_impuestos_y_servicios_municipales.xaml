@@ -1,0 +1,606 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="extraction_impuestos_y_servicios_municipales" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_sociedad" Type="InArgument(x:String)" />
+    <x:Property Name="in_cedula_juridica" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1261,4435</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>extraction_impuestos_y_servicios_municipales_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="36">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.ExtractData</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="34">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="extraction_impuestos_y_servicios_municipales" sap:VirtualizedContainerService.HintSize="1271,4370" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard WebDriverMode="{x:Null}" AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: LAFISE - Banc@Net" sap:VirtualizedContainerService.HintSize="1229,4278" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="20223950-bf1b-4149-add7-97782eae41ff" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1195,4062" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Boolean" Name="alertExist" />
+              <Variable x:TypeArguments="x:Boolean" Name="exitoso" />
+              <Variable x:TypeArguments="x:Int32" Name="contador" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="1153,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[exitoso]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:Int32">[contador]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+            </ui:MultipleAssign>
+            <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[exitoso.Equals(False) And contador &lt;= 5]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="1153,1776" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+              <ui:InterruptibleDoWhile.Body>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="480,1611" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="438,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[contador]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[contador+1]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,1419" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                    <TryCatch.Try>
+                      <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="376,1192" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <uix:NSelectItem DisplayName="Select Item 'Tipo de Servicio'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NSelectItem_1" Item="Impuestos y servicios Municipales" ScopeIdentifier="20223950-bf1b-4149-add7-97782eae41ff" Version="V1">
+                          <uix:NSelectItem.Items>
+                            <scg:List x:TypeArguments="x:String" Capacity="18">
+                              <x:String>Telefono,Luz,Agua,Internet</x:String>
+                              <x:String>Credix</x:String>
+                              <x:String>Recargas Prepago</x:String>
+                              <x:String>Televisión por Cable y Satélite</x:String>
+                              <x:String>Pago cuota creditos y suscripciones</x:String>
+                              <x:String>Empresas de Seguridad</x:String>
+                              <x:String>Impuestos y servicios Municipales</x:String>
+                              <x:String>Instituto Nacional de Seguros</x:String>
+                              <x:String>Caja Costarricense del Seguro Social</x:String>
+                              <x:String>Colegios Profesionales</x:String>
+                              <x:String>Consejo de Seguridad Vial</x:String>
+                              <x:String>Centros Educativos</x:String>
+                              <x:String>Ministerio de Hacienda</x:String>
+                              <x:String>Universidades</x:String>
+                              <x:String>INVU</x:String>
+                              <x:String>Cámaras</x:String>
+                              <x:String>Comerciales-Industriales-Venta Masiva</x:String>
+                              <x:String>Servicios Funerarios</x:String>
+                            </scg:List>
+                          </uix:NSelectItem.Items>
+                          <uix:NSelectItem.Target>
+                            <uix:TargetAnchorable BrowserURL="https://secure.lafiseenlinea.com/ebanking/ebanking.do?" DesignTimeRectangle="669, 615, 524, 25" ElementType="DropDown" FriendlyName="'Telefono,Luz,Agua,Inter…'" FullSelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl tableRow='2' tag='SELECT' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl type='' tag='SELECT' class='' aaname='' /&gt;" Guid="37455540-1989-42cc-94c3-391c16b4300e" InformativeScreenshot="cb3f0bb7e9ad3e658cc4deef23c237b2.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LAFISE - Banc@Net' /&gt;" SearchSteps="FuzzySelector" Visibility="Interactive">
+                              <uix:TargetAnchorable.Anchors>
+                                <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                  <uix:Target DesignTimeRectangle="313, 615, 356, 15" ElementType="Text" FriendlyName="'Tipo de Servicio'" FullSelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl tableRow='2' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl type='' tag='LABEL' class='' aaname='Tipo de Servicio' check:innerText='Tipo de Servicio' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAWgAAAATCAYAAAC9d5djAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAKESURBVHhe7Zo7buMwEEC32AO49ElyEXc+RFr3PoCbLVxnexe5gtsg8BmCADmDDdjgiqQoDqmhvYrlBRd6Ah4iicPhp3ga0PlxPB4NAADUB4IGAKiM0+lkLpcLggYAqAkr5/P5bA6HA4IGAKgJWzlbOc/n8yjo/fbJ/FwU2L779uavTDQ6b5tmvI3Za223cH3FnFc786HF3cWXeVk9mcXrl9ImuGcdADBp7LVcLs1sNtMraE3GVQva9Xs2L5/x3cfr8wMkjaAB4LHYy1bPgwT9T/im2HQZv5t1Jm0AgNqxl5Xztytof79z1aQ/Ukil6oT5l0cNLlcbu95mgv7cmUXIc022SgWtIceS67PvF83YbqzVb/Mrr5K7D0e/glZzZh+aIfsBANNmHEE3slm/ibYgnkROXmh5rg4ttnu2FXAcI5deTiJKJS6tslPR+r6xT16Rx7Wn/Yo55VyH7AcATJ5xBC0rQVfp+gq21/eKWK/G2ns5Riu3TthFvNjTalXpK/L35iHW4/vK+yBoed/2C4h1DNkPAIBxBJ20h/NeRVpFISmxTow+NjkWEKhCVPGi9vFC2gkFibbvXF87J61Kzit8SbfmIfsBAPDfVtAlvAT7opRyLMV4tPWG8ffNhyIKtp8zka/sW5L/lf0AABhH0OJHOfccZJoIyEusJ7+Ai83ydH2zCtV9BHTJ+mo75nFkudVz5fZZri0Sqm4p01TKxbNquQdD9gMAJs84gt5uxLGBlFh2PCEEpiFj/X9SiFytlLt2rVoNOBHG2HxOFjdvpV1br/6+XzUnOdWP1LD9AIBpc1PQtygJDQAA7gNBAwBUCoIGAKiUuwUNAACPAUEDAFRKFPTM/AHJF78DI+ErcwAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                                </scg:List>
+                              </uix:TargetAnchorable.Anchors>
+                            </uix:TargetAnchorable>
+                          </uix:NSelectItem.Target>
+                        </uix:NSelectItem>
+                        <uix:NSelectItem DisplayName="Select Item 'Tipo de Cobro'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NSelectItem_2" Item="Municipalidad de Tibas" ScopeIdentifier="20223950-bf1b-4149-add7-97782eae41ff" Version="V1">
+                          <uix:NSelectItem.Items>
+                            <scg:List x:TypeArguments="x:String" Capacity="43">
+                              <x:String>Municipalidad de Abangares</x:String>
+                              <x:String>Municipalidad de Alajuela</x:String>
+                              <x:String>Municipalidad de Belén</x:String>
+                              <x:String>Municipalidad de Cañas</x:String>
+                              <x:String>Municipalidad de Carrillo</x:String>
+                              <x:String>Municipalidad de Cartago</x:String>
+                              <x:String>Municipalidad de Curridabat</x:String>
+                              <x:String>Municipalidad de Desamparados</x:String>
+                              <x:String>Municipalidad de Coronado</x:String>
+                              <x:String>Municipalidad de Escazu</x:String>
+                              <x:String>Municipalidad de Goicoechea</x:String>
+                              <x:String>Municipalidad de Grecia</x:String>
+                              <x:String>Municipalidad de Heredia</x:String>
+                              <x:String>Municipalidad de la Unión</x:String>
+                              <x:String>Municipalidad de Liberia</x:String>
+                              <x:String>Municipalidad de Montes de Oca</x:String>
+                              <x:String>Municipalidad de Moravia</x:String>
+                              <x:String>Municipalidad de Paraíso</x:String>
+                              <x:String>Municipalidad de Oreamuno</x:String>
+                              <x:String>Municipalidad de San José</x:String>
+                              <x:String>Municipalidad de Santa Ana</x:String>
+                              <x:String>Municipalidad de Sn Pablo de Heredia</x:String>
+                              <x:String>Municipalidad de Sn Rafael de Heredia</x:String>
+                              <x:String>Municipalidad de Sto Domingo de Heredia</x:String>
+                              <x:String>Municipalidad del Guarco</x:String>
+                              <x:String>Municipalidad de Tibas</x:String>
+                              <x:String>Municipalidad de La Cruz</x:String>
+                              <x:String>Municipalidad de Parrita</x:String>
+                              <x:String>Municipalidad de Palmares</x:String>
+                              <x:String>Municipalidad de Pococi</x:String>
+                              <x:String>Municipalidad de San Carlos</x:String>
+                              <x:String>Municipalidad de Valverde Vega</x:String>
+                              <x:String>Municipalidad de Upala</x:String>
+                              <x:String>Municipalidad de Tilarán</x:String>
+                              <x:String>Municipalidad de Tarrazu</x:String>
+                              <x:String>Municipalidad de Talamanca</x:String>
+                              <x:String>Municipalidad de Siquirres</x:String>
+                              <x:String>Municipalidad de Sarapiqui</x:String>
+                              <x:String>Municipalidad de Santa Cruz</x:String>
+                              <x:String>Municipalidad de San Ramon</x:String>
+                              <x:String>Municipalidad de San Rafael Heredia</x:String>
+                              <x:String>Municipalidad de Poás</x:String>
+                              <x:String>Municipalidad de Garabito</x:String>
+                            </scg:List>
+                          </uix:NSelectItem.Items>
+                          <uix:NSelectItem.Target>
+                            <uix:TargetAnchorable BrowserURL="https://secure.lafiseenlinea.com/ebanking/ebanking.do?" DesignTimeRectangle="669, 649, 374, 25" ElementType="DropDown" FriendlyName="'Municipalidad de'" FullSelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='select1' tableRow='2' tag='SELECT' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='select1' type='' tag='SELECT' class='' aaname='' /&gt;" Guid="c676a225-92a1-42af-95e9-445c16b7ffd5" InformativeScreenshot="da397840b544a01c13f3d24433720754.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LAFISE - Banc@Net' /&gt;" SearchSteps="FuzzySelector" Visibility="Interactive">
+                              <uix:TargetAnchorable.Anchors>
+                                <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                  <uix:Target DesignTimeRectangle="313, 649, 356, 15" ElementType="Text" FriendlyName="'Tipo de Cobro'" FullSelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='label1' tableRow='2' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='label1' type='' tag='LABEL' class='' aaname='Tipo de Cobro' check:innerText='Tipo de Cobro' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAWgAAAATCAYAAAC9d5djAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAIsSURBVHhe7do9bsIwGIDhDj1TL5J7sLL3AKzMrEgZuAIr4hAIiTOwuYm/2PFnm/w0oXKlt9KjEmwSq8OLZfXj+XwaAEB5CDQAFIpAA0BhjsejRaABoDBtnNsfH+jz/st8Vi/srzLe/A5vsrrLrnnezpxzYxPcThu17ur0yM5LPcxhO2c+ALxPEuhQLsalB1q+YMLPXs335EgTaADlmB3oP/HbQN9rU1Ubc7hH70++H4EGUI5FO2h5XduoyXGCjqA6atjW5haMxWTnK773UVBteN14JsAd+7yR5wjZVfvnXdz7LtB1P+7vJ2OytuZ993eZuDYAmGt5oJswucDZaxc0tWuVuMX38nJz/bXE1Ed0YDecW28q2iXb+7mwumdH1/ae3Wv1BaDXJl9I+bUBwFzLAx0GKzhiSD47J6zh3Pa1iqKEst/19nLrTSTHIGGwwyB3434t4bx4rLuOv0wAYIEVjjjC8TZQbfymxMzJzLURlbnxf2Q4an5n0hFHso400Pm1pGPp8wg0gPX8wx30gGR3nHk/mTMSaL+WobHumkADWNEKZ9B97Oy1i6mKl8Qtvpdn50b38Z+NomcD+zqC+rOt+NlRaNWzu7nZdUefs/TaOIMGsKYVjjh2NlJy9KDjpI4nRnbB4dyquac74rDjXZT9uIpkSj03O1/C6sb72LsIv/4vjuReam3hzhwAlhkM9JhcwAEA6yDQAFAoAg0AhVoUaADA+xBoACiUBNqYH3J7TaX0U1t3AAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                                </scg:List>
+                              </uix:TargetAnchorable.Anchors>
+                            </uix:TargetAnchorable>
+                          </uix:NSelectItem.Target>
+                        </uix:NSelectItem>
+                        <uix:NSelectItem DisplayName="Select Item 'Servicio a pagar'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NSelectItem_3" Item="Patentes Municipales" ScopeIdentifier="20223950-bf1b-4149-add7-97782eae41ff" Version="V1">
+                          <uix:NSelectItem.Items>
+                            <scg:List x:TypeArguments="x:String" Capacity="5">
+                              <x:String>Servicio Urbanos</x:String>
+                              <x:String>Patentes Municipales</x:String>
+                              <x:String>Bienes Inmuebles</x:String>
+                              <x:String>Arreglo de Pago</x:String>
+                              <x:String>Pago Total</x:String>
+                            </scg:List>
+                          </uix:NSelectItem.Items>
+                          <uix:NSelectItem.Target>
+                            <uix:TargetAnchorable BrowserURL="https://secure.lafiseenlinea.com/ebanking/ebanking.do?" DesignTimeRectangle="373, 667, 225, 25" ElementType="DropDown" FriendlyName="'Patentes Municipales'" FullSelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='select2' tableRow='2' tag='SELECT' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='select2' type='' tag='SELECT' class='' aaname='' /&gt;" Guid="25151e0a-8324-410d-8d98-6c9e665e0f5d" InformativeScreenshot="4daa280f24d8bb73ea465159b759fca0.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LAFISE - Banc@Net' /&gt;" SearchSteps="FuzzySelector" Visibility="Interactive">
+                              <uix:TargetAnchorable.Anchors>
+                                <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                  <uix:Target DesignTimeRectangle="179, 667, 194, 15" ElementType="Text" FriendlyName="'Servicio a pagar'" FullSelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='label2' tableRow='2' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='label2' type='' tag='LABEL' class='' aaname='Servicio a pagar' check:innerText='Servicio a pagar' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMYAAAATCAYAAADLaHLBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAKaSURBVGhD7Zg9bgIxEIVT5ExchHvQ0nMA2tS0SBT0qWgRh4gi5Qx0jj3jmZ3x2ob8IBb0In3Fesb27Pq9nSUv5/M5AAA8MAYAFWAMAAzb7ZaAMQAwJFOkv5ExPvaL8DqfDbydXPxf+NyF+XwRNp+VmPIVNstZmO+/KjEAbkPVGGyKdTiYscPbDcwBY4CJUjVG1QQkYm8WAJ6VqzvGmFNYmU+t1TGPZwOtkrnS+Pu4K6jxyo5B17KmjI87Bs2XvF4Xc+t1cqWO/VpzfYfiGnQd92xsbBHvOz675S585Lir1d7rMe61jM+J5vrnA+5P4zdGIQRz0Dau4rECz2IchFUKmw1FRrLz7HjKS8IhAfr5ZFqth+d4EQs8zxu2IcBcs66br2Uu7ammulyPXpP4h2fnOjHdn6kPTIrmj29FRJOQQ6Wx8W8QEktFgE48Ke4EmHPVCMM8xgqxNFkpzA60ft8YVqROxA5rxp/Uw7neGJe6MrgXl40hWPHkt92IdOgVY7CYeCwJR4Vkci8JiucUXSXSM4b7jFnGfbvG8DFat3i7M3Gda+vJz8zOgzEeg4oxBhHbRCcCOvDGoVaNIR3lFEVuYja3KZRfdoyyjkZdQ6zVMco9r6+n7DruGsaYNNWOwW9af2h04DpWCoJNQ9ctAcpb1wjF5xZvX435vbwRzL6yplCIne+pbwytzc3l/b2g+/U4Y0is3APGmDTNTyk2QjxIQQ9fyCIQnKhqAiyEX8sV8WSsMK34WeTFvhVs3upY2V/IddB/lHK+M5uYOhH3o3V132wciq/DxhrF3k8cO9gYjDFprv+N8cw0zfxz6IXSMSt4DGCMxB+MkbrH0F06n3bgoYAxEn/pGPZzKYFu8RTAGABUgDEAqMDGCOEbmfAGilNDcAEAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                                </scg:List>
+                              </uix:TargetAnchorable.Anchors>
+                            </uix:TargetAnchorable>
+                          </uix:NSelectItem.Target>
+                        </uix:NSelectItem>
+                        <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Identificación*'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,216" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="20223950-bf1b-4149-add7-97782eae41ff" Text="[in_cedula_juridica]" Version="V1">
+                          <uix:NTypeInto.Target>
+                            <uix:TargetAnchorable BrowserURL="https://secure.lafiseenlinea.com/ebanking/ebanking.do?" DesignTimeRectangle="669, 673, 470, 27" ElementType="InputBox" FriendlyName="'INPUT input3'" FullSelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='input3' tableRow='2' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='input3' type='text' tag='INPUT' class='textfield_text' aaname='' /&gt;" Guid="767e5185-71f0-485a-9327-9428dcfb618b" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAdoAAAAfCAYAAABAtgwcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAACnSURBVHhe7dWxEYAgAMBA9x+FCemws1IbSPd/lxlyzTmXJElqMlpJksKe0Y4xJEnSgT5HCwDsMVoACBktAISMFgBCRgsAIaMFgJDRAkDIaAEgZLQAEDJaAAgZLQCEjBYAQkYLACGjBYCQ0QJAyGgBIGS0ABAyWgAIGS0AhIwWAEJGCwAhowWAkNECQMhoASBktAAQ+h2tJEna73W0kiTpfEYrSVLWXDfV7EDKsVLo6AAAAABJRU5ErkJggg==" InformativeScreenshot="393aa08beff67ab61a1f651792709f43.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LAFISE - Banc@Net' /&gt;" SearchSteps="FuzzySelector, Image" Visibility="Interactive">
+                              <uix:TargetAnchorable.Anchors>
+                                <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                  <uix:Target DesignTimeRectangle="313, 673, 356, 15" ElementType="Text" FriendlyName="'Identificación*'" FullSelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='label3' tableRow='2' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='formServiciosPublicosFilter' tag='TABLE' /&gt;&lt;webctrl id='label3' type='' tag='LABEL' class='' aaname='Identificación*' check:innerText='Identificación*' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAWgAAAATCAYAAAC9d5djAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAJYSURBVHhe7ZoxTgMxEAApeBMfuX/Qps8D0oaWNhIFX6CNeASKlDekM7e2927X8SUHOogRgzRC9sbrvSvGGyt3p9MpAABAeyBoAIBGQdAAAI2x2+0iCBoAoDFEzvJnBH0Mz6uH0L0e3QdH3sO6ewjrfS32TQ4voesew/MhjT9eH8N9v8d9twlP2/7/9v18zQK8TeSO86uX8FHMTyPvbBPeqjEAgO9xM0E7OTpB+/xTEl2Cam6p5Sty3m96mW/CWvjBWgHg/9GGoB2Sf+ym/wTxgFn4WwUA/HvmCVq6xHjlIFLtO0UroyynFDdizV3xeqvXFbI2CXm8wshzQwed5K8xqaEUeRzbtXne1ZjXDrF8qGhsqjt3ddkuOubOHXKOj/n1QJH39scOFgBomhmC9h2zSiyNfUxFFu9iVdwqwKLLdHIcBC0xn9N+Lu49iNPWqZJMa1wd5fOYvVwNlTU+ZnLEMTIGgJ/luqCduAQjUIm5+9q0NsacdIVp8c4TdFHXBdIhYg+KukxtDa4ewT53+Q4u5AQAWIqrgvZd6xgXgborAUNcu7ig/bwn1TTsvzKCPjtgRi7KH0EDwI1ZuIM2LC7oikSVskY7viBTW4OrR7A5yvwIGgB+gdl30F7YKtCiq43iyuPFBX3ezQ+xWJOu125ahVp/HsnvanASzjmqsR4EDQC/wAxB92TxxiuE+JvfcykP1wu67oqgVfRRuDMFPYzzXqOsVcpCn2df31vXaY1lbndlY78ZIGgAuAEVQQMAQAsgaACARkHQAACNgqABABoFQQMANEoSdAifyZ4fFPBMzB8AAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                                </scg:List>
+                              </uix:TargetAnchorable.Anchors>
+                            </uix:TargetAnchorable>
+                          </uix:NTypeInto.Target>
+                        </uix:NTypeInto>
+                        <uix:NClick ClickType="Single" DisplayName="Click 'CONSULTAR'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="20223950-bf1b-4149-add7-97782eae41ff" Version="V1">
+                          <uix:NClick.Target>
+                            <uix:TargetAnchorable BrowserURL="https://secure.lafiseenlinea.com/ebanking/ebanking.do?" DesignTimeRectangle="844, 801, 81, 45" ElementType="Button" FriendlyName="'CONSULTAR'" FullSelectorArgument="&lt;webctrl tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='BUTTON' type='button' class='btnStyle' aaname='CONSULTAR' check:innerText='CONSULTAR' /&gt;" Guid="667e1e7e-fbf7-4ba5-9d3c-b4047330a3a3" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFUAAAAxCAYAAACrkOUWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAQ+SURBVHhe7ZvLb1VVFIcd+F8o/4HKzIQwB2QI6kRRdCDyMCGaABYxYeADjAkaeShEGh6mAREJSGtvvRZq06SDTjpo06SDDpomTdNBk6bDbb4N62Td3bXKucc6Wzv5cvZer7Pv7+7sfXvv6XMp2qa3EPV/aKaoa2traWZmJo2NjaWhoaHUarWCp6AHuqAPOlltnajz8/M5cWpqKi0tLaXV1dWcHDwBPdAFfdAJvcrWISoBo6OjOckqGHSCTuhVCluJShDKh6DdgV7oRl9aJSp7BEu6TAqeDbqhn7RKVDbfWKXNQDf0k1aJyhKOQ6kZ6IZ+0ipR+bhgJQT1QD9pIeom4YrKMg6a4Yq6srISNMQVdXl5OWiIK+ri4mLQEFfUhYWFoCGuqHNzc0FDXFFnZ2eDhriiTk9PBw1xRZ2cnAwa4oo6MTERNMQVdXx83GXwUTtt/ejN9PzeVzP0sXn+Le/vSrf771f+/WdPdth+vHMzx3GVGLGV+VwZS+zj0X/S7lOHMvQ/v/LduvnoWhrJIYY5YdNz0HYNNh1T4orK11cW/e1WeuXIG+ndMz2VjT42fJb/1OVz6cX3dqa+B79X8Uzutc8Opr8fP0oXb1/PY674seEjTvoSSw1qlbHi514yF7m/IHMjxrIzBz1vYCy1GZf3t3BFHRkZMem59G16+fDr6UFrwPVz05v37lS2VvuvtOvkh2nfVyfymKu86z/09Wakj5/a3EPiNdSlvsRKbaC/0fykLjHaLnPec/roulzmILUZezU0rqjDw8Mmb395PO3sOZAGWoNd+bWd/vZP3slgO9N7KYv6/S8/V/EnLnyTbS/s35Gu/XarstPHJrHUo4bUJu+lQ3vTvYE/qhwBGz5ixKbzf7p1o6M2lK8HXznXElfUdrtt8tYXx9KOTz9I/YN/duXXdul/ffVinuC2j/fl67kbVzpy7j68n0XAJ7m9v/blFy6x2PCJ//j5szmHXF1L1yNGbLpeWQs/c+X+Gp1v0fVK3WgliL9cXbIaeNcZy7tPDa4yWe/d1zW9lSq1u12p9LVgoOevV2qdVQquqNZeAdZ+R1/2IvHrfajcZ/U+JXskk5V9Umyyb1n15f4ylliuEstYU8aWtcC6t34tjPVrsXBFtU41QZ+WUJ62pZ9JyMkP5Ykqnwb0icoJLfmlT05g8elaZZ72l6c/NfHr2sQRLznlXKWGtpW4olqfv4J6uKJafykE9XBFtf6mDerhimp9+xLUwxXV+p4wqIcrqvWNdlAPV1Trt5egHq6o1q+EQT1cUa3fs4N6uKJaT14E9XBFtZ4RCuphihrPpzYH3cznU/lSIJ6kbob7JHU8898c95l/nCzhWK3dgV7oRl9aJSot/o+qO9Bpw/+jkkYAyrOkSYrDqxP0QBf0QadSUNo6UWkks0ew+ZLIx4XgCeiBLuiDTlYzRY3231qIuuktpX8BCs5zTKv3PjgAAAAASUVORK5CYII=" InformativeScreenshot="15d12da0fcc3740bfef99453203f84bc.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LAFISE - Banc@Net' /&gt;" SearchSteps="FuzzySelector, Image" Visibility="Interactive">
+                              <uix:TargetAnchorable.Anchors>
+                                <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                  <uix:Target DesignTimeRectangle="940, 801, 137, 45" ElementType="Button" FriendlyName="'LIMPIAR FORMULARIO'" FullSelectorArgument="&lt;webctrl id='btnLimpiar' tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl id='btnLimpiar' tag='BUTTON' type='button' class='btnStyle' aaname='LIMPIAR FORMULARIO' check:innerText='LIMPIAR FORMULARIO' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector, Image" />
+                                </scg:List>
+                              </uix:TargetAnchorable.Anchors>
+                            </uix:TargetAnchorable>
+                          </uix:NClick.Target>
+                        </uix:NClick>
+                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Boolean">[exitoso]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                          </ActivityAction.Argument>
+                          <Sequence sap:VirtualizedContainerService.HintSize="376,283" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;Ha ocurrido un error al seleccionar los tipos de servicio: &quot;+exception.Message]" />
+                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Boolean">[exitoso]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
+                </Sequence>
+              </ui:InterruptibleDoWhile.Body>
+            </ui:InterruptibleDoWhile>
+            <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="1153,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+            <ui:UiElementExists DisplayName="Element Exists 'DIV'" Exists="[alertExist]" sap:VirtualizedContainerService.HintSize="1153,106" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+              <ui:UiElementExists.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3565ff63-f2bd-4469-ad6a-09f0390b2509" InformativeScreenshot="c83bf699f9bee88bc6d50b7f78d0f763" Selector="&lt;webctrl aria-role='dialog' idx='2' tag='DIV' /&gt;" TimeoutMS="7500">
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:UiElementExists.Target>
+            </ui:UiElementExists>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1153,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Existe alerta: &quot; + alertExist.ToString]" />
+            <If Condition="[alertExist]" sap:VirtualizedContainerService.HintSize="1153,1446" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="554,936" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Int32" Default="0" Name="count" />
+                    <Variable x:TypeArguments="x:Boolean" Name="succesfull" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="512,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;La cuenta impuestos y servicios municipales no tiene pendientes para &quot; +in_sociedad]" />
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="512,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                    <ui:MultipleAssign.AssignOperations>
+                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:Int32">[count]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:Boolean">[succesfull]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                      </scg:List>
+                    </ui:MultipleAssign.AssignOperations>
+                  </ui:MultipleAssign>
+                  <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[succesfull.Equals(False) And count &lt;=5]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="512,540" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+                    <ui:InterruptibleDoWhile.Body>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,375" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[count]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[count+1]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="434,183" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                          <TryCatch.Try>
+                            <Sequence sap:VirtualizedContainerService.HintSize="376,348" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <uix:NClick ClickType="Single" DisplayName="Click 'Aceptar'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_5" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="20223950-bf1b-4149-add7-97782eae41ff" Version="V1">
+                                <uix:NClick.Target>
+                                  <uix:TargetAnchorable BrowserURL="https://secure.lafiseenlinea.com/ebanking/ebanking.do?" DesignTimeRectangle="1176, 654, 112, 36" ElementType="Text" FriendlyName="'Aceptar'" FullSelectorArgument="&lt;webctrl aaname='Aceptar' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Aceptar' tag='SPAN' type='' class='ui-button-text' check:innerText='ACEPTAR' /&gt;" Guid="31b2fbf9-8828-45dd-acef-ff540ee87574" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAHQAAAAoCAYAAAAv1t6rAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAARMSURBVHhe7ZtLS1tBFMe7yGdy7aP9BK61uqhaH13Z2hbUGHWj1ld9tXRRNdZHkdaYaNNKfQafKKKIIiqiiKioIK5P772ZO3fuPTPXJN4uBkb4Le6Z/zlzzvxDMgn4BLS/ra0tuL+/V0iM7qH+Rw29u7tTSAwy9Pb2ViExyNDr62uFxCBDLy8vFRKDDD0/P1dIDDL07OxMITHI0JOTE4XEIEOPjo4UEoMMPTg4UEgMMnRvb08hMcjQnZ0dhcQgQxXyYzN0Y2NDITHI0LW1NY8ZgdLsNPCZ1I9wNAzf31tak1ftEGU1U+3wzKlB5EP9VAJaW+2/UP+Ko3FCcqI9+Uyc7EdrEXjz2BDkpQgydGVlxVuG36EB6v5wdCtTUFfG6jAlw0T7pw2ectbtkH0S0Za1wWSCPRgYeo62bpiZh4Dm5yE6k+RBhi4tLXnKl1rSdG0LBMgBZHX9RrpIVx4dsHiIWYu2QBaJ+7LfwhdbLA8CUUbLw0079JbUdexp4pbLrnWZdUh/LHQPXq+DUGysadQOOtZSAxkai8U8ZACKSMNF32IQ6ngeb760GUICXWbHJBMnfKvQ1irgs/k80QyZhv45+CcYHQ9X7QP7uuTaZ7HPyerivYv2j8HnQDzPFxhAa6mADJ2fn/eO4BsyzBvo0Z8jTfSAqiM8nSMuQlSHh4t27CMxRaMwaF8zEOZOQHVpPC/z44QR66mJP/tq+hmdhuts/VBorFl1HgsydHZ21jO6/WRIfx+JhaGqxBnT6H9Nhn4N3WbMjfFGyCAHIcSsn4i2pBF+OPew5eZC1fgDcTqDQ0vjbiQ4dwIgQ6enpz3iK7wgDb/oteKjrTlkiHLoNLW95TjmxlgDpJPaQvxfE9Kmt4ZwfROamwOVY1aczlDSAKNUb81rq0ln48OejRf8P0MfGESHDkO19oMTIjhoLslonXBzQ1BpvsuIYI3mzGa9qDXMF55HIENnZmY8YPzhoXX8vUTfS1/dGW3jTB1Cn/62lQuVIfIcaqBveTQmIhmtE16u0Uu8VzE8vX3/LvPjSIM7c4ogQ+fm5h5PuIkchNZsewSt/2zPpUNWh52xNCgIMnqmlv5Z02OLWflCktE64eTSy4/Zi41+KDDWNLTLkRELWoba94/Qi1VKvQlAhi4sLDyaEL09alf1CEcT+UBuj/rtbpLEJ8FPB+RTOIDz3TD0VCvoxQ2UG6S3Ul8giPUan8yvIdrN/pMeG7BuuWh/dg5BvWRBhi4uLj6SKP0BwVfWAuFkNYPWl30L7Qs7q/nF/tgg5uUgq9W+2P9iaiSCM5fpzajNy3Fq6DN//3Cn9YOKsGYSIEOXl5cVEoMMXV1dVUgMMnR9fV0hMcjQzc1NhcQgQ7e3txUSgwzd3d1VSAwydH9/XyExyNDDw0OFxCBDj4+PFRKDDD09PVVIDDKU9y9qCnlAhl5cXCgkBhl6dXWlkBhk6M3NjUJi4oYC/ANK9hvP1+8EhAAAAABJRU5ErkJggg==" InformativeScreenshot="1b2292f16096e26cb58b4651d4d6630a.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LAFISE - Banc@Net' /&gt;" SearchSteps="FuzzySelector, Image" Visibility="Interactive">
+                                    <uix:TargetAnchorable.Anchors>
+                                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                        <uix:Target DesignTimeRectangle="1175, 638, 115, 68" ElementType="Button" FriendlyName="'Aceptar'" FullSelectorArgument="&lt;webctrl aria-role='button' tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl aria-role='button' tag='BUTTON' type='button' class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only' aaname='Aceptar' check:innerText='ACEPTAR' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector, Image" />
+                                      </scg:List>
+                                    </uix:TargetAnchorable.Anchors>
+                                  </uix:TargetAnchorable>
+                                </uix:NClick.Target>
+                              </uix:NClick>
+                              <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Boolean">[succesfull]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </Sequence>
+                          </TryCatch.Try>
+                          <TryCatch.Catches>
+                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ActivityAction x:TypeArguments="s:Exception">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                </ActivityAction.Argument>
+                                <Sequence sap:VirtualizedContainerService.HintSize="376,283" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:Boolean">[succesfull]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;Error al hacer click en boton alerta, intento: &quot;+count.ToString +exception.Message]" />
+                                </Sequence>
+                              </ActivityAction>
+                            </Catch>
+                          </TryCatch.Catches>
+                        </TryCatch>
+                      </Sequence>
+                    </ui:InterruptibleDoWhile.Body>
+                  </ui:InterruptibleDoWhile>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="554,1287" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="sd:DataTable" Name="dtRecibos" />
+                    <Variable x:TypeArguments="x:Boolean" Name="succesfullyExtraction" />
+                    <Variable x:TypeArguments="x:Int32" Name="count" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="512,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+                    <ui:MultipleAssign.AssignOperations>
+                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:Boolean">[succesfullyExtraction]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:Int32">[count]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                      </scg:List>
+                    </ui:MultipleAssign.AssignOperations>
+                  </ui:MultipleAssign>
+                  <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="512,871" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
+                    <ui:InterruptibleDoWhile.Body>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,706" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[count]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[count+1]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="434,514" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                          <TryCatch.Try>
+                            <Sequence sap:VirtualizedContainerService.HintSize="376,348" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[dtRecibos]" DisplayName="Extract Table Data" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Table'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Recibo' ReferenceIdx='0' Name='Recibo'&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Recibo Url' ReferenceIdx='1' Name='Recibo Url' IsDeleted='true'&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Período' ReferenceIdx='2' Name='Período'&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Monto' ReferenceIdx='3' Name='Monto'&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Vencimiento' ReferenceIdx='4' Name='Vencimiento'&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Número de factura' ReferenceIdx='5' Name='Número de factura'&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract-table get_columns_name='1' get_empty_columns='1' columns_name_source='Longest'&gt;&lt;column name='Recibo' attr='text' name2='Recibo Url' attr2='href' /&gt;&lt;column name='Período' attr='text' /&gt;&lt;column name='Monto' attr='text' /&gt;&lt;column name='Vencimiento' attr='text' /&gt;&lt;column name='Número de factura' attr='text' /&gt;&lt;/extract-table&gt;" ExtractSimilar="True" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NExtractData_2" LimitExtractionTo="Rows" MaximumResults="0" ScopeIdentifier="20223950-bf1b-4149-add7-97782eae41ff" Version="V1">
+                                <uix:NExtractData.Target>
+                                  <uix:TargetAnchorable DesignTimeRectangle="40, 606, 1837, 90" FriendlyName="'Recibo Período'" FullSelectorArgument="&lt;webctrl parentid='formServicioPublicoBNCRConsult' tag='TABLE' /&gt;&lt;webctrl tableRow='2' tag='TABLE' /&gt;" Guid="6cfac0f8-f579-4325-a790-e795cf502f81" InformativeScreenshot="3725df9a9cc996f7b63ac8cd45de3b03.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LAFISE - Banc@Net' /&gt;" SearchSteps="Selector" Visibility="Interactive" />
+                                </uix:NExtractData.Target>
+                              </uix:NExtractData>
+                              <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Boolean">[succesfullyExtraction]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Boolean">[dtRecibos.Rows.Count &gt;0]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </Sequence>
+                          </TryCatch.Try>
+                          <TryCatch.Catches>
+                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,352" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ActivityAction x:TypeArguments="s:Exception">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                </ActivityAction.Argument>
+                                <Sequence sap:VirtualizedContainerService.HintSize="376,283" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;Error al extaer la tabla: &quot;+ exception.Message]" />
+                                  <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="x:Boolean">[succesfullyExtraction]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                </Sequence>
+                              </ActivityAction>
+                            </Catch>
+                          </TryCatch.Catches>
+                        </TryCatch>
+                      </Sequence>
+                    </ui:InterruptibleDoWhile.Body>
+                    <ui:InterruptibleDoWhile.Condition>
+                      <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="succesfullyExtraction.Equals(False) And count &lt;=5" />
+                    </ui:InterruptibleDoWhile.Condition>
+                  </ui:InterruptibleDoWhile>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke save_data workflow" sap:VirtualizedContainerService.HintSize="512,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Proccesses\save_data.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_sociedad">[in_sociedad]</InArgument>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="dt_recibos">[dtRecibos]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_obligacion">Patentes municipales (banco)</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_cedula_juridica">[in_cedula_juridica]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </If.Else>
+            </If>
+            <uix:NClick ClickType="Single" DisplayName="Click 'LAFISErvicios'" sap:VirtualizedContainerService.HintSize="1153,156" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="20223950-bf1b-4149-add7-97782eae41ff" Version="V1">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://secure.lafiseenlinea.com/ebanking/ebanking.do?" DesignTimeRectangle="745, 322, 210, 60" ElementType="ListItem" FriendlyName="'LAFISErvicios'" FullSelectorArgument="&lt;webctrl idx='3' tag='LI' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' tag='LI' class='liMenu' aaname='                             LAFISErvicios                         ' check:innerText='LAFISErvicios' /&gt;" Guid="479112eb-2c51-436c-a56e-6332f6f49464" ImageBase64="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" InformativeScreenshot="e687fa6639f0e02bfc8413b0c3ff13c5.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LAFISE - Banc@Net' /&gt;" SearchSteps="FuzzySelector, Image" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                      <uix:Target DesignTimeRectangle="532, 322, 210, 60" ElementType="ListItem" FriendlyName="'Administración'" FullSelectorArgument="&lt;webctrl idx='2' tag='LI' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' tag='LI' class='liMenu' aaname='                             Administración                         ' check:innerText='Administración' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector, Image" />
+                      <uix:Target DesignTimeRectangle="958, 322, 210, 60" ElementType="ListItem" FriendlyName="'Pag@Net'" FullSelectorArgument="&lt;webctrl idx='4' tag='LI' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' tag='LI' class='liMenu' aaname='                             Pag@Net                         ' check:innerText='Pag@Net' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NClick.Target>
+            </uix:NClick>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-1928, -8, 1936, 1056" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAKcSURBVDhPdZNdSFNhGMd3n95221WQXXVdGRR06ZVBF2oXGaFWvDRTq9lmzunUua2zL3fmpm5z7jOnlokLLViQCSFISB9qJRZmFhopm23/nvdVKb8O/Dnwfx9+53n+z3sUrK2ead0SM/hlZot6mS3iZfUdD5jaZWKNnTYmhbuZJdTNDD6Z6ixMI5uYhTyJvBafkylKNEqUN6uwtPIT428mkRhPQuUwoERzE1VSI1z9QcjxIO46WlHaUE2+Eo6HPQg/HUKluQGKIjJeTr3GejqNTDaDbDaLVDqF2YV5aNqNcA2E4OIAOwdUCUB09Aku1SnBjPVQFJOh67ThvsuM2S/zBMmCP+8/zcE/1Ievy0voezYiAJepA95Fub4WZc33cMusgxiBH6hlI4aSo0hvbAgAB/1aW0P8eYI6CEFlN+D8tSJo3VZoPZsyBTwEqKv8B3gxhvVUSozxJ5NBcHhAtM8zKKwpgxTuginohnFL9qhvJ4AH1jMcx+Lyd6hsLWCGOsjktfk76GtumHo9QsYt2SP7ADooNJ5+OPEIzlgAE9NTsEa8sAh1Q4rSe0u8fheglxTC1cY7Yo2JV0lYw14sfFsU2UzPfkATzV6hV5FqcVvS7+1gG3C9VS2KuKbnZpDJZEWwWVr16tpvGrUfNVLT/oD8KxdoTXxVm6poUWNq5q0Il4uD3LQZJb9Iu0coUJaKDP5XtaSDsy8gNsM78T6Oka+DxmnaBPDLwQFaj0Qp87Qp9R1yIzgyKADJyQlIoS7htdOVFoBiCowXmGk1B6lzMIIfqysiVL5K7jmifiguqm4gNjYMW8wHa8x7oPgP9O7zR9jo8mx7cjwARW7+cZZzKo/lns5jOfmkM3vFz7iOFp5lRwpOUt0xdoh0+NwJ9hcwE7nonoiAUwAAAABJRU5ErkJggg==" InformativeScreenshot="558f137f65e030289cc897337d21105b.png" Selector="&lt;html app='chrome.exe' title='LAFISE - Banc@Net' /&gt;" Url="https://secure.lafiseenlinea.com/ebanking/ebanking.do?" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>

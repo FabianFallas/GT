@@ -1,0 +1,234 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Descarga_Reportes_Memorizados" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_sociedad" Type="InArgument(x:String)" />
+    <x:Property Name="in_to_date" Type="InArgument(s:DateTime)" />
+    <x:Property Name="in_from_date" Type="InArgument(s:DateTime)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1205,2557</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Descarga_Reportes_Memorizados_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Descarga_Reportes_Memorizados" sap:VirtualizedContainerService.HintSize="646,2492" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary (Of String, String) From &#xA;{&#xA;{&quot;DICOMA&quot;,&quot;08 - 114241 · IVA 13%&quot;},&#xA;{&quot;REFRIGERACION&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;MAQUINARIA&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;SOLID&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;SEL&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;KEYBUSINESS&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;KEYPLANNING&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;BRICK&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;FRATERNA&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;FORZALAB&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;GOLDENSEED&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;FARO&quot;,&quot;08 - 114241 - IVA 13%&quot;},&#xA;{&quot;COISA&quot;,&quot;08 - 114241 - IVA 13%&quot;}&#xA;}]" Name="dictionary_08" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary (Of String, String) From &#xA;{&#xA;{&quot;DICOMA&quot;,&quot;13 - 114251 · IVA 13%&quot;},&#xA;{&quot;REFRIGERACION&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;MAQUINARIA&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;SOLID&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;SEL&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;KEYBUSINESS&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;KEYPLANNING&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;BRICK&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;FRATERNA&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;FORZALAB&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;GOLDENSEED&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;FARO&quot;,&quot;13 - 114251 - IVA 13%&quot;},&#xA;{&quot;COISA&quot;,&quot;13 - 114251 - IVA 13%&quot;}&#xA;}]" Name="dictionary_13" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary (Of String, String) From &#xA;{&#xA;{&quot;DICOMA&quot;,&quot;09 - 114242 · IVA 4%&quot;},&#xA;{&quot;REFRIGERACION&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;MAQUINARIA&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;SOLID&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;SEL&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;KEYBUSINESS&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;KEYPLANNING&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;BRICK&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;FRATERNA&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;FORZALAB&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;GOLDENSEED&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;FARO&quot;,&quot;09 - 114242 - IVA 4%&quot;},&#xA;{&quot;COISA&quot;,&quot;09 - 114242 - IVA 4%&quot;}&#xA;}]" Name="dictionary_09" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary (Of String, String) From &#xA;{&#xA;{&quot;DICOMA&quot;,&quot;14 - 114252 · IVA 4%&quot;},&#xA;{&quot;REFRIGERACION&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;MAQUINARIA&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;SOLID&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;SEL&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;KEYBUSINESS&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;KEYPLANNING&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;BRICK&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;FRATERNA&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;FORZALAB&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;GOLDENSEED&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;FARO&quot;,&quot;14 - 114252 - IVA 4%&quot;},&#xA;{&quot;COISA&quot;,&quot;14 - 114252 - IVA 4%&quot;}&#xA;}]" Name="dictionary_14" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dictionary_22">
+        <Variable.Default>
+          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="New Dictionary (Of String, String) From &#xD;&#xA;{&#xD;&#xA;{&quot;DICOMA&quot;,&quot;61301 - IVA_Construccion&quot;},&#xD;&#xA;{&quot;REFRIGERACION&quot;,&quot;22 - 61301 · IVA Construcción&quot;},&#xD;&#xA;{&quot;MAQUINARIA&quot;,&quot;&quot;},&#xD;&#xA;{&quot;SOLID&quot;,&quot;22 - 61301 · Imp.Vts. Construcción&quot;},&#xD;&#xA;{&quot;SEL&quot;,&quot;22 - 61301 · Imp.Vts. Construcción&quot;},&#xD;&#xA;{&quot;KEYBUSINESS&quot;,&quot;22 - 61301 · Imp.Vts. Construcción&quot;},&#xD;&#xA;{&quot;KEYPLANNING&quot;,&quot;22 - 61301 · Imp.Vts. Construcción&quot;},&#xD;&#xA;{&quot;BRICK&quot;,&quot;22 - 61301 · Imp.Vts. Construcción&quot;},&#xD;&#xA;{&quot;FRATERNA&quot;,&quot;22 - 61301 · IVA  Construcción&quot;},&#xD;&#xA;{&quot;FORZALAB&quot;,&quot;22 - 61301 · Imp.Vts. Construcción&quot;},&#xD;&#xA;{&quot;GOLDENSEED&quot;,&quot;22 - 61301 · Imp.Vts. Construcción&quot;},&#xD;&#xA;{&quot;FARO&quot;,&quot;22 - 61301 · Imp.Vts. Construcción&quot;},&#xD;&#xA;{&quot;COISA&quot;,&quot;22 - 61301 · Imp.Vts. Construcción&quot;}&#xD;&#xA;}" />
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[New Dictionary (Of String, String) From &#xA;{&#xA;{&quot;DICOMA&quot;,&quot;18 - 11426 · IVA sujeto a proporcionalidad&quot;},&#xA;{&quot;REFRIGERACION&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;MAQUINARIA&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;SOLID&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;SEL&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;KEYBUSINESS&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;KEYPLANNING&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;BRICK&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;FRATERNA&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;FORZALAB&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;GOLDENSEED&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;FARO&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;},&#xA;{&quot;COISA&quot;,&quot;18 - 11426 IVA SUJETO A PROPORCIONALIDAD&quot;}&#xA;}]" Name="dictionary_18" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="604,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Proccess\LimpiarDirectorios.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_sociedad_actual">[in_sociedad]</InArgument>
+        <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date_actual">[in_to_date]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:BlockUserInput TimeoutMS="{x:Null}" BlockType="All" DisplayName="Block User Input" sap:VirtualizedContainerService.HintSize="604,2248" sap2010:WorkflowViewState.IdRef="BlockUserInput_1" KeyModifiers="Alt" SpecialKey="True">
+      <ui:BlockUserInput.Body>
+        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="568,2122" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <uix:NApplicationCard WebDriverMode="{x:Null}" AttachMode="ByInstance" DisplayName="Use Application: DICOMA  - Intuit QuickBooks Enterprise Solutions 22.0(multi-user)(User01)" sap:VirtualizedContainerService.HintSize="526,757" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="cd183f94-8666-4f49-a251-02fc697ff50f" Version="V2">
+            <uix:NApplicationCard.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,468" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NClick ClickType="Double" DisplayName="Click 'Search types'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_1" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="cd183f94-8666-4f49-a251-02fc697ff50f" Version="V1">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable DesignTimeRectangle="7, 7, 22, 22" FriendlyName="'System'" FullSelectorArgument="&lt;ctrl automationid='MenuBar' /&gt;&lt;ctrl name='System' role='menu item' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='MenuBar' /&gt;&lt;ctrl name='System' role='menu item' automationid='' check:text='System' /&gt;" Guid="95effcad-e95f-40dd-8a29-6d67463db1b4" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAPESURBVEhL3dXtT1NXHAfw/h209Lm0vW2ZQwRK6aC0IKVAkUKpUIfRuNCIIApxe6Esui3gQ4wSnUwelIAP+IhuZEjEZjifIln2YtlDFhXUIMn+A5Z8/d3TA9fGC2Yv+mZNvmnvyT3nc87vnHur+P9+lpb+xcLiP5h//SYl4YxCISLb9x2FL9qZknBGoRBVsUFT0PB+3JuhKYpA66mnb4p4LXffGuGMPGT0RGGsDMHQ5IWpMxvmrkxkfJEF42efQB+qgLk0Cu07968VznCosQMaF82WkuGPILPNB/sxK4SzSggDaVL66bpXj3UHXBDCIWjdNBjvt1o4kwwZSuvYzIU+dRLgGEyH+0ImHEO8vT8N1h4LDLQ63QcwzkiQydsIe4cbwneqJERM/qgdfb+cQOmYU2qn1dm67bAEw7LAcjgjQfbGEGy9RjZI1nkDNtKgVdeKWMTf0y8m0fRDCGVjLrhG7LANUhnPqvDRnhJoCyOyiBjOJCBvlFbUnsNmWXjhY5yaPYb7L+OYXXiCXxdn0TK1FdNzd9A104mpZxMY/+sqGm5VwT6oguVwBjTeENSuiGw4w1e0rQ3mrwTW8cjjg5iZn0Zs8lOEx/0E3sPe6RiDorerqa0cY7+PYOLvm3COCLB+q4auulwWEcOZBFQS2wnLURM2DGfQAOPYF98F24CSBrJh6vnEChS5FWCl9V8pwP35OILXi+ngqKBv8sgiYjjDoeYWBmUPm6gsV/B5vJWtbjWo8moRfqbSivv3nyDfVirdQRvb4AO0Dw9e/cS+a29uXIHic1PYP9OB5sktuP7nJdz44xKrgPU0lS7ohzq/Xjac4YehYS9MrbnsFLlGHTjxtAd3n/+InkdfMmj33R1sXx6/foAZ2rPR34aw6UYJK6/5Gws0HjoMMogYzkiQEK6B7WTieK8b0sJzMYuOcj4mn32PbRNhdi0ec9/lHLYS9iz1pcOxy0dvCCqTDCKGMxKko5emtb0AVurMBhHBczp0P+xCDc1+uS0phxwwBmpkgeVwRoI01Kj30iuonUp4RnoF5QybGZgEUIktXwswVFewfmpneNVwhqBXb1C8eTfS82pZ9MUhWGOFELrpGTkjrS4BKGE5boCt0wljRRUNlOizVjgjQgsEtUGdRxvKo3PVQV9WCV29B4bmXBj30F9Eazb0W9zQBfwwFtJs37k/XUxujWw4o1DMEeSpb4UqZ5N88qqhcgYTyaXfcvesEc5wKNwC5YZgSsIZDtXthDK7KiXhTAIqqoshbX1FSsIZDtUSlBVIQQJ4C1uToOQXFXFmAAAAAElFTkSuQmCC" InformativeScreenshot="6c7ab7504cca21b651a395b9549098de.png" ScopeSelectorArgument="&lt;wnd app='qbw.exe' cls='MauiFrame' title='DICOMA  - Intuit QuickBooks Enterprise Solutions 22.0(multi-user*' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Visibility="Interactive">
+                        <uix:TargetAnchorable.Anchors>
+                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                            <uix:Target DesignTimeRectangle="13, 67, 166, 24" FriendlyName="'Search types'" FullSelectorArgument="&lt;wnd cls='Afx:*' title='eco box1' /&gt;&lt;wnd cls='HwndWrapper*' title='QB WPF Host' /&gt;&lt;ctrl automationid='SearchBox' /&gt;" FuzzySelectorArgument="&lt;wnd cls='Afx:*' title='eco box1' /&gt;&lt;wnd cls='HwndWrapper*' title='QB WPF Host' /&gt;&lt;ctrl automationid='SearchBox' role='combo box' check:fulltext='Search types' /&gt;" ImageBase64="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" SearchSteps="Selector, FuzzySelector, Image" />
+                          </scg:List>
+                        </uix:TargetAnchorable.Anchors>
+                      </uix:TargetAnchorable>
+                    </uix:NClick.Target>
+                  </uix:NClick>
+                  <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="334,178" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_1" Shortcuts="[d(hk)][d(alt)][u(alt)][u(hk)][d(hk)]w[u(hk)][d(hk)]a[u(hk)]" Version="V1" />
+                </Sequence>
+              </ActivityAction>
+            </uix:NApplicationCard.Body>
+            <uix:NApplicationCard.TargetApp>
+              <uix:TargetApp Area="-7, -7, 1935, 1175" FilePath="C:\Program Files\Intuit\QuickBooks Enterprise Solutions 22.0\qbw.exe" IconBase64="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" InformativeScreenshot="b8cae8b7abdc8a7c6fbc54326d985110.png" Selector="&lt;wnd app='qbw.exe' cls='MauiFrame' title='DICOMA  - Intuit QuickBooks Enterprise Solutions 22.0(multi-user*' /&gt;" />
+            </uix:NApplicationCard.TargetApp>
+          </uix:NApplicationCard>
+          <Sequence DisplayName="Descaga de los reportes" sap:VirtualizedContainerService.HintSize="526,964" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Descargar reporte - 61301 - IVA Construccion" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Proccess\Quickbooks\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">[dictionary_22.Item(in_sociedad)]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reports\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">61301 - IVA Construccion</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Descargar reporte - 114241 - IVA 13%" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Proccess\Quickbooks\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">[dictionary_08.Item(in_sociedad)]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reports\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114241 – IVA 13</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Descargar reporte - 114242 - IVA 4%" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Proccess\Quickbooks\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">[dictionary_09.Item(in_sociedad)]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reports\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114242 - IVA 4</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Descargar Reporte - 114251 - IVA 13%" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Proccess\Quickbooks\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">[dictionary_13.Item(in_sociedad)]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reports\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114251 - IVA 13</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Descargar Reporte - 114252 - IVA 4%" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Proccess\Quickbooks\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">[dictionary_14.Item(in_sociedad)]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reports\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">114252 - IVA 4</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Descargar reporte - 11426 - IVA Sujeto Proporcionalidad" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Proccess\Quickbooks\Descargar Memorized Report.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report_quickbooks">[dictionary_18.Item(in_sociedad)]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_from_date">[in_from_date]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime" x:Key="in_to_date">[in_to_date]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reports\"+in_sociedad+"\"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_name_report">11426 - IVA Sujeto Proporcionalidad</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+          <Sequence sap2010:Annotation.AnnotationText="Cerrar Quick Books despues de haber descargado los reportes" sap:VirtualizedContainerService.HintSize="526,229" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="ui:UiElement" Name="elementQuickBooks" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:CloseApplication DisplayName="Close Application 'QuickBooks''" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="CloseApplication_1">
+              <ui:CloseApplication.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="420df997-511a-4d2f-b5e5-a507c4b2933f" InformativeScreenshot="f3fbcf731a1783783c81fd9c7a4c8374" Selector="&lt;wnd app='qbw*.exe' /&gt;" TimeoutMS="3000">
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:CloseApplication.Target>
+            </ui:CloseApplication>
+          </Sequence>
+        </Sequence>
+      </ui:BlockUserInput.Body>
+    </ui:BlockUserInput>
+  </Sequence>
+</Activity>

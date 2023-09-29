@@ -1,0 +1,431 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Reporte_7_IVA_Servicios_Gravados_Sequence" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_from_date" Type="InArgument(s:DateTime)" />
+    <x:Property Name="in_to_date" Type="InArgument(s:DateTime)" />
+    <x:Property Name="in_sociedad" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>1087,5788</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="30">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Callout.Activity</AssemblyReference>
+      <AssemblyReference>UiPath.Form.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.CV.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Descargar Reporte 7 - IVA en Servicios Gravados Sequence" sap:VirtualizedContainerService.HintSize="840,5723" sap2010:WorkflowViewState.IdRef="Sequence_5">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: DICOMA MAQUINARIA E INFRAESTRUCTURA  - Intuit QuickBooks Enterprise Solutions 22.0(" sap:VirtualizedContainerService.HintSize="798,5631" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="6aa3c0e6-c962-4a23-8cfc-7f5ee7bfb6e1" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="764,5342" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="nameReport" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="722,1641" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="4">
+              <ui:RetryScope.ActivityBody>
+                <ActivityAction>
+                  <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="538,1376" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <uix:NClick ClickType="Double" DisplayName="Click 'qbw.exe DICOMA'" sap:VirtualizedContainerService.HintSize="496,156" sap2010:WorkflowViewState.IdRef="NClick_9" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6aa3c0e6-c962-4a23-8cfc-7f5ee7bfb6e1" Version="V1">
+                      <uix:NClick.Target>
+                        <uix:TargetAnchorable DesignTimeRectangle="8, 8, 22, 22" FriendlyName="'System'" FullSelectorArgument="&lt;ctrl automationid='MenuBar' /&gt;&lt;ctrl name='System' role='menu item' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='MenuBar' /&gt;&lt;ctrl name='System' role='menu item' automationid='' check:text='System' /&gt;" Guid="b150e504-48cf-4805-86e1-517fe53cadc2" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKdSURBVEhL3ZHfS1NhGMf7O5ybR8/a2Q+L1tTNrdpWIGGa1tr6oYXSArtyERUtyIvCm26C6Hcymw6U6BfUTSCBBP4BLVOjfyCKblJwyZ7e5z3Pe7Zz9gbdnJsGHzh73uf7/bxn2/b/fsDmD2l0kbJ3yDZIo4ta9pxqWGhJZkDNJkG7vgt8tzSGlz+7swl+1rDPOmSQRi5SR/eD/74C7YVmKXiGO/UZq0BAGhLFToLChognF5GWh2e9lpmD74ocdsggjVnkPnPAUlZj5tMTmPhwqWGujrA3+1eRK3YCXPvSELjXahTsKDghWgpArNQOHcXtTDQFT8uPIMLeDM/EXuCuAq5EWu+QQJqaSB1JGuGri+PwfeMbVKtVPIZZJhGirz+/8LP8Ys7Yx6xVICBNTeTJB3lo+M0ArFd+QW7hHLu9D0rLBZOoa0aD8YUs3xl+O8gzmLUKBKQhUfQ4eCf9PIT/xfxK0bjtdPmhSSTmc5+LfIbP2qSPd8ggTaOo8PEBvFybNwr/JnqxNsfP8BmzVoGANCTqzoDncoiHUq96YOP3OtxcugYHn0VNIrxA3/M43FjK853U6x6e0a6wn451yCCNLnJGjkHbUMK47di707D6Y5kjRPg2la0KbG5t8vl5tiP2MYsdMkgjRClwRo+A706bERYIkXUuwAxmeYcE0pAofBRcbNiaSUJgylx08f0YFMuPTTMB7mIGs9ghgzS6qLmL3YgO1LNRVuAwFe6cdpm+I362o2a7jRx2yCANiToHwcmGAiWVAP9ttaFcgGe4U5/BDhmk0UWOzgFmZwd1NIX7QcnEwX0hCNqEn6OyZyUd52fWfeyQQRoSdRy2DdKQKNRvG6TRRU2hPtsgDYl2H7IN0ghRr22QhkRBNrSFXvgDJNWgEInFUAUAAAAASUVORK5CYII=" InformativeScreenshot="99535387af71ed0e9965cff51e0bf643.png" ScopeSelectorArgument="&lt;wnd app='qbw.exe' cls='MauiFrame' title='DICOMA  - Intuit QuickBooks Enterprise Solutions 22.0(multi-user*' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
+                          <uix:TargetAnchorable.Anchors>
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                              <uix:Target DesignTimeRectangle="25, 37, 26, 21" FriendlyName="'qbw.exe DICOMA'" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABoAAAAVCAYAAABYHP4bAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFaSURBVEhLvdFrasJAFAXgu6JZS+I+fKTLEB91ExIfpVsQKxLxR1BERRSJIiqiWzgdx0y4MyK0lM6PD+Z6ztxIQrfbDS7Q9XqFC3S5XOACnc9nuECn0wku0PF4hDJuICcEhCXXGKfZGz6zXnr+BTocDlBGjwUfen7lpz0L7fd7KNG7XBCgq2eOZ0+9LoLsDby4L9Fut4MS1eHLYkfPHM+sXicQ8OuROkd1HyLomHdTlCQJlGFNLjC/jyi1WVZC2z4nbZSEj9ow3aFmnZlou91CGVTlgiJaeuZ4ZvRaKNp/Tj64OmB3U7TZbKB8VeDJBaGeOZ4ZvVA+6MUdC63Xayj9+4ICQj1zPLN6YUHAq/QfvbAA4VXQTzOOVqsVlF5ZLsijqWeOZ0+9JvLZa/NQ7unfTbRcLuECLRYL3Jkf1KQ7f0Hz+Rwu0Gw2gws0nU7hAk0mE7hAcRzj/8X4BqYpLugOr8/LAAAAAElFTkSuQmCC" SearchSteps="Image" TargetType="ImageBased" />
+                            </scg:List>
+                          </uix:TargetAnchorable.Anchors>
+                        </uix:TargetAnchorable>
+                      </uix:NClick.Target>
+                    </uix:NClick>
+                    <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" sap2010:Annotation.AnnotationText="Navega a la lista de Reportes IVA dentro de QuickBooks" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="496,209" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_9" ScopeIdentifier="6aa3c0e6-c962-4a23-8cfc-7f5ee7bfb6e1" Shortcuts="[d(hk)][d(alt)][u(alt)][u(hk)][d(hk)]r[u(hk)][d(hk)]z[u(hk)][d(hk)]l[u(hk)]" Version="V1">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NKeyboardShortcuts>
+                    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Dependiendo de la sociedad cambian los nombres y ubicación de las 7 cuentas del IVA, entonces se usa el Swith para que el robot sepa donde hacer clic según cada sociedad." DisplayName="Switch" Expression="[in_sociedad]" sap:VirtualizedContainerService.HintSize="496,564" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Sequence x:Key="DICOMA" sap:VirtualizedContainerService.HintSize="304,151" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[nameReport]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">8 - IVA EN SERVICIOS GRAVADOS IVA</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                      <Assign x:Key="REFRIGERACION" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[nameReport]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">8 - IVA EN COMPRA DE SERVICIOS</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign x:Key="MAQUINARIA" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[nameReport]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String" xml:space="preserve">8 - IVA  EN SERVICIOS</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <x:Null x:Key="SOLID" />
+                      <x:Null x:Key="SEL" />
+                      <x:Null x:Key="KEYBUSINESS" />
+                      <x:Null x:Key="KEYPLANNING" />
+                      <x:Null x:Key="BRICK" />
+                      <x:Null x:Key="FRATERNA" />
+                      <x:Null x:Key="FORZALAB" />
+                      <x:Null x:Key="GOLDENSEED" />
+                      <x:Null x:Key="FARO" />
+                      <x:Null x:Key="COISA" />
+                    </Switch>
+                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="496,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[nameReport]" />
+                    <ui:ClickText ContinueOnError="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" FormattedText="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_DOUBLE" DisplayName="Click Text 'MauiPopUp'" sap:VirtualizedContainerService.HintSize="496,134" sap2010:WorkflowViewState.IdRef="ClickText_3" KeyModifiers="None" MouseButton="BTN_LEFT" Occurrence="1" Text="[nameReport]">
+                      <ui:ClickText.CursorPosition>
+                        <ui:CursorPosition Position="Center">
+                          <ui:CursorPosition.OffsetX>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetX>
+                          <ui:CursorPosition.OffsetY>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetY>
+                        </ui:CursorPosition>
+                      </ui:ClickText.CursorPosition>
+                      <ui:ClickText.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fbc152f4-a1ac-44b5-8bdd-54c085d7e325" InformativeScreenshot="dc617792c80cf97466fc9e40774acd7b" Selector="&lt;wnd app='qbw.exe' cls='MauiFrame' title='*  - Intuit QuickBooks Enterprise Solutions *' /&gt;&lt;wnd cls='MauiPopUp' title='Memorized Report List' /&gt;">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:ClickText.Target>
+                    </ui:ClickText>
+                  </Sequence>
+                </ActivityAction>
+              </ui:RetryScope.ActivityBody>
+              <ui:RetryScope.Condition>
+                <ActivityFunc x:TypeArguments="x:Boolean">
+                  <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'MauiPushButton'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
+                    <ui:UiElementExists.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f0cd777a-659d-4ef4-ae11-c211bab611e0" InformativeScreenshot="e10155f7c7dd2cb3a0c90cf92284afce" Selector="&lt;wnd app='qbw.exe' omit:cls='MauiFrame' title='*  - Intuit QuickBooks Enterprise Solutions *' /&gt;&lt;wnd cls='MauiReport' omit:title='8 - IVA EN SERVICIOS GRAVADOS IVA' /&gt;&lt;wnd aaname='Excel' cls='MauiPushButton' title='E&amp;amp;xcel' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:UiElementExists.Target>
+                  </ui:UiElementExists>
+                </ActivityFunc>
+              </ui:RetryScope.Condition>
+            </ui:RetryScope>
+            <Sequence sap:VirtualizedContainerService.HintSize="722,3567" sap2010:WorkflowViewState.IdRef="Sequence_10">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:Boolean" Name="existeExcel" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="680,178" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_18" Shortcuts="[d(hk)][k(tab)][u(hk)]" Version="V1" />
+              <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'Edit'" sap:VirtualizedContainerService.HintSize="680,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[in_from_date.ToString(&quot;MMddyyyy&quot;)]">
+                <ui:TypeInto.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e5cba548-d19e-40d9-999c-058f62ce78a1" InformativeScreenshot="674826af5593acefcd1bf485de16db9a" Selector="&lt;wnd app='qbw*.exe' cls='MauiFrame' title='*  - Intuit QuickBooks Enterp*' /&gt;&lt;wnd cls='MauiReport' omit:title='*- IVA EN SERVICIOS GRAVADOS IVA' /&gt;&lt;wnd cls='Edit' idx='2' /&gt;">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:TypeInto.Target>
+              </ui:TypeInto>
+              <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="680,178" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_19" Shortcuts="[d(hk)][k(tab)][u(hk)]" Version="V1" />
+              <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'Edit'" sap:VirtualizedContainerService.HintSize="680,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="[in_to_date.ToString(&quot;MMddyyyy&quot;)]">
+                <ui:TypeInto.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="edd4d88d-8176-469b-b790-f6777f05cb32" InformativeScreenshot="e240db568ab86c289c208e81e19a9fd5" Selector="&lt;wnd app='qbw.exe' cls='MauiFrame' title='* - Intuit QuickBooks Enterprise Solutions *' /&gt;&lt;wnd cls='MauiReport' omit:title='8 - IVA EN SERVICIOS GRAVADOS IVA' /&gt;&lt;wnd cls='Edit' idx='2' /&gt;">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:TypeInto.Target>
+              </ui:TypeInto>
+              <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" sap2010:Annotation.AnnotationText="Para sacar del foco el campo de Fecha Final en QuickBooks para realizar la busqueda por fechas" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="680,220" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_14" Shortcuts="[d(hk)][k(tab)][u(hk)]" Version="V1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NKeyboardShortcuts>
+              <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="680,22" sap2010:WorkflowViewState.IdRef="Delay_5" />
+              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'MauiPushButton'" sap:VirtualizedContainerService.HintSize="680,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition Position="Center">
+                    <ui:CursorPosition.OffsetX>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetX>
+                    <ui:CursorPosition.OffsetY>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetY>
+                  </ui:CursorPosition>
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0367dbd5-b926-443d-a157-06f951cebac7" InformativeScreenshot="cf0cd381715287f586d6da172e033dcc" Selector="&lt;wnd app='qbw.exe' cls='MauiFrame' title='* - Intuit QuickBooks Enterprise Solutions *' /&gt;&lt;wnd cls='MauiReport' omit:title='8 - IVA EN COMPRA DE SERVICIOS' /&gt;&lt;wnd aaname='Excel' cls='MauiPushButton' title='E&amp;amp;xcel' /&gt;">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:Click.Target>
+              </ui:Click>
+              <uix:NKeyboardShortcuts ActivateBefore="True" sap2010:Annotation.AnnotationText="Para exportar el archivo Excel" ClickBeforeMode="None" DelayBetweenShortcuts="7" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="680,209" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_15" Shortcuts="[d(hk)]n[u(hk)][d(hk)]x[u(hk)]" Version="V1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NKeyboardShortcuts>
+              <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="680,847" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:WaitUiElementAppear FoundElement="{x:Null}" WaitActive="{x:Null}" sap2010:Annotation.AnnotationText="Aparece en la barra de tareas cuando el reporte Excel se ha terminado de descargar" DisplayName="Find Element 'push button'" sap:VirtualizedContainerService.HintSize="484,148" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_6" WaitVisible="True">
+                  <ui:WaitUiElementAppear.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2ba516b3-4189-46b9-831f-ec8afc2fbec9" InformativeScreenshot="e5f8c681cf7c362fb907d42c47544355" Selector="&lt;wnd app='explorer.exe' cls='Shell_TrayWnd' idx='*' /&gt;&lt;wnd cls='MSTaskSwWClass' title='Running applications' /&gt;&lt;wnd cls='MSTaskListWClass' title='Running applications' /&gt;&lt;ctrl name='Running applications' role='tool bar' /&gt;&lt;ctrl automationid='Microsoft.Office.EXCEL.EXE.15' idx='2' name='Excel - 1 running window' role='push button' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:WaitUiElementAppear.Target>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:WaitUiElementAppear>
+                <ui:UiElementExists DisplayName="Element Exists 'Title Bar'" Exists="[existeExcel]" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c0ec3782-7b96-479c-af3b-c37136bfe01c" InformativeScreenshot="9e5daf86ea04d9320f3c3ac1f87ca8fb" Selector="&lt;wnd app='excel.exe' /&gt;">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+                <If Condition="[existeExcel]" sap:VirtualizedContainerService.HintSize="484,419" sap2010:WorkflowViewState.IdRef="If_2">
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,231" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:Activate DelayMS="{x:Null}" sap2010:Annotation.AnnotationText="Para poner en primer plano la aplicación de Excel" DelayBefore="900" DisplayName="Activate 'push button'" sap:VirtualizedContainerService.HintSize="334,137" sap2010:WorkflowViewState.IdRef="Activate_5">
+                        <ui:Activate.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="21c89580-4994-438a-a613-1300505dc5e5" InformativeScreenshot="b016b3757dacc88f0b9e7d80feeb674a" Selector="&lt;wnd app='explorer.exe' cls='Shell_TrayWnd' idx='*' /&gt;&lt;wnd cls='MSTaskSwWClass' title='Running applications' /&gt;&lt;wnd cls='MSTaskListWClass' title='Running applications' /&gt;&lt;ctrl name='Running applications' role='tool bar' /&gt;&lt;ctrl automationid='Microsoft.Office.EXCEL.EXE.*' idx='2' name='Excel - 1 running window' role='push button' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Activate.Target>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:Activate>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap:VirtualizedContainerService.HintSize="242,85.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </If.Else>
+                </If>
+              </Sequence>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Guardar Reporte Excel Invoke Workflow File" sap:VirtualizedContainerService.HintSize="680,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Generales\GuardarExcel.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_path">[Directory.GetCurrentDirectory+"\Reportes\IVA\"+in_sociedad+"\"]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_file_name">07 IVA EN SERVICIOS GRAVADOS (COMPRAS)</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <uix:NClick ClickType="Double" DisplayName="Click 'qbw.exe DICOMA'" sap:VirtualizedContainerService.HintSize="680,156" sap2010:WorkflowViewState.IdRef="NClick_14" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="6aa3c0e6-c962-4a23-8cfc-7f5ee7bfb6e1" Version="V1">
+                <uix:NClick.Target>
+                  <uix:TargetAnchorable DesignTimeRectangle="8, 8, 22, 22" FriendlyName="'System'" FullSelectorArgument="&lt;ctrl automationid='MenuBar' /&gt;&lt;ctrl name='System' role='menu item' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='MenuBar' /&gt;&lt;ctrl name='System' role='menu item' automationid='' check:text='System' /&gt;" Guid="f8d187d4-0887-4633-a5c5-e5f07a9cee4a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKdSURBVEhL3ZHfS1NhGMf7O5ybR8/a2Q+L1tTNrdpWIGGa1tr6oYXSArtyERUtyIvCm26C6Hcymw6U6BfUTSCBBP4BLVOjfyCKblJwyZ7e5z3Pe7Zz9gbdnJsGHzh73uf7/bxn2/b/fsDmD2l0kbJ3yDZIo4ta9pxqWGhJZkDNJkG7vgt8tzSGlz+7swl+1rDPOmSQRi5SR/eD/74C7YVmKXiGO/UZq0BAGhLFToLChognF5GWh2e9lpmD74ocdsggjVnkPnPAUlZj5tMTmPhwqWGujrA3+1eRK3YCXPvSELjXahTsKDghWgpArNQOHcXtTDQFT8uPIMLeDM/EXuCuAq5EWu+QQJqaSB1JGuGri+PwfeMbVKtVPIZZJhGirz+/8LP8Ys7Yx6xVICBNTeTJB3lo+M0ArFd+QW7hHLu9D0rLBZOoa0aD8YUs3xl+O8gzmLUKBKQhUfQ4eCf9PIT/xfxK0bjtdPmhSSTmc5+LfIbP2qSPd8ggTaOo8PEBvFybNwr/JnqxNsfP8BmzVoGANCTqzoDncoiHUq96YOP3OtxcugYHn0VNIrxA3/M43FjK853U6x6e0a6wn451yCCNLnJGjkHbUMK47di707D6Y5kjRPg2la0KbG5t8vl5tiP2MYsdMkgjRClwRo+A706bERYIkXUuwAxmeYcE0pAofBRcbNiaSUJgylx08f0YFMuPTTMB7mIGs9ghgzS6qLmL3YgO1LNRVuAwFe6cdpm+I362o2a7jRx2yCANiToHwcmGAiWVAP9ttaFcgGe4U5/BDhmk0UWOzgFmZwd1NIX7QcnEwX0hCNqEn6OyZyUd52fWfeyQQRoSdRy2DdKQKNRvG6TRRU2hPtsgDYl2H7IN0ghRr22QhkRBNrSFXvgDJNWgEInFUAUAAAAASUVORK5CYII=" InformativeScreenshot="fd1d49de2334f6e7851785b5166e55ac.png" ScopeSelectorArgument="&lt;wnd app='qbw.exe' cls='MauiFrame' title='DICOMA  - Intuit QuickBooks Enterprise Solutions 22.0(multi-user*' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
+                    <uix:TargetAnchorable.Anchors>
+                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                        <uix:Target DesignTimeRectangle="27, 36, 21, 24" FriendlyName="'qbw.exe DICOMA'" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABUAAAAYCAYAAAAVibZIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFRSURBVEhLrZAJasJAFIbfieYsifdwSY8hLvUSEpfSK4gVSRERRUwICSEJQUUUb/B3bBrJjHShvMAX3sz/vdnoer2CG7pcLuCGzuczuKHT6QRu6Hg8ghs6HA7ghvaLHipCQGhUegvk2RNe93u1/gXK3nP5JcuQ/cRfPQmlzrOULYzTFKlOOXvwxrDuN1P7KXG6MOXkKEmQ6JQzzRtZAmbX+aydrglhje59FM87UlbfUzSGiOMYedbAUK/jIRrCRGd+q4txkcWgaNaWch2DKEKkU84Ub4C6fhC5SXuW91H41oIhZTsMEeqUM8Wz5aLf9EgomN7kGuwgQKBTzjTPrgkYrWnu2TUIo4XpV0b+pCnlKvq+D1+nnD14fVTvVzfQnBTzPsjzPHBD6mOruK77L2i324Eb2m634IY2mw24ofV6DW5otVqBG1oul+CG5Hf7MUL4AIL/YGy00FRDAAAAAElFTkSuQmCC" SearchSteps="Image" TargetType="ImageBased" />
+                      </scg:List>
+                    </uix:TargetAnchorable.Anchors>
+                  </uix:TargetAnchorable>
+                </uix:NClick.Target>
+              </uix:NClick>
+              <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" sap2010:Annotation.AnnotationText="Para Cerrar todas las ventanas dentro de QuickBooks" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="680,209" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_16" Shortcuts="[d(hk)][d(alt)][u(alt)][u(hk)][d(hk)]w[u(hk)][d(hk)]a[u(hk)]" Version="V1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NKeyboardShortcuts>
+              <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State 'qbw.exe Memorize Report'" sap:VirtualizedContainerService.HintSize="680,488" sap2010:WorkflowViewState.IdRef="NCheckState_2" ScopeIdentifier="6aa3c0e6-c962-4a23-8cfc-7f5ee7bfb6e1" Version="V1">
+                <uix:NCheckState.IfExists>
+                  <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="376,272" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <uix:NKeyboardShortcuts DelayBetweenShortcuts="{x:Null}" ActivateBefore="True" ClickBeforeMode="None" DisplayName="Keyboard Shortcuts" sap:VirtualizedContainerService.HintSize="334,178" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_17" Shortcuts="[d(hk)]n[u(hk)]" Version="V1" />
+                  </Sequence>
+                </uix:NCheckState.IfExists>
+                <uix:NCheckState.Target>
+                  <uix:TargetAnchorable DesignTimeRectangle="0, 0, 507, 198" FriendlyName="'Memorize Report'" Guid="a545a13b-0a7c-411f-a364-1c27c6a32964" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAfsAAADGCAYAAADVGCkVAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAACpmSURBVHhe7Z17uBXFme75/8w8M4IIKMrFMznPM5kkM1EzyTYxJjlmRo0ZTdBoomI8mW3iOVEB7yIi8YbAZgOKiGgiag4XFdE56CRGwwYcb1EQBA2bm4KioqKId1Onvuqq7q+qu2r1WrvX3mv1en/P88Lqruqvvqrq7ndVr7X37tfd3S22bNkitm/fLnbu3Clef/11sWvXLvHWW2+J3bt3i3fffVdpz5494r333hN79+6FIAiCIKiJ1O+ll14Sr7zyiuh/8KGi/4gvRxp5iNKAkYdGkmUDDj4MgiAIgqAm0b6f+5ow9NuwYYPYZ9iXxOAvHiWGf/0nYvg3ThMjjjhdjPjm6EhHniFGHvnTSN86E4IgCIKgJtD+hxwnBv6Pw6OV/T5yJT/oC98Rww7/kRj29VOk2UvDP+JUafRk+FJHjpZGT4av9S0yfQiCIAiCGl37H/I9se/ffVWa/UFfFAd+9URx0NdOEgcdfrI0/B+LYWT43zhVmv5pYrgyfb3K1yt9CIIgCIKaQ/RIv9/fcrNvyzB7/kgfZg9BEARBTaXE7P/5h9LspeG3/UgMO/wUZfjqcb5l+I7pQxAEQRDU8HLMfpQ0+5Ok2dPqnj6714Z/RGT4I75JMqYPQRAEQVAzKDb7oV/5gTjwq6PEgXp1H312H63w6ZH+MLXCN6t8CIIgCIKaRczsT1CrezL86LN7epwvDV8/0h+mfiRPP9aHIAiCIKhpxMz+eGn2tLo3n93T43xt+HqFHz/WhyAIgiCoaRSb/QGH/Zta3Q9Vhm8e50crfPVIX63wzSofgkqony4Vm9XvmXpKjEuV3yge9pb1klR+Bbcf99mlD/sJQVCsH599mbjoyinWvpFHnComXNMhjjtjnLU/pMTsD/2+GHrY8enH+eaRPv1InjF9CCqjziDj2yE2bxPi4UlO2aSnhNgmy8gE+f5ml+pzuk/jVki/37ZUHOvsr5s8eUBQK4uMfunSpeIPf/iDuGji9WrfSLlKnzS5UyxfvlwsXny3OG60NHznuCzFZr//ocep1f0BX5GGL1f3Q/XqXile4UerfAgqo4adcZ8ynJvvlKZ+50VWGZnfw3dG5ePY/maX6bPbJ9/+eqm324OgZtCE62aK5557Tqxdu1Y88sgjyvDJ6Lu6utS+NWvWiHPHT8481lVi9od8T63uk8f50eo+fqSvVvja9CGohBo2mgznSTGO/t92nzjW7G+bJR42++l/a7+B779Q3ExPB+6g+pquWTq+Rm7b7Rp2iJtHs/3bnhQPy1gqPmt/2KQnVW2XhyeFc3MV97nC/nBfZc53sHyq7hsnqQNBrS56mj7tpvnK2I3hG6MnXT7l5szjspSY/Zel2R8iV/eHSrNXj/N/ED3ON4/01W/Y06YPQSXUsNFLIoP72gWRgY3W+6+URtY1k5XLfaqONNcrozrH3rFDiG1LxLGsLNmeGRml2VZxovimzMRRbZk2VD1Wxtqnba5xXbKizFHVC+TGj1F1PTHzxov7Go9L1J/Nd1xQWN8gqJU1TBo1N/zY6K+fk1nfp9jsh/zTMdLwj1V/IYd/fh9/aU+ZPlvtQ1DZdPq90nCeEOPk62Pm7xCb549T+8n4fj/RLrdeK80Qv5cGPud0ej1OzJEGqI5RZYHtUBxVZmJm1Y2kjHnbveIYsy+YmyNVN43pe1Inb1+jsRNdM8LHqbLKfYOgVtfwtpPEjJtvT5n9pKmzM+v7xMz+aG329Dj/OGn29DifDJ8+w6cv7dG39KMfzYOgUio2HP1aGSgZFNtnvXbZLs2LYhkDpNcVtic+oY06o4y3R3K3pY6Zv9053tRzMbk5ymyD55rss/H1Vcr0qYd9g6BW1/C2E8WV1023Ht0b0SP9C6+4LvO4LCVm/4//KvbXq3t6nD9Ure7pkX5k+geqb+lr04egMuq0eyLDoY+wvtIpTV4a2kS5b9s94hjax8v5azfOV8ZqU8ux7cYx7Z6WUeZuk5lm5RDKzVVWXRVX5+CrY+T2TUq9AVnemT6umr5BECQmXD3N/ox+8mwxdXayyifDH3PpVZnHukrM/kv/Ig1fru6V4ZvP77+ffGlPPdZnj/YhqGyShrNJPC7G6u2xy9USVmyaPyajfIw2uaxjnbLgNhkgK5v4uNzScZx8rG1Vj4xTl1kK5ebIU6b6rt7k0HblviZ1eX+q7ZuvPxDUmjr+zPPF6tVrlLGPl0ZP+8i4p87+jdr35NN/Et8+6ezUcVliZv/daHWvDF+u7o3hm8/w1Rf3tOlDUBl16t2RAZltY6inesoPm67MLILVO+w8bY45t1VcQ6C9eDs6Pg3PwZebo1SfjPTxy6fb24qMvi6nsYrYdPt5ukwqb99Yn5JxgiDohz+7SFxy9SxrHz1pv2r6XHHUyb+09ocUm/3gLx0lBv8jre7/lX1Z73vqC3vqZ/DVCj9a5UMQBEU6V9yk3rjg3gBBjazE7L8ozV6t7qXh05f1jOHLFb760p5a4bNH+xAEQYdqs78iqwyCoEZRYvZf+J/K8O3H+dLw/4kM3zzWZ4/2IQiCDjlHm31WGQRBjaLY7Ad94Tti0Bel4VuP849Wj/SHfNk81jeP9iEIgiAIahYlZv8P31aGHz/OV9/Ol4YvV/jJY33zaB+CIAiCoGYRM/tvSbP/tjT7aHUfPc43K3z6GXxp+F8mGdOHIAiCIKgZlJj956XZy9W99dk9re6/RKt78xm++RwfgiAIgqBmUWz2+33+SLGffpQff3YvDX+wNPzkM3zzOT4EQRAEQc0iZfb/bb8R6q/iDGs7Wbz22mvirbfeEu+++67Yu3ev+OCDD8RHH30kPvnkE/HZZ5+Jv/zlL9FvvgAAAABAQzPyW2cq/fWQz8HsAQAAgDICswcAAABKDsweAAAAKDkwewAAAKDkwOwBAACAkgOzBwAAAEoOzB4AAAAoOTB7AAAAoOTA7AEAAICSA7MHAAAASg7MHgAAACg5MHsAAACg5MDsAQAAgJIDswcAAABKDsweAAAAKDkwewAAAKDkwOwBAACAktOrZv/ZZ5/qV31HZ1s/0a99md6KWNae3lczGztFW792UVC0PmajGi81NFa/ov39+vUTbe3tNfaXxebwdvpyLH159GpObJw7N+p9VZI3917tVw+oKs9lor1fmwgPnec8VPjO/wJolXmpJf+8YwOqolfMvnv978XiuaeIa87ZR+n++WeJlzc/oUt7GXXysBtA0SdTqU7OHIZcM01q9r1JEe02yngWRTV9WNYu2unNaNDtc5p90bTKvNTSt7KNTYNQd7PfsfVpcf2YAWL+tQeKe2cerPTrq4eKyWP6i107/6xr9S58JU+v7ZsBrQai1VQ/fpK5J12Fk7ud2tBxrJuFKnfKaF9bp7y1GOgmY96QePKx0PU72+O4qk/yZmdtx4RisrI22Y/UyoYfK9tc5o5DDbEZ1rGVxjLYFoONQzCnuIzv40pyUvX0vHXmyU/1l73JDOYUkeRQ4VxQeUTj6cay6ofGk/eLyJFfdru+OaH97fIcbdNlbCwUefrG5ckpxlxDMq51bRGsrdR56Cnj46NyqnHeNVZfdewyzkv6WF8eCbnHRlE5Hoiou9k/cOfZ4rarhop7Zoy0NG/SAeJ391ysa/U2dILIk5qMyrkRWOZPF5Ypdy86d9ug9ntimHZNg3EMbu56vz6G57ORLkj7TNdEK5C4TOdgbye5evuoNp0yc3HxGL7XklC+3ticVOx8ufrHhsY8yS+Uk1WWp79V5KfKLNP25xTD25Kk4pm2dB6Z3c+br9VWNfnZ7frnhGLKc9K0p8ajhr5ZeQagejoGxfblGOWRlHvLeLs6p8x81aYbwzVQSd54vJ78t+nmxdnvjcfhx+h2fMf4+wVc6mr2r+14XkwZO0Dc3TkypcXTR6gV/+43X9a1exd1YjgXhDx1rIsp2tYXqnsy5zy5vfUUSXuUDz9po9esfYWbn8F5s5Da5nHcGKGy6E2EGiPeD99rdbwv30Bsjje2JHdbHLceJxDDl0dV+bEya05COTGC8VgMNw9O3nxTbVWbH+Eex3Om13y+3fHwxAnlHIBfT8og4obdtvh5GCjzjpXE2s6KkTGWeeOlYjfZvKTy98Tj8GOC7bjHu/EBp65m/+DCcXIFv7809xGZmjtxiPjDfRN07V4m6+RM7WMnfvCkY+SoR+9G6Y1GJF1G9dQ7Vvdi43VJGRdH6obibrOLIpVPoI8SyjV4s7OOCeQbis3xxpbkbctFHZdVJ2e+eV4Tbpm1anHmRNV12nQJtVVh3mJCMSqWVZGfIjQn7BzUZJ5bikDfUnWzoOPdPPQxGcf78/CUhXKi16F5N1QTL1Vm+tQE88L3h+JxQsdY26F+AZe6mf2br29SK/dFHSPUKj5LC6cNF5PP6y/2vLNTH9WLpE48gk4evo9dCMGTjpHj5IwNzirTJ7710YKbjw/3onG3WT9SMUNlFKfCzS7VP348JxCb440tyd1WAOsxYCCGL4+a83PnhJHncWYqHm3reG4enLz5hmLkyo8IzQnLV8HHo4q+hfI0UB0n3+SNpdsWPw8DZbzdYE5ZMTLmPW88t4zTDPNi7Q/E4/Bjgu248UCIupn9w/deplbuizqGBzVnwhDxxwd+pY/qRTwnJ90Usj8fsk/M6GOAjBMtdHJmlrkxWfsSfz4c94bibtu5h2KmysybE18/nD7VFJsTiF1NWzHu/ko5mTJfHj3Jz8xBhZxiKsXLytUlb778dY35Ef45oXNQrrzMhDsxc/cto00Xuo5S5xXF1DvT85Kch94y31gRznY6Br8WNXnj8dd8XAh32+DGk/TZvDj7/Xkw+DEV2skVDyjqYvb0OTx92/7/Th2mVu+rlpwoPnlrmaVHF44Sd04eJn57/TBx3bn9xQfvv6OP7iV8J6fckzwassuNGZPaOjtlvYzjK5ycPEbqm8Cqrntj4Plk3DQU1Zl9qI/Rsbos9G3krNeKUL6e2Bamjozpxq6qrQS6IUR1dFy9P8IXg+Xhy6ma/No7ZYwkfjgnTbC/oXY5OcfTKastP8I3nrRfmnC7Of/d+crbt0B/NJ3y3ErnG7UftWliSKXOQ09ZYKzSObK+OPOeUOJ50Xsi3P2eeBY5x0bh6xdwqYvZP3L/lXLFPlgskGZPWnH3D8Unb/6HpaW3Hi/rDBV3TT5IzB4/WCz/f9foowEoIZk34FYiMpWWuxk3/Ly36Ly0IIWb/d49b4jrzusv7rr+ILWyJy1f/APx8Rv3W1ow+/tixqUHiPnXHSTulHVpdf/Rh3t0FACaHbZCxKpD0iqm0mzzDrNvFQo3e/r8ffb4QeK3Uw6K9cdFJ4iPXl9iacHs74kZl+wvbr/2QFXnhssGiZX/OVVHAQAAAEBRFGr2tDK/Vq7Q77huqFzZHxjrkQXHiQ9fu9vSb2cdLTovHiJ+c01Ud/61Q+Wx+4hPP/lIRwMAAABAERRq9isenCxmXbqfuHPygZYemPd18cGrCy3ddNU/x2Zv6s28ZD/xXw/P0NEAAAAAUASFmf3HH72vVua/ueYAtbLnWtj5ebF3x12WrjpvmJh5aWT2pt6vrz5A/aGcRvjreAAAAEBZKMzsH/vddDHz4oFi/rUHpHS7fAPw9pZ54r3t85Xe2DhHXP7zgeKGy4aoMl53xkUDxZOP3qSj1gH17dh+yc+VaqIfaenDb80W+q3d6EtCqR9rM31PqZf77etraAzyjk9PxpEf63vd1zRqXnlpiDFOvkQX/4x21eSM0Yxz5IHukdY9hX6uXfY/tS9146mC4Hh57mv1wnt+Uh7N96XGQsyePmenVf2tk/YXv5Grc1e/vuoAse3Zq8Wel25TWr/yCmX2N46XK3un7rwrh9R3da8mrU20tfNfvrBM0F+mKstF6b0oPBeS+tn/3vxlFL4L2re/GoqIQfA4RcUsgkbNKy+NkH8R7eaN0Yxz5IHuE/yNjfrlRc6fEHbrVE1wvPrQ7C1a2OxpJd550b7S1Pf36rlHzhHvbp2rtGLpL8TE/z1Q/Xx9Vt2OC/YVf1pxq45eMHoC6ZdIxJMl96mT1ppY+pGUrJWvnuie/jlZykP/0g73l0fYvzhDKj67fTkRrMz3C2t8J29qv68d2l/HP1Pqy49wy9h4J3H842PdJFQslrv5zVu8Dd9rl8w8NOo4U6bbp33WGyt+4/Dnb7DKdV41/fnPUN458lBUHYPv45Ll7njLMWqOPx0sY7h/5jnuixOX95FI9dlty5MXJxSTKGKeDSpHc+7q89b69d6uCQbG1bftlvEYnvua9cTByrGG9jnevHg/6TXlVqHNBqDHZk8rcFqJz504WNz2qyFerVpyiti9ebbSknk/EL/65UBx0+XZx8y9YrC45drDVfzCMZMmLwJzgmyUxu1esHQCGdNWK9/kbIomNzlYHuduZ8dRF545KfRx1kmaOjnsi8efU0Y7PLYhsw0dKz5ZQ+3oE9nUVe0U1VeJbz9hlVEeST0rx0AfrT6xfOIyfqzvtUUgD1XGbnxxDOeGSPv1OIXmNyaVl2fM1WZoHn1558yj1hip/H2v8/VLlVmm7c8phrclScXznbccX+6Er6xiPbutXPMQiin/7fk8c3g8+VqNE53P2e2FxzWpZ207Zem5zpgPuZ/XMa9rap/jzSu5hq02JNWPae/RY7OnFTitxG+dNCSo391xtHh70yyl26YcIa45NzL7rLqkaefvK9Y8fpdqo1DMpNH/aiL0yWpNJp207IasttMTHeFu82Ptk98qs9qTuNsSOlmSEymUk9sO5ZRxUag2zLtOJnYjrdwOj8v77ubA4uToq8K3n7DK3BwZodi6n8voqQ49mYnnPyNP32uLQB4pkvHh85q8dmMl9S1CeVnboXhuGSdnHrXG8OVfVb9YWeoc9OXECMZjMdw8OHnzraWewu2Lm6cmFDMVg5MzvoVzregbARlcdCkl+9LxWHuhnFP58xie+xrV49e26lON7XO8eUXj0CZz4UZvtaFwc+hbemz2tAKfM2GQmHfl4KDuvuEw8dbG6UpTL/57cd2YgWLO5f7jbpJlv576HdVGocSTJidMfW4vJ4TOHmsyaZJcUzSTyG8uhLsdOKl4Xbcsaztlwp6cUu3I2uYC5Lj11DtlnjsR6jvrm8a60Gvtq8G3n8iM4eZn9mfFoNxpv/4/rmf2S/ixvtcuqiwjDw2NTzKOLJ6aW37uhMadEcrL2q4Qz5t3zjyIWmL48ve9Jtwy67pwrj9V12nTJdRW6LzlhGL4yvLWU9RwPhCZ21nHVzHPDHpzGt0u2R8b0qtpa3GS6k/O+4HvtSbzvhbHln0y50at7XO8uVAsMvrOpD1FbWPaW/TI7Fc/Nl+uwAeIWyYOqqjbrz1YvPniVKXxZw0SU8YOFDfLNwlZdY2mjhsg1j21WKdaEGzSzApPnaDWZNKkZUy+gp00CnebjjXbbhxW5p5gqZOJxyRCObll0clY0ewldIHany1VasfXd/c4VjfYV4ZvPxEqCz2iY6gbhbxAkyc6Mr94hU+72LG+1yF4HrI2XfjxHFgxdNu1/DnjUF7Wds54RCrvnMdx8sbw5V9zv7KuFY2VEyMYj7Y95y0nb7611FPknIdQTJei5lme1MkKWkJtuvtS8QPjyretMjeG574mUW8+rC8L1tg+x5tXcs5Zb3BUGxlxGoQemf1tU44Us8fvJ+ZKY66km68YJKZfOFBM+MUAcYVU50XS7OW+rLpGN8rY8zuP1qkWBJ80OnE9JwAZQzyJ1kXi3lzcbXZS0ZYvjnuCsW37BErw55RRxo3G4LapiC4g/tmSvx3qG6tbKYccfbXw7Sd4mdNusC0O1ZP5mxyjNzoeQ/a95lSTh9pOzgvTdjxektD8xoTycra98UJ5q80cedQaw5d/T/plxrVCTjGV4mXl6mKV2dd8NLe6rKZ6EbnmIRSzwnjki+8i25P3u6ynK/QFw3z55x+H9Fxnm310XBKTqKl9Ds/Fyovf8+37f21j2jvUbPZrn1wkpozrLw17v1yaI3Xj+IGi8+JIsy/Prufq+rH9xQurH9DpFoBvAq3JJOiEyHoU45q7u22fSHYcFt9tL97m9RNFJ5AvJ4Ly0GWeb62m+6hR+9lJ6m0n6lu7fAefnUPOvsa5OrnoPKLjmagjTgy6qJI6OWITKgbLWd08WD3ehu+1gz8POsyMk5Q7J24uitD8Glj/3LxSefrjhfLOl0etMfj8ePpSTb/66k8HO2V8ru0/f22fj956mW3lmwd/25XGwxM/1G/TH+fmotpJ3XA84yrJPw5m/KR89zUF1Qv1L2f7HJ6LlRe15RuvfHPWF9Rs9rdPP1rccOlAMWeCNPIcem3dJEu0sqeVe1Zdrlmyjd/eeIJOF/QtdCI31gkMWpygMYGWgc6D7HcBQFOT2a9/5n4xWa64b7qcvlGfTzvXXmFpws/3EdMv3Dezrqvrx/QX3et/r1MGfQfMHvQ1bKXXgKsn0PtEq3ScB5WoyezvuuF4MePifcXs8fSLcfLp1ecut3T+GX8rpowbkFnXFbW1eO4pOmUAAAAAVEPVZr/u6XvEdef1FzeOJ7PPr1fXXGbp/DP+Rpt9dn1Xk+XqvtDP7gEAAIAWoWqznz/jONF50QBxw2X7ihurEP2I3vj2fcS40X+jRK9pX1bdLM2QbeKzewAAAKB6qjb7qRcOFzMvHiBmXSoNvwrNkMdMHddfrdBJ9Jr2ZdXN0qxLBoiZl/+9ThsAAAAAeana7O+7/eei4/z+VZt9T9VxQX/x4MJxOu0eUMZv7xbVJx4nFLNZxtDNU20nX+7Cl3cBAK1C1Wa/rfsJcf8dvxBXn7OP+gM4vSUy+td2PK/T7gHNYlR9AR+bMoyT1Yfo519jg1dl+AYvAKA1qNrs+W/Qa0bSv2TB/4sXEvQvUejpn7UtKg4Zlf4FE2o/MzX7l2hIxe5WuZ9WuY6Z+edTLROVsPx9sVM5q52+nGh/wX9KN+O3WdFYYXUPAGgFWs7sXaOiG35ssBmGEKF/ttc4g4rhbmfHVD8DmrhkzXGs3PRxSVj7uAj9xiI+3JcTg8fRbfjbN+1FxpykEoptm6s/J23mpj31ZqKocTHY4wMAAGWmxc3eNqpoO8sAXGNwt/lxbgzeRrVxPLm5JpZhamSesSHyYxVubA2PE2rDKnNje0jlGMqJXvM3Bnyc3NxZnFDOFlH8ZHwAAKDctLbZp8zANV9DtSYtV6WWTFkVcUK5VTI12raeUIRyYvA4oTYyywJxCfcY+cqfEx/PCFrNK/NPxaliXBRU337CAAAAZQcr+5QBZZlVFSadisnpSRxWFjQ1NyYRyonB44TacMs4vo9CUseEcuLjQPA+1ToumlDuAABQUlrc7MmbPJ//WlRj0qGYBcUJmJr9+D4hVz953EAb1ms3Vp7YGn9ONA5ypW+W307MWsYFAABamdYze2kL0R/SMCagjUXJZwzVmbQdM3RcNXECJhZv8/qJImP05cRhYxMyTqeMzDdpjx3DceMpfDlF41CXP6VLdbLejAAAQIlpQbMHjU9k9tlvSAAAAFQLzB40IDB7AAAoEpg9AAAAUHJg9gAAAEDJgdkDAAAAJQdmDwAAAJQcmD0AAABQcmD2AAAAQMmB2QMAAAAlB2YPAAAAlByYPQAAAFByYPYAAABAyYHZAwAAACUHZg8AAACUHJg9AAAAUHJg9gAAAEDJgdkDAAAAJQdmDwAAAJQcmH0N9OvXD//jf/zfx/8DAPIDswcANB0wfACqA2ZfA7jRAAAAaCZg9gCApgNvuAGojpY0e8q/GrngRgMAAKCZaDmzp9xff/118eijj4p77703KKpDdbMMHwDQd+ANNwDV0ZJmv2zZMvHQQw+JFStWiJUrV4pVq1ZZon1URnWormv26kazsVO0yf/pNVf7Ml2pN1A5tIvKTW4UnW06t9zHBCgiBsHjhGIW1V6ZqGVM8o53bqLzis77ts6Nel8GmD8A+pyWNHtatT/xxBPi2WefFatXrxZr1qyxRPuojOpQXdfsFZk3sGWivTcNP/dNlJl9ERR18+ZxYAj1p+jxzhujDnNLbzAAAPlpWbMnM1+/fr3YsGFDpqiM6mSZvbrR+G5gtL+tU9qrIXoDEK38PTc8fUxnu+8JQVaMSnFZeVu7aPet7Je16xhuHDq+XXR2tumyNhEv3twYatvESHJfJvsT96PSuOiY7VljkDtnDr3BkTl3JnXV6pMda69GA+MZai9U5hmXCHd+2PiGcjHwMdFj6z9/iCrGW1EpB14uc1/mzFGcX3a76Xr6tT5XkzZzjAUAoCIta/a0gs8yeS6qU93KnqCbU3LjJsOLTYWMwTI8jYrlr+eN4c0h4xgZX93MrWMo1+T4jWTs8R1f32RNWyqGrpuK4XkjII/hOcSvDbyuep2nn6GcOfoRsynT8e3tJA4fr/Q4+NqrVOYZF0l6frLPGW//eDzdt8yx41RxTG05JP3zllWsZ7/p8OVB5zMAID8w+4B8Zq9uNO5NK0avKNX9yTaDaJsZgCF0AwzF8ObgHsMe46diZ+SjoDJ+42X98rZL8Lbla20gy9or9NuN6S0L5czh80C42zyOG9PpQ3CMfGUubkzWVys3N6ZbV5N37Di5jyk4h1rqKXLmAQCoCMw+oB6v7FN1XMPRVHUDzGG6GftphZQ2e4naNo9J3Rurnas3hoTKohgkU2ZylbFyrTTdvEJlWTlz3LF2t3n/6DXP34kbaq9CLpnjQsdY48Fzq5CLgY8Jf02424bcxxScQy31FP486DUAID8w+4BqWtlbj0PpZuXevCrcNAlrOxDDl0PqGDITv1HHpHLnuTJDSuXHngA48enRa3t7xiN8gtd18wqVcXyPrHm+ikpm74nv4m1Pkho/37i47blmnyOXvGPHyX1MwTnUUk9RxbwAAILA7AOqfmXv3OAl/DNHr1GEboASb4zMHCJSx5i8+DFuPhlmFX9W62s3M3dmqu42p2KcjLJgzpxqzJ7CeMY41F6oLLM/gfby5MLxjQ/hbhuqOKbqHOS/fDzV5+uZbeWtF+HLAyt7AKoDZh9Q5ZW9+4jRNvoIbZpK9o0sxr3JpW56vhhkYL64pkwq8G18upma3O040U25vZ1uxlSW3KDdGNENW8fgbSkoj6z8CJZ/aAxy58xxzd3dtk3HHmO+P9xeqCw8Lqy99s6M3HSZk0tMYHxS2zE5x1tRZQ5qM+lvW2enPN6UsXZD9TLzzpEHAKAiLWn2Dz74oPrlOZV+9I7qUF3X7FsDuskWcHOlG3j6HRDgZJocCEHmDwDIT0ua/auvvqp+Mx6t2kOiOlTXNfvWuNH03OyjFRxWY2nMShcrVgBA79ByZk9Q/tUIANBYYGUPQHW0pNn3FNxoAAAANBMwewBA04E33ABUB8y+BnCjAQAA0EzA7GvEGD7+x//4v+/+BwDkA2YPAAAAlByYPQAAAFByYPYAAABAyYHZAwAAACUHZg8AAACUHJg9AAAAUHJg9gAAAEDJgdkDAAAAJQdmDwAAAJQcmD0AAABQcmD2AAAAQMmB2QMAAAAlB2YPAAAAlByYPQAAAFByYPYAAABAyYHZNyj/ufJFcdLYu8R3/9dcqEDRmN71wDPio48/1SNdO7t27RLr1q0TzzzzDFSgaEx37typ7jM9BXNUHxU5R6B3gNk3IIsfWiNOuvBecc7cF8TlC14SExe9DBUgGsvz5r0oTr70P8SMO1fp0a4Nuj66u7vV9QCKhcb0pZdeEtu3b9d7agNzVD+KmiPQe8DsG5ATzpkvzr3lRXHJnVvFz2/6s/j3G1+EChCN5YXzt4rzb98sjmmfp0e7NtauXSs+/TR6OkDXAlSczJiuXr1ava4VzFH9ZMa0p3MEeg+YfQNCj5tpFXrW7BfFz254ASpQ/y51hVzl0xj3BHqUSdC1ABUvwoxxrWCO6iuip3MEeg+YfQNCRkSPnc+cuQGqg2hsYfaNLQJm39giYPbNA8y+ATFm/9PO9VAdVKTZ02NiqHgRRZl9Vnyo5yJg9s0DzL4BMWY/uuN5qA4q0uzpeoCKF1GU2WfFh3ouAmbfPMDsGxBj9qdPWwfVQTD7xhcBs29sETD75gFm34AYsz9tylqoDirS7D/++GOoDiKKMvus+FDPRcDsmweYfQNizP4nk5/rQ/1ZLH2TsvlALL3V7NsmnlYZ8n3NpyLNnq6JhtHWxWLsqFFi1NjFYqvet3XxWDFq1FixeKtTt8FFFGX2WfGL1Vbx2HQaZzn2avzleD+2NaNeL+ix6SqH6Y9llBUsAmbfPMDsGxBj9qdcu6ZvtXS3ymfHqhfV9sWrPrC2m1VFmv2HH37YONqyKDJ7utmvivZtWRSZ/aItTt0GF1GU2WfFL05bxKKxZPCLxCo1xlvEqr4c81Xa7PX811MEzL55gNk3IMbsT756dR/rBXHfLspot5h19VbxlMqOXsuyW3aKp1SZZNducd8tyXEXrdwtdugiegrw1H1JWSOoSLOn66JhtGlhbPajxi4Um+S+TQsj41m4KanTQeak6nQk+xtMRFFmnxW/MK3sUGPZsTKjTGvTwo5kXuRcdCzcFJXp+Rrb0aHnhJXp8niuQmV8HnPkU5QImH3zALNvQIzZ/+hXz/a9lrytctqxK7q4n1wi9938qjLzHSs2yDobxKwNVPK2mEX1TdmGrep4q6xBVHazHzs2eqRMN3zb7FeKDjKHjpXZbwQaSEQzmH3FMVRzkpSv7CCD7hAr4zIya3pjtkksVOaty9y54iZu5lmZ/yY7JsweeIDZNyDG7E+88pkG0Hqx5A2d2IbNat/5XXShfyCWzNF17oneEDx5j3w9JzJ7Kt8h659v6jSQijT7999/v3HUbUxgRWQc0kRWGDPqfl90s9d2/e50rD4WUZTZZ8UvSiu00a7IKEvULeeBVuI0/lRfz4Ez/lasFdq0V/A4kVLzyOsGjitaBMy+eYDZNyDG7H94xZ8aQ4vfUnk9sTjaHrc8elfvsn3586p8hlO+ff2rYhyP18cqv9lL89A3/WiV7zH791fo1eMKO04DiGgGs0+PqSM9J+pR+wpp+srQK5t9FDdk9lTXFp93mD1wgdk3IMbsTxj/dGNoYWT2jy+Mtsf8MVrZ3zPLqWfpeTFm4Svi8dfVofGxjaAizZ6ujYZR9wIxRt7oxyzoltvdYsEYYwRjxILuvaJ7wZj4dbo+i9MAIooy+6z4halLm2tXRpmUO+Zd2tC7qNwZf6ssEDc1j1wV8ilSBMy+eYDZNyDG7P/t0qcaQt9foM1+gd6e8YqgP2y5/dF1avvcRyPzv3tGUjcps49tBLWG2cttfeOPjUGXj+roEt2yPGgafSyiKczevKkas0B0qXHsFl1qXCPDjcZYm293V/QkxZmPTLPfq+vqubLqOsdZ8wizBx5g9g2IMfvjLn6yMbRA/cC9NGx7X/KXrD+wys5xyx5ZmxzXACrS7N97773G0UZjAhv1vo16dS+NYGNSZ5pZ8Y+ZluxvMBFFmX1W/GIlx3laZOrRuMrx7nLngDRGTNP1pnXJMme+uqZRnWmiy8Tlc0X1pnXpmFJd09SxcVyKp/fH8U3dOomA2TcPMPsGxJj9sRc8AdVBRZr9nj17oDqIKMrss+JDPRcBs28eYPYNiDH7o8f9V5/KR1bdZlJZzd6sAH3KOqZRRcDsG1sEzL55gNk3IMbs/2XMY1AdVKTZ0/UBFS+iKLPPig/1XATMvnmA2TcgxuyPOucxqA4q0uzfeecdqA4iijL7rPhQz0XA7JsHmH0DYsz+O/9nFVQHFWn2u3fvhuogoiizz4oP9VwEzL55gNk3IMbsj/zFSqgOKtLs3377bagOIooy+6z4UM9FwOybB5h9A0JGNGHBS8qYjjhrBVSwijJ7ugZohZN1I4R6JjPGPQFzVF+ZMQbNAcy+ATm6fZ44c+o6ccbkdeLwny2HCtSJE/4kfjn7xR6b/erVq9U1QaLrBCpO9DPcH3/8cY+NBHNUPxU1R6D3gNk3INNvXym+e/Z94qwZG9QqFCpO583dKI46+yFxztUP6NGujZdfflls2bJFXROgWOges2PHDrFx40a9pzYwR/WjqDkCvQfMvgHZs/cjcVnn79TqEypeZ152t9j5RvSjQ7Xy6aefis2bN6uVDVS8XnjhhR6bNOaovipijkDvAbMHAAAASg7MHgAAACg5MHsAAACg5MDsAQAAgJIDswcAAABKDsweAAAAKDkwewAAAKDkwOwBAACAkgOzBwAAAEoOzB4AAAAoOTB7AAAAoOTA7AEAAICSA7MHAAAASg7MHgAAACg5MHsAAACg5MDsAQAAgJIDswcAAABKDsweAAAAKDkwewAAAKDkwOwBAACAkgOzBwAAAEoOzB4AAAAoOTB7AAAAoOTA7AEAAICSA7MHAAAASg7MHgAAACg5XrMfdviPxfBv/EQMP+I0MeKI08WIb46WOkOMOPIMMfLIn8YHQhAEQRDUHILZQxAEQVDJFZs96a/2Gyn+atDBkQb/d6m/E39tNIT0OQiCIAiCmk6fE/8fqa4d75Exf/wAAAAASUVORK5CYII=" InformativeScreenshot="9463120fcc0d17c3f58e202acffefd4f.png" ScopeSelectorArgument="&lt;wnd app='qbw.exe' cls='MauiForm' title='Memorize Report' /&gt;" SearchSteps="Selector, FuzzySelector">
+                    <uix:TargetAnchorable.Anchors>
+                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                        <uix:Target DesignTimeRectangle="182, 5, 125, 22" FriendlyName="'qbw.exe Memorize Report'" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAH0AAAAWCAYAAADts5O8AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANQSURBVGhD7ZTbUhpBEIbnOURBXyEGEjWna8jJJJUjinmBRNkyuQzyAp4qFbkMeBlP13IDuVF8Bq3aKn2OTk/PDMwOuwujQMranaqvmD7MdP89W7CpJ0sQEy3Y1OMCxEQLfPRF3MRECTb5aAFiogWbfJiHmGiBj/4JNzFRgqUefAQrPh/BBfB1Bk5X/CfUA2MjgvobcP22ZnP9R503gKXmPoAVS3wAV3DhAtTLRqx8BuBijA9D9992SHO3Jucvvrt7BDnDPzQC+rCFJefegw2ppUMqXNnFx9397onxIdR3RdzR/LcdpdnUFOQfFoOqx5Kz78CGVIEXboHDf91DyCn/7Db+tUs///X41dL936DC/y1qPF+u5ra8Xy60vXXVuoJKQfO7LajjXXS/Vj9VblG2uerl8N5M2pp7+MO1Ys81rR9rbfrq5FwHlpx5CzakCgdC6MyqEFKQ/jUU1NzS4uijHBzymsjJ1a7w7/AAclqsY2+JgSmb7hH3q5i6h2qpGpSnxbT63NZxmpiIPVJeSG/6GcoNuLPf+9pa23MRei5qqwPTZgObuP8GrFjcx8Kn4OA+W8W/+KpDfj6A45I37tkTm3CMD7mzyPcO7OAg6AzFQuyweyim7vTLFdADufuQVb7Q3gwot3sp7Z2cfrWK2UFzM/wcxXprswUf/TVuLGgXlnsaJG9U83n25rpEEfwuNQi+72GXTuWD+cT0ehzTRrLVS+O8yjOX6s3At4bea8fnXUFaEaXphtquA5u49wqsWNgThTO4z2zgY6OwEvrcPchynx7X9+Y9maIU14dt3qPqLvjETJsP1a+HsN5M/HLpXtlDUI7C1IbQh9jY6D5no+2asPHMPFiBhc/hBIrSLjbok4bz6opPfEWK9TtrxEJtPggtVjpBS95j9OOxKY8PUMY8hPVmEBAj7fSxc7u31k6ursdWW5Ce/mHj6ZdgRf6PaETZarD5gHh6nUSJpeWll+WQ+rTpXrVC6rVtcb576T0E9WbQpUkhzzfWvTYtH60NPiuxzn8vyxjSrzZNU2dO9rBE+gXEDJuv8Is+4Oc+sdHDEnexkZghIx/9h19s9LDE9DOIGTZf5KP7xUYPG5t+CjHRgo3dyUFMtMBHz+ImJjpk4R/NEZnKS2/cDgAAAABJRU5ErkJggg==" SearchSteps="Image" TargetType="ImageBased" />
+                      </scg:List>
+                    </uix:TargetAnchorable.Anchors>
+                    <uix:TargetAnchorable.FuzzySelectorArgument>
+                      <InArgument x:TypeArguments="x:String">
+                        <Literal x:TypeArguments="x:String" Value="" />
+                      </InArgument>
+                    </uix:TargetAnchorable.FuzzySelectorArgument>
+                  </uix:TargetAnchorable>
+                </uix:NCheckState.Target>
+              </uix:NCheckState>
+            </Sequence>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1936, 1176" FilePath="C:\Program Files\Intuit\QuickBooks Enterprise Solutions 22.0\qbw.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQJSURBVFhHpZdJTBRBFIYhnDxwMMZTYxQ3lAFjUFTEBYQoUeOOmhhjjHGNG64YE5eDIWiMUeNBYwaURREVwRCMG8Hl4MGDW4wrGBcOigYFBhzk+b+ye6iurhmmsZIv09T733s/PdXVNRFEFBkuCd6YPgkFMVPxmeMpiDmJ6yITXBs5IB3XfXS5wQjLAIqmmI2aAfUAa0pgJlVXSyWkARSJw39brTRwgVGDzzhdbYugBpC8Fsmt9oK9wgfW63owDgMQR4GjHq+22P9wDESp/ZwGvMYRJTEkY88PpQXXMrUxDUfVfjYDEKxUEnok63IqdXV10dmnp7RxFU+BsUruGTCAQCwEv9SEnmADPDr/+GlC8UitRoF7xFp9AwYwWSaJwsYywCPz0jitxolRDnm3AUwmgj92UTdJ5wbTjPIUmnl5ko3RhYMcBtIuJgkt5+hqmXCvRKQEDPCu5hDOq8igm/XV5PP7xPesDjahGrjdUCO0nHOroZrmVwRboMYppERG4A88dsZnVbCtdh21o0ioEcyAPNo722l77XpbbRPuGcUGPNKkYFHlDOro7BAFPjTXU27dZsoqn0jTysbSkqqZYp6HzkBqaYLQ5tZtoobm92Kea2VXZdl6MFj4iWxgmRp48KlWJL778YYmlnhsMTZhDZ0BWcu5b3+8FrGHn+psMZPlbGCPPMlJfjxSPDbfWSWLBW4MMBtvrxQxrjmpNFGN72UDefKkfItTSuJlscCtgfHFI8wo0dLrs9V4fgT2fJuBhZXTTTnRlAujZbHArYHJpaPMKFF2pWMd5PMd2ClPJhcNozZ/m0g48HCXLBa4NbDvwQ4R48cyuWi4Gt/NBhYqk1T5hjcqou++bzS3It0Wc2NgztU0amr7KmLX316xxUyy2QC/A2y7YAaaNKE5j9bfLXTu+RnKubsG3+GskAb23s+hDbdW0Na7q6nw2WmRy+O7r4kyy5LlxiZGrLUTvlSD/H01tnwWBaxx58ONkAZ0o7HlCy3Gwlbrg1cI/9uKsSHs1wgopTiejj/Opxdfn9DPjmaqeV/lMMD7fuvvVhusffHtKZ14fFj7JDEer3EQJQLvAgPw0UkrllEN6DRhwL0GoIT0OvYafGTSiW2wAevF1FsDONIft/p2Gygw+iL4URWrjDk/JLC4emkAPYy+Vt+AAQbBqaBDEmvZc28LtcCEewOGH5/pck+bAQYCPhcGPZxYJOFOjCocqI0FgWvazoOMwwAD4QrQ451wAdfit5Kjl9YAg4RUUG8W6D1eox6/ribrejBBDTAoEA0OYdW6Pi3jJfcLz3oecqN1tS1CGrBAwf5gO3gEeCFpm5qLjDWs7a+rpRKWARkU7of/jn+G82LFT3IBX/NcP11OcCjyLwwtgBSzfrS8AAAAAElFTkSuQmCC" InformativeScreenshot="be5ff2be6459b8ca00cd92f7afdc9ea0.png" Selector="&lt;wnd app='qbw.exe' cls='MauiFrame' title='DICOMA MAQUINARIA E INFRAESTRUCTURA  - Intuit QuickBooks Enterpr*'/&gt;" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>
