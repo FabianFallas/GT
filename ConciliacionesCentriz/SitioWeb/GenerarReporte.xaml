@@ -1,0 +1,252 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GenerarReporte" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="strFechaFinal" Type="InArgument(x:String)" />
+    <x:Property Name="strFechaInicial" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>830,2456.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GenerarReporte_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="34">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="27">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="GenerarReporte" sap:VirtualizedContainerService.HintSize="840,2392" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Boolean" Name="boolExists" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="798,1909.33333333333" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="4" RetryInterval="00:00:05">
+      <ui:RetryScope.ActivityBody>
+        <ActivityAction>
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="552,1642.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Rp_Ascii_Pedidos_Facturas - Administrador de informes" sap:VirtualizedContainerService.HintSize="510,1550.66666666667" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="471ac175-03ff-490f-b79b-dface27b4733" Version="V1">
+              <uix:NApplicationCard.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="476,1332.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Inicio (aaaa-mm-dd)'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="434,220" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="471ac175-03ff-490f-b79b-dface27b4733" Text="[strFechaInicial]" Version="V1">
+                      <uix:NTypeInto.Target>
+                        <uix:TargetAnchorable BrowserURL="http://192.168.200.7/Reports/Pages/Report.aspx?ItemPath=%2fBI_Centriz%2fFacturacion+Electronica%2fRp_Ascii_Pedidos_Facturas" DesignTimeRectangle="216, 174, 320, 28" ElementType="InputBox" FriendlyName="'INPUT ctl31_ctl04_ctl03…'" FullSelectorArgument="&lt;webctrl tag='INPUT' type='text' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='INPUT' type='text' aaname='' /&gt;" Guid="c637291b-f737-4a15-9a55-afb2b83d162f" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAUQAAAAgCAYAAABq+AE+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAACfSURBVHhe7dSxCQMxAARBV61ynTpXAzKG/UcP7kAzcNHl+3p/5jIzs7kE0cysCaKZWXsEcYxhZnbU9gbeQfwdAKfZoyiIwNEEESCCCBBBBIggAkQQASKIABFEgAgiQAQRIIIIEEEEiCACRBABIogAEUSACCJABBEggggQQQSIIAJEEAEiiAARRIAIIkD+BvGKopnZSdsb+Aiimdm5m+sLQkGUbpf7/IMAAAAASUVORK5CYII=" InformativeScreenshot="20cdae8da60d8f0343102eeb31354a2e.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Rp_Ascii_Pedidos_Facturas - Administrador de informes' /&gt;" SearchSteps="FuzzySelector, Image">
+                          <uix:TargetAnchorable.Anchors>
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                              <uix:Target DesignTimeRectangle="31, 178, 175, 19" ElementType="Text" FriendlyName="'Inicio (aaaa-mm-dd)'" FullSelectorArgument="&lt;webctrl parentid='ParametersGridctl31_ctl04' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='ParametersGridctl31_ctl04' tag='SPAN' type='' aaname='Inicio (aaaa-mm-dd):' check:text='Inicio (aaaa-mm-dd):' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAALMAAAAXCAYAAABAmX4LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAMlSURBVHhe7ZY7UsQwDIb3cswww3loqLgC1XbcgI6WA1BSM0NLvxcIfsiOLEuOnN1A1qj4il0rev5Wcvj6Pk2GMQImZmMYTMzGMJiYjWEwMRvDYGI2hmFcMX88TzeHw3S4fZ7euXNjM14edH2nduG3m9n9a22rIYv5/XgXHGG6nb4+dj8XC3icXpiz9XxOT7fO78Mbc2ZszVox5/9W6oFs5jNFsBMxx4t5Nz198OfGtpwj5q/vt+neaejm+In+03FZMe+C2Azbyn/HeWJOy6h/wenEDN+ffuPGTZogAZFd8TxsbEy6eVLiZZyOmxpiCVuZyYOLzX1ySRuE2mlq7x1UHjrxFWPBzCTfeSbELtVDfPZvRBofqPqltXNIOso++P51idkHnwOALU6GSSIJo0jM20GMWsyyX02jm7faDY76iJemtPc+ykYyOXkx00GAMIpnlTFb5IuN5oIvXDUTPL88O3zB0UXENYT8ez7P+LdgvnzddglBh+n/S4i5HDAjnMouFtESYeVDaqiy0aFBVRMaKP02L0lmud5Ap2jYoa+eSYQXkjJ/QOoJ9a21q8565ui4gJjRUKidYmi0ULFAIQfKYhPAT9pq9XYDQu7UjtaSNgVB6B+1K/tUnmFBsT1pzuRSYubqS74FrThK31q7klCHcCZxPWJWbo3wvCDmcEZ9gJDm2uYB4nqrWpMAi1xjjji+LmYbtie/IuYWJuYKtZiFHCjheU7M8Hw1KCosQWhlrdAnQQw5vjbmAmxPmjO5fjGLc2ywrZgVzamaL10AxcXwBH9cg4QaeDHXcVgxV83mxbwYc4F9ilkWI/1fazcjX4AWG4s52ZBnvR3EqJqfcsBFgl9Vk0XRM7WB3zI/ZqAgPuxXzNvb5RjamG3YoTO99vymmLm5pHkvzY+1Swg5zz3GfZ/JYs7OEdlZs3FtMQeyGGrfVfOB0Gxkr24w3Y7cWcI3ktuSUEe2c76qWh1ljv6Mi62M2WC3YvaQXvlnW/ku2jkkTajFPBKc8IxrYcWFAoYUM/t6N66C+LbjN+8Sg4rZkV5rzGvM2CdRyPrPL8q4Yjb+GafpBzF+1ZLrwy6VAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                            </scg:List>
+                          </uix:TargetAnchorable.Anchors>
+                        </uix:TargetAnchorable>
+                      </uix:NTypeInto.Target>
+                    </uix:NTypeInto>
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Final (aaaa-mm-dd)'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="434,220" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="471ac175-03ff-490f-b79b-dface27b4733" Text="[strFechaFinal]" Version="V1">
+                      <uix:NTypeInto.Target>
+                        <uix:TargetAnchorable BrowserURL="http://192.168.200.7/Reports/Pages/Report.aspx?ItemPath=%2fBI_Centriz%2fFacturacion+Electronica%2fRp_Ascii_Pedidos_Facturas" DesignTimeRectangle="764, 174, 320, 28" ElementType="InputBox" FriendlyName="'INPUT ctl31_ctl04_ctl05…'" FullSelectorArgument="&lt;webctrl id='ctl31_ctl04_ctl05_txtValue' tag='INPUT' type='text' /&gt;" FuzzySelectorArgument="&lt;webctrl id='ctl31_ctl04_ctl05_txtValue' tag='INPUT' type='text' aaname='' /&gt;" Guid="66bf9b2f-81f3-449f-9af6-97e43d5db06c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAUQAAAAgCAYAAABq+AE+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAACfSURBVHhe7dSxCQMxAARBV61ynTpXAzKG/UcP7kAzcNHl+3p/5jIzs7kE0cysCaKZWXsEcYxhZnbU9gbeQfwdAKfZoyiIwNEEESCCCBBBBIggAkQQASKIABFEgAgiQAQRIIIIEEEEiCACRBABIogAEUSACCJABBEggggQQQSIIAJEEAEiiAARRIAIIkD+BvGKopnZSdsb+Aiimdm5m+sLQkGUbpf7/IMAAAAASUVORK5CYII=" InformativeScreenshot="1dfda4b5c86711750c395c3a9ab8ff1a.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Rp_Ascii_Pedidos_Facturas - Administrador de informes' /&gt;" SearchSteps="FuzzySelector, Image">
+                          <uix:TargetAnchorable.Anchors>
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                              <uix:Target DesignTimeRectangle="584, 178, 169, 19" ElementType="Text" FriendlyName="'Final (aaaa-mm-dd)'" FullSelectorArgument="&lt;webctrl aaname='Final (aaaa-mm-dd):' parentid='ParametersGridctl31_ctl04' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Final (aaaa-mm-dd):' parentid='ParametersGridctl31_ctl04' tag='SPAN' type='' check:text='Final (aaaa-mm-dd):' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAK0AAAAXCAYAAAB5/s9QAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAALvSURBVGhD7Zc7buQwDEB9uQABcp5pUuUKqdLlBummzQFSpg6w7fa5gFYfSqIoSqYcj3c0YfGARUyLv2ePd/nz99soykyotMp0qLTKdKi0ynSotMp0qLTKdFyhtO/mtCzm7uWLucbz8fJglsF7lB34fDV3du6nM3MNU8V9mef7xe7swTx/ojghpbRwuBOAwyc9P+V/43t3Y1Ba6eCU/dksrQPEvX81HzhWACttV5irknZ748oO/Ejazt9XGJf24gxIe/EHSOnyU2ktb4/jL51xaZkCUmK4Fj8n6Dnx27OgKlguba/hkVw0rhouPBwlT+YNx6TvtJKxF0Du3feWzoFcZL7L43txf+jZxjb2UJ654XuSnYN0Xg25fSxTC5zBzW8/aV1hWApIiuPcUMvCuZ93qbRwL1lcRJyLiszU7f5G6wk9Y3Hd+URkyTwL8kOU8+OHAZ3P7CE9qMweHLiO3gPPEc4mcjVrWI/LNPY9Km1sEpNuZgrgByCTLzSJly2VNsTxg+Cpc3EI8/uhrr2t+g9WDZ+br7s+m49r9COqP9I4o3JBGocJfazOG7Hv5wGOgwaqhaEnP4OH12i8IsR1pV3N5cBvMgStG/qmcTR/+tXBoNkEscrra0s/RFpmVumeluDUBWkcwc9M/GAfKm2WA98bBr23tMJccVFF7bTuLGJRE9ybzk9SY2mgjmo2LfjeD5G2x6+Vli4ZuIi0olwtoUjdrZmQHEHshlgqbUfa0Mf6vjMHS1s3tF3aTrOiXPXSA7y01cB9DiJtNYMbkbY1A/p3aVyBdN+ZAz8PmOJg8dukbeV1yHLVSwYRXFyqm5EbZoCl5SQIb1/L7NJaQi/47HBuMYOBuESrDtgX58Gx/xFDy/bYa2HQ26SNjbHDEOVCYnncNaZuNHiP65XJHc7PcafzjbxpgXJWNg/jwkhciuXmI5Z2OkalUK6Kjsw9JpfWsrFx5X+z/YUzv7SW+LMs+qRQrgAQdvDzJHIT0iq/iW/zDyb1538KcLSXAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
+                            </scg:List>
+                          </uix:TargetAnchorable.Anchors>
+                        </uix:TargetAnchorable>
+                      </uix:NTypeInto.Target>
+                    </uix:NTypeInto>
+                    <uix:NClick ClickType="Single" DisplayName="Click 'Ver informe'" sap:VirtualizedContainerService.HintSize="434,158" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="471ac175-03ff-490f-b79b-dface27b4733" Version="V1">
+                      <uix:NClick.Target>
+                        <uix:TargetAnchorable BrowserURL="http://192.168.200.7/Reports/Pages/Report.aspx?ItemPath=%2fBI_Centriz%2fFacturacion+Electronica%2fRp_Ascii_Pedidos_Facturas" DesignTimeRectangle="1760, 174, 118, 28" ElementType="Button" FriendlyName="'Ver informe'" FullSelectorArgument="&lt;webctrl tag='INPUT' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='INPUT' type='submit' aaname='Ver informe' check:text='Ver informe' /&gt;" Guid="c7c493a2-d95e-4c33-8e53-a68bbc6def7c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAHoAAAAgCAYAAADdTGx1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAJgSURBVGhD7ZtLcoMwDEBzPg6UJZdImplOmZ4gJ+AkrLrtMjO5gOu/ZSQbppgEsBZvUctgWc8ym/T08/sUzPFh0ZXAoishEv359S0uHzdxPp+ZHaMcKpfQrRetAvf7XTweD+YAKJdQthd9ud7IB5j9crl+YNGq5anJzH5RTll0BbDoSmDRlcCiNb1oTydxsrQ9NWffLBc9dKKRxWm6gY5Lhq6RBWxEN9Dx5Qyia6SkphMDGc9hn217InYcCnT0VJFfUcgFou1BPWIXQwqInujYrRdS57fmbbMNioh23zjq+jaHoBU9HLfy3TcxFVeHo2/dnLwMPQ90dFg3/v5GNwvKQwJvhb5NxzRh32Y9M88c6hALe1DYvY7XJm+8Ue4LDmQh0bjQBuLatsWDHW4KAWSDIsy9CWjR9HujAwkOlR+T4FuK+jwEEfiQh1h4t32HHsd5RTkQueKc5lNMNCUQj4VT7ueAcT8vUfwc6Y6G84iDR66VzzOMp+alY/PyIvIE4/R6ecqJthuDyaFO1eKpEznawNqiYVdSa03kGfa4kujM/vU+0QGYpqDosVgs3nV4khkbTfEa0eN11hVN1kgB859JUdHRVU0VK1PAiM2Kfn9H/5eyokEXjwsP43RhAO8WncxzPJ7bDx2bJRr9vZzCot31baAKYDaKJapxP/Z20e552NXEs6uJltjbEb1bjtPr5Sku2hUue0X7ORCw+Q2I1thieyLJihVFa8w7ohzmfPoIyotmNgmLrgQWXQksuhJYdCWQovnnvsdDOUWi+Qf8xyL5A34nm/8lZ/9k/yWHOTJP8QcAGGWaahHRJAAAAABJRU5ErkJggg==" InformativeScreenshot="545fa386d9770c4da41dcb042c3cee14.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Rp_Ascii_Pedidos_Facturas - Administrador de informes' /&gt;" SearchSteps="FuzzySelector, Image">
+                          <uix:TargetAnchorable.Anchors>
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                              <uix:Target DesignTimeRectangle="1633, 120, 44, 19" ElementType="Text" FriendlyName="'Inicio'" FullSelectorArgument="&lt;webctrl aaname='Inicio' css-selector='body&amp;gt;form&amp;gt;span&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;div&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;span&amp;gt;a' tag='A' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Inicio' type='' tag='A' check:text='Inicio' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADAAAAAXCAYAAABNq8wJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAELSURBVFhH7ZS9EYMwDIUzQcbJIozBGDRMQEtBS0FNRcsCUFNTZgDFjh3/STZwycXnOxdfY8vPepLs2/4ESJlsIDbZQGyygdhoA9sExaOBu0m9ogNhdmhLdq6cYCH3CeS9Rb/T+wegDix9x5IfYHTWz5G8gf9z0sAKlayS2P+MWQftZsYBjDXRgeB4am0Vz5kHO97T1UsGuJB50TtZJxYZkInYCTI9FYMNiBzM4vhH83IHzFiRnN0F24C8OPgZuNqeuzzrPzDQQDXrNcuAHB1zH+NoE0UR0MVIyAAxnozcgaCB5N+AEWOfZXoqBmuLHK7+Ql/81UEDHEJba4W1FUTyHNSB1MgGYpO4AYAXzz+exle3vRwAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                            </scg:List>
+                          </uix:TargetAnchorable.Anchors>
+                        </uix:TargetAnchorable>
+                      </uix:NClick.Target>
+                    </uix:NClick>
+                    <ui:OnUiElementAppear ContinueOnError="{x:Null}" FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="On Element Appear 'DIV'" sap:VirtualizedContainerService.HintSize="434,520" sap2010:WorkflowViewState.IdRef="OnUiElementAppear_1" RepeatForever="False">
+                      <ui:OnUiElementAppear.Body>
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,344" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'TD'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                            <ui:Click.CursorPosition>
+                              <ui:CursorPosition Position="Center">
+                                <ui:CursorPosition.OffsetX>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetX>
+                                <ui:CursorPosition.OffsetY>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetY>
+                              </ui:CursorPosition>
+                            </ui:Click.CursorPosition>
+                            <ui:Click.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d19717b6-4623-4224-947f-99d21b3a76a9" InformativeScreenshot="26f546169b34b76ccf306348c7ef97cc" Selector="&lt;webctrl id='ctl31_ctl05_ctl04_ctl00_Button' tag='TABLE' /&gt;&lt;webctrl tag='TD' /&gt;">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                                <ui:Target.WaitForReady>
+                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                </ui:Target.WaitForReady>
+                              </ui:Target>
+                            </ui:Click.Target>
+                          </ui:Click>
+                          <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'A  javascript:void(0)'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+                            <ui:Click.CursorPosition>
+                              <ui:CursorPosition Position="Center">
+                                <ui:CursorPosition.OffsetX>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetX>
+                                <ui:CursorPosition.OffsetY>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetY>
+                              </ui:CursorPosition>
+                            </ui:Click.CursorPosition>
+                            <ui:Click.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9a7fe0ea-034a-494c-9633-2a058ae911f0" InformativeScreenshot="f3f0a7083872c13c1481194f982260eb" Selector="&lt;webctrl aaname='Excel' tag='A' innertext='Excel' title='Rp_Ascii_Pedidos_Facturas - Administrador de informes' /&gt;">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                                <ui:Target.WaitForReady>
+                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                </ui:Target.WaitForReady>
+                              </ui:Target>
+                            </ui:Click.Target>
+                          </ui:Click>
+                        </Sequence>
+                      </ui:OnUiElementAppear.Body>
+                      <ui:OnUiElementAppear.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a69851b6-2ba8-45a7-9d76-8cc296e307b3" InformativeScreenshot="1437c791bf4512ba005c10364e4e43f7" Selector="&lt;webctrl aaname='Factura Eletrónica Wizard' tag='DIV' colName='Factura Eletrónica Wizard' innertext='Factura Eletrónica Wizard' /&gt;" TimeoutMS="300000">
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:OnUiElementAppear.Target>
+                    </ui:OnUiElementAppear>
+                  </Sequence>
+                </ActivityAction>
+              </uix:NApplicationCard.Body>
+              <uix:NApplicationCard.TargetApp>
+                <uix:TargetApp Area="-11, -11, 1942, 1042" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="3d0499d004d92549bfbd46cb364839ab.png" Selector="&lt;html app='chrome.exe' title='Rp_Ascii_Pedidos_Facturas - Administrador de informes'/&gt;" Url="http://192.168.200.7/Reports/Pages/Report.aspx?ItemPath=%2fBI_Centriz%2fFacturacion+Electronica%2fRp_Ascii_Pedidos_Facturas" />
+              </uix:NApplicationCard.TargetApp>
+            </uix:NApplicationCard>
+          </Sequence>
+        </ActivityAction>
+      </ui:RetryScope.ActivityBody>
+      <ui:RetryScope.Condition>
+        <ActivityFunc x:TypeArguments="x:Boolean">
+          <ui:UiElementExists DisplayName="Element Exists 'DIV'" Exists="[boolExists]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+            <ui:UiElementExists.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="064b293d-1fe9-466e-9e59-993e2b684e68" InformativeScreenshot="877a9e34a703f584fcf60a0417b64177" Selector="&lt;html app='chrome.exe' omit:title='Rp_Ascii_Pedidos_Facturas - Administrador de informes' /&gt;&lt;webctrl aaname='Factura' omit:parentid='Pd03729fc25704482a63813a05bc0ad51_7_oReportCell' tag='DIV' /&gt;" TimeoutMS="300000">
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
+            </ui:UiElementExists.Target>
+          </ui:UiElementExists>
+        </ActivityFunc>
+      </ui:RetryScope.Condition>
+    </ui:RetryScope>
+    <If Condition="[boolExists]" sap:VirtualizedContainerService.HintSize="798,350.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="376,186.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Reporte generado de forma correcta&quot;]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap:VirtualizedContainerService.HintSize="376,186.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;Error al generar reporte&quot;]" />
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>

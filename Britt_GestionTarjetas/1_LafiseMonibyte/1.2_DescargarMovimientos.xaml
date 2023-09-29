@@ -1,0 +1,639 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="_1_2_DescargarMovimientos" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:uascw="clr-namespace:UiPath.Activities.System.Compression.Workflow;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_out_reportesPath" Type="InOutArgument(x:String)" />
+    <x:Property Name="in_out_excelTarjetasPath" Type="InOutArgument(x:String)" />
+    <x:Property Name="out_nombreReporteGeneral" Type="OutArgument(x:String)" />
+    <x:Property Name="in_tipoCorrida" Type="InArgument(x:String)" />
+    <x:Property Name="in_fechaInicio" Type="InArgument(s:DateTime)" />
+    <x:Property Name="in_fechaFin" Type="InArgument(s:DateTime)" />
+    <x:Property Name="in_ExisteReporteGeneral" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_ReporteGeneral" Type="InArgument(x:String)" />
+    <x:Property Name="in_ExisteReporteDescargas" Type="InArgument(x:Boolean)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1265,3402</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>_1_2_DescargarMovimientos_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="80">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Activities.System.Encode</x:String>
+      <x:String>UiPath.Activities.System.Compression.Workflow</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="126">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="_1_2_DescargarMovimientos" sap:VirtualizedContainerService.HintSize="604,3337" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:IList(x:String)" Name="listaEmpresas" />
+      <Variable x:TypeArguments="scg:IList(x:String)" Name="listaTarjetas" />
+      <Variable x:TypeArguments="sd:DataTable" Name="reporteDescarga" />
+      <Variable x:TypeArguments="x:String" Name="Descargado" />
+      <Variable x:TypeArguments="x:String" Name="Comentarios" />
+      <Variable x:TypeArguments="x:String" Name="to_email" />
+      <Variable x:TypeArguments="x:Boolean" Name="FolderExists" />
+      <Variable x:TypeArguments="x:String" Name="downloadsPath" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="542,70" sap2010:WorkflowViewState.IdRef="Assign_13">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[in_out_excelTarjetasPath]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">ExcelTarjetas</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="542,70" sap2010:WorkflowViewState.IdRef="Assign_10">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[in_out_reportesPath]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["ReportesExcel/" +Date.Now.ToString("yyyy") + "/" + Date.Now.ToString("MM") +"/" + Date.Now.ToString("dd")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="542,101" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Se crean las carpetas para la descarga de tarjetas.&quot;]" />
+    <Sequence DisplayName="Crear Carpetas" sap:VirtualizedContainerService.HintSize="542,90" sap2010:WorkflowViewState.IdRef="Sequence_26">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[FolderExists]" sap:VirtualizedContainerService.HintSize="580,99" sap2010:WorkflowViewState.IdRef="PathExists_3" Path="[in_out_excelTarjetasPath]" PathType="Folder" />
+      <If Condition="[NOT FolderExists]" sap:VirtualizedContainerService.HintSize="580,363" sap2010:WorkflowViewState.IdRef="If_8">
+        <If.Then>
+          <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,89" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="[in_out_excelTarjetasPath]" />
+        </If.Then>
+      </If>
+      <If Condition="[NOT in_ExisteReporteDescargas]" sap:VirtualizedContainerService.HintSize="580,795" sap2010:WorkflowViewState.IdRef="If_9">
+        <If.Then>
+          <Sequence sap:VirtualizedContainerService.HintSize="498,519" sap2010:WorkflowViewState.IdRef="Sequence_24">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="436,397" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[Directory.getFiles(in_out_excelTarjetasPath+&quot;\&quot;,&quot;*&quot;)]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="file" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,264" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="338,142" sap2010:WorkflowViewState.IdRef="Delete_6" Path="[file.ToString()]" />
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ForEach>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence sap:VirtualizedContainerService.HintSize="400,113" sap2010:WorkflowViewState.IdRef="Sequence_25">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </If.Else>
+      </If>
+      <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[FolderExists]" sap:VirtualizedContainerService.HintSize="580,99" sap2010:WorkflowViewState.IdRef="PathExists_4" Path="[in_out_reportesPath]" PathType="Folder" />
+      <If Condition="[NOT FolderExists]" sap:VirtualizedContainerService.HintSize="580,363" sap2010:WorkflowViewState.IdRef="If_10">
+        <If.Then>
+          <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,89" sap2010:WorkflowViewState.IdRef="CreateDirectory_4" Path="[in_out_reportesPath]" />
+        </If.Then>
+      </If>
+    </Sequence>
+    <Assign sap:VirtualizedContainerService.HintSize="542,70" sap2010:WorkflowViewState.IdRef="Assign_12">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_nombreReporteGeneral]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["ReporteGeneral_" + Date.Now.ToString("dd_MM_yyyy_hh-mm")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[in_ExisteReporteDescargas]" sap:VirtualizedContainerService.HintSize="542,913" sap2010:WorkflowViewState.IdRef="If_7">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="400,559" sap2010:WorkflowViewState.IdRef="Sequence_21">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_out_reportesPath + &quot;/&quot; +out_nombreReporteGeneral + &quot;.xlsx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="338,163" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[in_ReporteGeneral]" />
+          <Delay Duration="00:00:03" sap:VirtualizedContainerService.HintSize="338,97" sap2010:WorkflowViewState.IdRef="Delay_4" />
+          <ui:ReadRange AddHeaders="True" DataTable="[reporteDescarga]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="338,97" sap2010:WorkflowViewState.IdRef="ReadRange_1" Range="A1" SheetName="ReporteDescarga" WorkbookPath="[in_out_reportesPath + &quot;/&quot; +out_nombreReporteGeneral + &quot;.xlsx&quot;]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap:VirtualizedContainerService.HintSize="400,191" sap2010:WorkflowViewState.IdRef="Sequence_22">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:BuildDataTable DataTable="[reporteDescarga]" DisplayName="Build ReporteDescarga DT" sap:VirtualizedContainerService.HintSize="338,69" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Empresa&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Tarjeta&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Descargado&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Comentarios&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+        </Sequence>
+      </If.Else>
+    </If>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="542,1661" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="982,6524" sap2010:WorkflowViewState.IdRef="Sequence_29">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If Condition="[NOT in_ExisteReporteGeneral]" sap:VirtualizedContainerService.HintSize="920,6402" sap2010:WorkflowViewState.IdRef="If_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="838,6126" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:BlockUserInput TimeoutMS="{x:Null}" BlockType="All" DisplayName="Block User Input" sap:VirtualizedContainerService.HintSize="776,6004" sap2010:WorkflowViewState.IdRef="BlockUserInput_1" KeyModifiers="Alt" SpecialKey="True">
+                  <ui:BlockUserInput.Body>
+                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="740,5868" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="678,70" sap2010:WorkflowViewState.IdRef="Assign_9">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[downloadsPath]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal)) + "\Downloads"]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <If Condition="[NOT in_ExisteReporteDescargas]" sap:VirtualizedContainerService.HintSize="678,936" sap2010:WorkflowViewState.IdRef="If_5">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="498,660" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="436,101" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Limpieza de la carpeta de Descargas de la Computadora.&quot;]" />
+                            <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="436,397" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[Directory.getFiles(downloadsPath+&quot;\&quot;,&quot;*&quot;)]">
+                              <ui:ForEach.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="file" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,264" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="338,142" sap2010:WorkflowViewState.IdRef="Delete_3" Path="[file.ToString()]" />
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ForEach.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:ForEach>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap:VirtualizedContainerService.HintSize="400,113" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="1_LafiseMonibyte\1.2.1_ObtenerEmpresas.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="678,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="1_LafiseMonibyte\1.2.1_ObtenerEmpresas.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <OutArgument x:TypeArguments="scg:IList(x:String)" x:Key="out_listaEmpresas">[listaEmpresas]</OutArgument>
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each - Empresa" sap:VirtualizedContainerService.HintSize="678,2781" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[listaEmpresas]">
+                        <ui:ForEach.Body>
+                          <ActivityAction x:TypeArguments="x:String">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="x:String" Name="empresa" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body - For Each Empresa" sap:VirtualizedContainerService.HintSize="642,2648" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="1.2.2_SeleccionarEmpresa.xaml" sap:VirtualizedContainerService.HintSize="580,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="1_LafiseMonibyte\1.2.2_SeleccionarEmpresa.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_empresa">[empresa]</InArgument>
+                                  <InArgument x:TypeArguments="scg:IList(x:String)" x:Key="in_listaEmpresa">[listaEmpresas]</InArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="1.2.3_NavegarAConsulta.xaml" sap:VirtualizedContainerService.HintSize="580,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="1_LafiseMonibyte\1.2.3_NavegarAConsulta.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="580,101" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Check en la opción 'Sólo Títulares'&quot;]" />
+                              <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Monibyte" sap:VirtualizedContainerService.HintSize="580,392" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="d443df5a-487c-4aa2-a0d9-8710e1041132" Version="V2">
+                                <uix:NApplicationCard.Body>
+                                  <ActivityAction x:TypeArguments="x:Object">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                                    </ActivityAction.Argument>
+                                    <uix:NCheck Action="Check" DisplayName="Check 'Sólo Titulares'" sap:VirtualizedContainerService.HintSize="334,166" sap2010:WorkflowViewState.IdRef="NCheck_1" ScopeIdentifier="d443df5a-487c-4aa2-a0d9-8710e1041132" Version="V3">
+                                      <uix:NCheck.Target>
+                                        <uix:TargetAnchorable BrowserURL="https://lafise.monibyte.com/cr/reporte/estadocuenta" DesignTimeRectangle="1587, 221, 13, 13" DesignTimeScaleFactor="1" ElementType="CheckBox" FriendlyName="'Checkbox'" FullSelectorArgument="&lt;webctrl id='cbxTitulares' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='cbxTitulares' tag='INPUT' type='checkbox' class='' aaname='' /&gt;" Guid="1a20652f-8352-4a54-ae3e-3f81367c03eb" InformativeScreenshot="f292d3c2baa5171bab5258c8c0eaa525.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Monibyte' /&gt;" SearchSteps="FuzzySelector" Version="V1" Visibility="Interactive">
+                                          <uix:TargetAnchorable.Anchors>
+                                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                              <uix:Target DesignTimeRectangle="1600, 219, 75, 16" ElementType="Text" FriendlyName="'Sólo Titulares'" FullSelectorArgument="&lt;webctrl aaname='Sólo Titulares' parentid='areaTrabajo' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Sólo Titulares' parentid='areaTrabajo' tag='SPAN' type='' class='' check:innerText='Sólo Titulares' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAE8AAAAUCAYAAADMfWCyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAM8SURBVFhH7VexahtBENUn5A/8Cf4Bg0vlAwwurVRuDgQp5DSJUWEFxySyG6lwIYEJwtUV5jDIhYxB2LiQGgmBmlMhJBCGAyGQVL3M7O6d7nTr45zEJCG38EA7Mzs793ZmdpVK7W4hwU9CK0wQD1phgnjQChPEw8cvBbx591av1MJAZbiA0z3T6P4zXF1d4RMRqFVqkL4dYL4cwTzf0ep/HWU0ZqDDKWt0fxlA4/jbV5rsYL/Zx5gCd8d8NkLDOsSGt+AC97MBKgWfA0Z9QNYDlP2yCOy1n+QGofGE69IaedUWHPJdWfOhQ3lILoamVvcq4JBzuRxS5xwkMKZy3DZIYRjYq7dgD++wq1voB2UjkxfnA4Ow0OMAhpZGp/AC3xVBXoSv3w2OXZBXesCYfs8ndzgoZDTGGRy0R4JgMah0G9Z7qQt8YIRdCDryTnBNi8ePh6EM7dVlds3tS8++aC+8bPOTl6W1c7mMxhTtuopBVMkIPerbMtNJVrhEY8JzHgvY3Uukhf8j8jlVcubmAVlOLKEjsFCQR5PNcwsNMpabTmH3b7Cfk4bbgiAKQpQxEdRlp9T7uIR95EXauZt60JF3pspWXkhZsX6VeevZ5Z8/l3mbzdHKh4gPsJtuOzoSh+X0L0TFbeS5NbHeULYU+yn1d+MQNeKmbfl8syOXvBUySH+/g70k5bKDz+RUBDZrYd+1yZOeRPaju4kMLtLOlXl4PfLS9U6gfwfJW/lLncqKCw3OZqtPP4iwW9XK3DUu2C5MnsT2I5/YFI3qP0Ze/kbtqT7aT9g6earXBzLKQyZwic7psjSrvlcGCwV5VgfOpINK1ZDpnDuBOSHlso8iBfCnylb6HqGmTr7IrHBM1E42S5KkEHkqm3p16t2i3LifPUOeKls+8APyuZE/o+9eiP6aKpkwmxfY49ZlfJB8+GOlqSTPOEHNfoLDpaoGM13z3nMRF0HgqRJhF4J8lvgvAP+FIeZ5C20Vk3i+FIhwN0anhWvfhbF6quxQxrqXDRHRpcRwCeNYmXxvP8JzF0bBxL3Dhy9HkA8CC4+L/M5TggTx8dJ/GAl8YOJe9t82gQetMEE8aIUJ4kErTBADW/gB3/1PMi3QcBYAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                                            </scg:List>
+                                          </uix:TargetAnchorable.Anchors>
+                                        </uix:TargetAnchorable>
+                                      </uix:NCheck.Target>
+                                    </uix:NCheck>
+                                  </ActivityAction>
+                                </uix:NApplicationCard.Body>
+                                <uix:NApplicationCard.TargetApp>
+                                  <uix:TargetApp Area="0, 0, 0, 0" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAW/SURBVFhHxZbZU5NnFIfzN3jf3khvOtNOe2Vnaqcz7djaqi3VQjuVUZC6gWtBQRa1NhooAZVdcGNpERUsglgVi4Bs2UMCRBLCDtkIISA44wy/nvNSGIb5RJ0OePHL8uWc93m+835JPllAwDurKquqMw1Gk7e9w4KOzifLGmYwi5nMltGLjBGH8/nU9PTM9LNnWIkwi5nMlhkMbWNPnz6dmZ6exkqGmcyWtbd38htMTU2taJjJ7HmBNxEhYDZ3YGJiEn7KmH/ihRmncJ1k+DP/uGT8lBf1Mltmogc/FXSP+rHbMIogjXQa2+rg93lF7cKMj/vR0NQA96Nzkhl5lI7E1nbEmb3QOmdl5nqZLTOZ2sUiFvc4Nqo8WNMonfo7J+G3N4nahekbGEKU/DRc1YmSGa4+gfA6g1hjY6sHWodvvpfZsjZ68PnG0enyiYLF4Lk8Lt+PyfuH4RsbE/VzuVF9D+tDd0jCOQsFOLGmUbi8PtHLbCEw5vOhwzX2UoGpy+9j3FYv6jn2vn4EHYzCl9vDJOGcxQLBGg9s7jHRLwSMbWZ46azand6XCkznvoWJu3vg9XpFz9Wyv/DBt0GvJRCi9cDumu1nNgmYMEoLmh2j2LCEQEP5PjwjgalL78Jra0BPfz827zuE9zZteS0BpcUDl2dUMJkto99luOmAadjzSgKzU4jE1Ztl+DAw+JUFPqY19ug9sDo9gsdhthBwuT0w9Q4hqLQWnxc+kExdeSJ8pZtnUxaCvYXlWKMsEvkmswC+a4GS8ZR8hyN/FuDXhxr0O9yCNRchoDe0welyw9RlQ8hJBb6OipdM7Y1kcUbO+wo4rVq0DboQqnXTdNwIfGwXk5HKRM7biE4Ix6YjCYjPuQR7/4DgcZgtBBxOF9qeWJcWuJ4M54MkOCwtcDicokc94MIOrQuBjT1ie6Qy+Z/A3Dq5ZbcxPOIQ/UJApzeC/hrRZulaUqCmPAsjlmaMUDPXz0XV70Ss2ioJ5ywWiFSmo8veK3qZLdPpjMLISDcLW5cQKK2uxvDwiKhdHBtNRQrOWSyw80wqOqzdoo/ZswK0sJHuVJYSKL5zb1ZAIk5LgyScs1ggga6DHvoB4z4hoNUZMDg0DD39NW498WKBQhLgOqmMdNZLwjkLBX5IkKNeo5vvY7YQGBgcEltwKC0LYfIUydysqRV1Uhmma2OyaK1kxgvXQpEai9isfNS20ldxYHC+TwhotHpx0GbvwcOmFrTShWGg7ahpbEYTffaYjMvu1UBFV6ylywq9uV3Um6iGXxtpclqjEUZtPUz6BljNLei1aOh9HfTqWujUj9CoVkFtMkNDv/36jk6xBbwGs4VAH303W3V6fLYtHGey81BLIp/8FIpjKWexZd9hHDilwPf7f8Hxs5lYF7oLKjKPpc/CYhIQ8VsSbd0Z7FdmYPupZJy+XISCyrtIzL2EmMw8/Jgop+cL2EafxWVfhLL4GtrpK89MIaCmM+wloxatDuvCduGrn/ci4oQcn24Nw/rwPVDk5MPe24fcP66J919QTUj0MRySJyE0Jh4RJMfgI+m5UFwpFs8M09AZ6+mGIzo9B3UqDXYp0pBaXIqSu/fFtJnJbCHQQ4Bmeg6MOIi41PPYsDMS0YoUBB+IQuRJOZo0WjGNYPrrjU5SIk55Dh8Fh8wLRKacx5WKOwJ+sbwSp/ILhDQL8DEW2J2UhsKqv1FZS9tkswumEFCpdbD39NJYjQLWqNaipKIK2UUlOH+1CAmp6QiPO46Y39NoCqVIybsMIy28/Wg8jiYrkZieLQRiMi4g5/otVPxTh5wbt8SafH3wVBpp1Mey8ij5kNMWGei4YBKbBLToppEslS5bt+Tx/xtmCwFbt/2NRAi0qrRiT6QKljPMZLasqVk11mW1zUgVLWeYyWxZxe2qDLo/f261dc+sxCSYwSxmMlu2OiBgFb3IJBsvj4T3ZTnDDGYxc3VAwKp/AeFU/hCEZ0OTAAAAAElFTkSuQmCC" InformativeScreenshot="cb00bbda2f018655a0edc79202efecbf.jpg" Selector="&lt;html app='chrome.exe' title='Monibyte' /&gt;" Url="https://lafise.monibyte.com/cr/reporte/estadocuenta" />
+                                </uix:NApplicationCard.TargetApp>
+                              </uix:NApplicationCard>
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="1.2.4_ObtenerTarjetas.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="580,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="1_LafiseMonibyte\1.2.4_ObtenerTarjetas.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <OutArgument x:TypeArguments="scg:IList(x:String)" x:Key="out_listaTarjetas">[listaTarjetas]</OutArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                              <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="580,1467" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[listaTarjetas]">
+                                <ui:ForEach.Body>
+                                  <ActivityAction x:TypeArguments="x:Object">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="x:Object" Name="tarjeta" />
+                                    </ActivityAction.Argument>
+                                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="544,1334" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If Condition="[reporteDescarga.AsEnumerable().Any(Function(x) x(&quot;Tarjeta&quot;).ToString = Split(tarjeta.ToString, &quot;-&quot;)(0).Trim and x(&quot;Empresa&quot;).ToString = empresa.ToString)]" DisplayName="If - empresa y tarjeta existen el reporte" sap:VirtualizedContainerService.HintSize="482,430" sap2010:WorkflowViewState.IdRef="If_12">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <If.Then>
+                                          <Sequence DisplayName="Then - If empresa y tarjeta existen el reporte" sap:VirtualizedContainerService.HintSize="400,154" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:Continue sap:VirtualizedContainerService.HintSize="338,32" sap2010:WorkflowViewState.IdRef="Continue_1" />
+                                          </Sequence>
+                                        </If.Then>
+                                        <If.Else>
+                                          <Sequence sap:VirtualizedContainerService.HintSize="400,113" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                          </Sequence>
+                                        </If.Else>
+                                      </If>
+                                      <Assign sap:VirtualizedContainerService.HintSize="482,70" sap2010:WorkflowViewState.IdRef="Assign_6">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:String">[Descargado]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:String">NO</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <Assign sap:VirtualizedContainerService.HintSize="482,70" sap2010:WorkflowViewState.IdRef="Assign_7">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:String">[Comentarios]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:String">[Nothing]</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="1_LafiseMonibyte\1.2.5_ProcesoTarjeta.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="482,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="1_LafiseMonibyte\1.2.5_ProcesoTarjeta.xaml">
+                                        <ui:InvokeWorkflowFile.Arguments>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_tarjeta">[tarjeta.ToString]</InArgument>
+                                          <InOutArgument x:TypeArguments="x:String" x:Key="in_out_Comentarios">[Comentarios]</InOutArgument>
+                                          <InOutArgument x:TypeArguments="x:String" x:Key="in_out_Descargado">[Descargado]</InOutArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_tipoCorrida">[in_tipoCorrida]</InArgument>
+                                          <InArgument x:TypeArguments="s:DateTime" x:Key="in_fechaInicio">[in_fechaInicio]</InArgument>
+                                          <InArgument x:TypeArguments="s:DateTime" x:Key="in_fechaFin">[in_fechaFin]</InArgument>
+                                        </ui:InvokeWorkflowFile.Arguments>
+                                      </ui:InvokeWorkflowFile>
+                                      <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{empresa.ToString, Split(tarjeta.ToString, &quot;-&quot;)(0).Trim, Descargado, Comentarios}]" DataTable="[reporteDescarga]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="482,195" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                                      <ui:WriteRange AddHeaders="True" DataTable="[reporteDescarga]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="482,125" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="ReporteDescarga" StartingCell="A1" WorkbookPath="[in_out_reportesPath + &quot;/&quot; +out_nombreReporteGeneral + &quot;.xlsx&quot;]" />
+                                    </Sequence>
+                                  </ActivityAction>
+                                </ui:ForEach.Body>
+                              </ui:ForEach>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEach.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ForEach>
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="678,101" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Se crea el Reporte de corrida y la Hoja de Reporte de descarga.&quot;]" />
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="678,101" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Se extraen todos los .ZIP descargados en la carpeta de Archivs de Tarjeta del Bot.&quot;]" />
+                      <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="678,1233" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[Directory.getFiles(downloadsPath+&quot;\&quot;,&quot;*&quot;)]">
+                        <ui:ForEach.Body>
+                          <ActivityAction x:TypeArguments="x:Object">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="x:Object" Name="file" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="504,1100" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:RetryScope ContinueOnError="True" DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="442,659" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="6">
+                                <ui:RetryScope.ActivityBody>
+                                  <ActivityAction>
+                                    <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="400,475" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <uascw:ExtractFiles Content="{x:Null}" DestinationFolderInfo="{x:Null}" File="{x:Null}" Password="{x:Null}" CodePage="Default" DestinationFolder="[in_out_excelTarjetasPath]" DisplayName="Extract/Unzip Files" ExtractToADedicatedFolder="False" FileToExtract="[file.ToString]" sap:VirtualizedContainerService.HintSize="338,216" sap2010:WorkflowViewState.IdRef="ExtractFiles_1" SkipUnsupportedFiles="True" />
+                                      <Delay Duration="00:00:03" sap:VirtualizedContainerService.HintSize="338,97" sap2010:WorkflowViewState.IdRef="Delay_2" />
+                                    </Sequence>
+                                  </ActivityAction>
+                                </ui:RetryScope.ActivityBody>
+                                <ui:RetryScope.Condition>
+                                  <ActivityFunc x:TypeArguments="x:Boolean" />
+                                </ui:RetryScope.Condition>
+                              </ui:RetryScope>
+                              <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="442,97" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                              <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="442,142" sap2010:WorkflowViewState.IdRef="Delete_4" Path="[file.ToString]" />
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEach.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ForEach>
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="1.3_LogOutMonibyte.xaml" sap:VirtualizedContainerService.HintSize="678,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="1_LafiseMonibyte\1.3_LogOutMonibyte.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                    </Sequence>
+                  </ui:BlockUserInput.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:BlockUserInput>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="400,113" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </If.Else>
+          </If>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="508,1489" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Catch" sap:VirtualizedContainerService.HintSize="502,1420" sap2010:WorkflowViewState.IdRef="Sequence_30">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="440,101" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Error inesperado durante la Descarga de Movimientos de Tarjetas.&quot;]" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="440,101" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Error" Message="[exception]" />
+              <ui:GetRobotAsset AssetName="To_DestinationEmail" CacheStrategy="None" DisplayName="Get To_Email Asset" FolderPath="GestionTarjetas" sap:VirtualizedContainerService.HintSize="440,181" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+                <ui:GetRobotAsset.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:GetRobotAsset.TimeoutMS>
+                <ui:GetRobotAsset.Value>
+                  <OutArgument x:TypeArguments="x:String">[to_email]</OutArgument>
+                </ui:GetRobotAsset.Value>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:GetRobotAsset>
+              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="440,625" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                <TryCatch.Try>
+                  <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;PROCESO: Britt_GestionTarjetas&#xA;&#xA;Wall-E intento descargar los movimientos de las tarjetas en todas las cuenta de MonyBite pero no lo logró.&#xA;Porfavor revisar el reporte adjunto y la página de Lafise e intentar correr a Wall-E nuevamente mediante la opción de 'Recuperación'.&#xA;&#xA;Si el problema persiste, contactar al soporte de Grant Thorton&#xA;&#xA;El error es el siguiente: &lt;&quot;+exception.Message()+&quot;&gt;.&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="334,262" sap2010:WorkflowViewState.IdRef="SendOutlookMail_2" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="⚠️ Wall-E no logró descargar todos los movimientos de tarjetas correctamente ಠ_ಠ" To="[to_email]">
+                    <ui:SendOutlookMail.Files>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                        <InArgument x:TypeArguments="x:String">[in_out_reportesPath + "\" + out_nombreReporteGeneral +".xlsx"]</InArgument>
+                      </scg:List>
+                    </ui:SendOutlookMail.Files>
+                  </ui:SendOutlookMail>
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="406,453" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="s:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception2" />
+                      </ActivityAction.Argument>
+                      <Sequence sap:VirtualizedContainerService.HintSize="400,384" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;PROCESO: Britt_GestionTarjetas&#xD;&#xA;&#xD;&#xA;Wall-E intento descargar los movimientos de las tarjetas en todas las cuenta de MonyBite pero no lo logró.&#xD;&#xA;Porfavor revisar la página de Lafise e intentar correr a Wall-E nuevamente de manera normal y sin utilizar 'Recuperación'.&#xD;&#xA;&#xD;&#xA;Si el problema persiste, contactar al soporte de Grant Thorton&#xD;&#xA;&#xD;&#xA;El error es el siguiente: &lt;&quot;+exception2.Message()+&quot;&gt;.&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="338,262" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="⚠️ Wall-E no logró descargar todos los movimientos de tarjetas correctamente ಠ_ಠ" To="[to_email]">
+                          <ui:SendOutlookMail.Files>
+                            <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                          </ui:SendOutlookMail.Files>
+                        </ui:SendOutlookMail>
+                      </Sequence>
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+              <TerminateWorkflow DisplayName="Terminate Workflow" sap:VirtualizedContainerService.HintSize="440,130" sap2010:WorkflowViewState.IdRef="TerminateWorkflow_1" Reason="[exception.Message]" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>
